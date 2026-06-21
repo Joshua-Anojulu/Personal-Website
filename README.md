@@ -1,31 +1,20 @@
 # Personal Website
 
-Source for my personal site, a one-page portfolio. It is a single static page with no framework and no build step.
+## Built With
 
-Live: add the URL here once GitHub Pages is enabled.
+- **HTML5**
+- **CSS3**
+- **Vanilla JavaScript**
+- **Google Fonts**, [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque), [Inter](https://fonts.google.com/specimen/Inter), [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono)
 
-## Stack
+## Getting Started
 
-- Plain HTML and CSS
-- A small amount of vanilla JavaScript (a generated star scatter in the hero and scroll-reveal on sections)
-- Google Fonts: Bricolage Grotesque, Inter, IBM Plex Mono
-- No dependencies, no bundler
-
-## Run locally
-
-Open `index.html` directly in a browser, or serve it:
+No build tools or dependencies required. Clone and open.
 
 ```bash
-python3 -m http.server 8000
-# visit http://localhost:8000
+git clone https://github.com/Joshua-Anojulu/Personal-Website.git
+cd Personal-Website
+open index.html
 ```
 
-## Deploy
-
-GitHub Pages: in Settings > Pages, serve from the `main` branch root. The site is `index.html`, so it works as is. If you name the repo `Joshua-Anojulu.github.io`, it deploys to `https://joshua-anojulu.github.io/`.
-
-Netlify or Cloudflare Pages: drag the folder in, no configuration needed.
-
-## Structure
-
-`index.html` holds the entire site: markup, styles, and scripts in one file.
+Or view the live site directly, linked in the About section of this repo.
