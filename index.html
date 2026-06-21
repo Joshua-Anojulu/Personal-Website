@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joshua Anojulu</title>
+<meta name="description" content="Joshua Anojulu builds full-stack software and runs machine-learning experiments on real scientific data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E1A;
+    --panel:#10162600;
+    --panel-solid:#101626;
+    --ink:#EAEDF5;
+    --muted:#8B93A7;
+    --faint:#5A6275;
+    --line:rgba(255,255,255,0.09);
+    --line-strong:rgba(255,255,255,0.16);
+    --amber:#F4B860;   /* star  + primary accent */
+    --cyan:#5BC8D8;    /* galaxy */
+    --violet:#B08CFF;  /* quasar */
+    --display:'Bricolage Grotesque',Georgia,serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--amber);color:#0A0E1A}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* ---------- structural label ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    color:var(--faint);
+    margin-bottom:22px;
+  }
+  .eyebrow b{color:var(--amber);font-weight:500}
+
+  /* ---------- triad mark ---------- */
+  .triad{display:inline-flex;gap:5px;align-items:center}
+  .triad span{width:7px;height:7px;border-radius:50%;display:block}
+  .d-cyan{background:var(--cyan)}
+  .d-amber{background:var(--amber)}
+  .d-violet{background:var(--violet)}
+
+  /* ---------- top bar ---------- */
+  header.bar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,26,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar-in{
+    max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .mark{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13.5px;letter-spacing:0.02em}
+  .mark .name{color:var(--ink)}
+  .bar a.gh{
+    font-family:var(--mono);font-size:13px;color:var(--muted);
+    border:1px solid var(--line-strong);border-radius:7px;padding:7px 13px;
+    transition:border-color .2s,color .2s;
+  }
+  .bar a.gh:hover{color:var(--ink);border-color:var(--amber)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:118px 0 96px}
+  .scatter{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .hero .wrap{position:relative;z-index:1}
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(52px,9vw,104px);
+    line-height:0.94;
+    letter-spacing:-0.02em;
+    margin-bottom:30px;
+  }
+  .lead{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(21px,3vw,30px);
+    line-height:1.28;
+    max-width:20ch;
+    letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:clamp(15px,1.6vw,17px);
+    max-width:52ch;
+    margin-bottom:38px;
+  }
+  .sub .hl{color:var(--ink)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn{
+    font-family:var(--mono);font-size:13.5px;letter-spacing:0.01em;
+    padding:13px 20px;border-radius:9px;transition:transform .15s,background .2s,border-color .2s,color .2s;
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  .btn-primary{background:var(--amber);color:#0A0E1A;font-weight:500}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--muted);transform:translateY(-2px)}
+  .btn .arr{transition:transform .15s}
+  .btn:hover .arr{transform:translate(2px,-2px)}
+
+  /* ---------- section frame ---------- */
+  section.block{padding:74px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:40px}
+  .sec-head .num{font-family:var(--mono);font-size:12.5px;color:var(--amber)}
+  .sec-head h2{font-family:var(--display);font-weight:600;font-size:clamp(22px,3vw,30px);letter-spacing:-0.01em}
+
+  /* ---------- work cards ---------- */
+  .card{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:30px 30px 26px;
+    margin-bottom:18px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.018),rgba(255,255,255,0));
+    transition:border-color .25s,transform .25s;
+  }
+  .card:hover{border-color:var(--line-strong);transform:translateY(-3px)}
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+  .card-id{font-family:var(--mono);font-size:12.5px;color:var(--faint)}
+  .badge{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;padding:5px 10px;border-radius:6px;text-transform:uppercase}
+  .badge-live{background:rgba(244,184,96,0.12);color:var(--amber);border:1px solid rgba(244,184,96,0.32)}
+  .badge-res{background:rgba(91,200,216,0.10);color:var(--cyan);border:1px solid rgba(91,200,216,0.28)}
+  .badge-prep{background:rgba(176,140,255,0.10);color:var(--violet);border:1px solid rgba(176,140,255,0.28)}
+  .card h3{font-family:var(--display);font-weight:600;font-size:clamp(24px,3.4vw,32px);letter-spacing:-0.01em;margin-bottom:12px}
+  .card h3 .triad{transform:translateY(-3px);margin-left:10px}
+  .card p{color:var(--muted);font-size:15.5px;max-width:64ch;margin-bottom:20px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+  .links{display:flex;flex-wrap:wrap;gap:22px}
+  .links a{font-family:var(--mono);font-size:13.5px;color:var(--ink);border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:color .2s,border-color .2s}
+  .links a:hover{color:var(--amber);border-color:var(--amber)}
+  .links a.muted{color:var(--faint);border-color:var(--line);cursor:default}
+  .links a.muted:hover{color:var(--faint);border-color:var(--line)}
+
+  /* ---------- research rows ---------- */
+  .rrow{display:grid;grid-template-columns:170px 1fr;gap:26px;padding:24px 0;border-top:1px solid var(--line)}
+  .rrow:first-of-type{border-top:none}
+  .rrow .place{font-family:var(--mono);font-size:13px;color:var(--amber);line-height:1.5}
+  .rrow .place small{display:block;color:var(--faint);font-size:12px;margin-top:4px}
+  .rrow .what{color:var(--muted);font-size:15.5px;max-width:62ch}
+  .rrow .what b{color:var(--ink);font-weight:500}
+
+  /* ---------- contact ---------- */
+  .contact p.intro{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.6vw,26px);line-height:1.35;max-width:30ch;letter-spacing:-0.01em;margin-bottom:28px}
+  .contact-links{display:flex;flex-wrap:wrap;gap:14px}
+  .clink{font-family:var(--mono);font-size:13.5px;border:1px solid var(--line-strong);border-radius:9px;padding:12px 18px;transition:border-color .2s,color .2s;color:var(--ink)}
+  .clink:hover{border-color:var(--amber);color:var(--amber)}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:34px 0 60px}
+  footer .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer .f-mono{font-family:var(--mono);font-size:12px;color:var(--faint)}
+
+  /* ---------- motion ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:640px){
+    .wrap{padding:0 20px}
+    .bar-in{padding:14px 20px}
+    .hero{padding:84px 0 70px}
+    .rrow{grid-template-columns:1fr;gap:8px}
+    .rrow .place small{margin-top:2px}
+    .card{padding:24px 22px 22px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn,.card,.btn .arr{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="mark" href="#top" aria-label="Joshua Anojulu, home">
+      <span class="triad" title="galaxy · star · quasar" aria-hidden="true"><span class="d-cyan"></span><span class="d-amber"></span><span class="d-violet"></span></span>
+      <span class="name">joshua anojulu</span>
+    </a>
+    <a class="gh" href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="scatter" aria-hidden="true" preserveAspectRatio="xMidYMid slice"></svg>
+    <div class="wrap">
+      <p class="eyebrow reveal">// builder &nbsp;·&nbsp; cs student @ tams &rarr; unt</p>
+      <h1 class="reveal">Joshua<br>Anojulu</h1>
+      <p class="lead reveal">I build full-stack software and run machine-learning experiments on real scientific data.</p>
+      <p class="sub reveal">Right now that is <span class="hl">a live scholarship-matching app</span> you can open and use, and sole-authored research on whether sky-survey classifiers stay trustworthy across half a million SDSS objects.</p>
+      <div class="cta-row reveal">
+        <a class="btn btn-primary" href="https://scholarship-matcher-fqr2.onrender.com/" target="_blank" rel="noopener">Open the live app <span class="arr">&#8599;</span></a>
+        <a class="btn btn-ghost" href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">View the code <span class="arr">&#8599;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="num">01</span>
+        <h2>Selected work</h2>
+      </div>
+
+      <!-- Card 1 -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-id">scholarship-matcher</span>
+          <span class="badge badge-live">Live · deployed</span>
+        </div>
+        <h3>Scholarship Matcher</h3>
+        <p>A web app that matches students to real scholarships with transparent, explainable scoring, then generates AI-assisted essay guidance. FastAPI backend, vanilla HTML / CSS / JS frontend, Pydantic for validation, and the Anthropic API running server-side. Deployed on Render.</p>
+        <div class="tags">
+          <span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag">Pydantic</span><span class="tag">Anthropic API</span><span class="tag">Render</span>
+        </div>
+        <div class="links">
+          <a href="https://scholarship-matcher-fqr2.onrender.com/" target="_blank" rel="noopener">Live app &#8599;</a>
+          <a href="https://github.com/Joshua-Anojulu/scholarship-matcher" target="_blank" rel="noopener">Source &#8599;</a>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-id">stellar-classifier</span>
+          <span class="badge badge-res">ML research</span>
+        </div>
+        <h3>Stellar Classifier
+          <span class="triad" title="galaxy · star · quasar" aria-hidden="true"><span class="d-cyan"></span><span class="d-amber"></span><span class="d-violet"></span></span>
+        </h3>
+        <p>A reproducible study of how far you can trust a photometric classifier of galaxies, stars, and quasars on 100,000 SDSS objects. Five self-contained experiments isolate where accuracy actually comes from and where it breaks down: redshift leakage that inflates results, degradation under injected noise, which photometric bands carry signal, and the generalization gap when training and testing on different brightness regimes. A single notebook restructured into a modular, re-runnable repository.</p>
+        <div class="tags">
+          <span class="tag">scikit-learn</span><span class="tag">Python</span><span class="tag">SDSS</span><span class="tag">pandas</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/Joshua-Anojulu/Stellar-Classifier" target="_blank" rel="noopener">Source &#8599;</a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-id">IEEE URTC</span>
+          <span class="badge badge-prep">Paper · in preparation</span>
+        </div>
+        <h3>Calibration robustness under magnitude shift</h3>
+        <p>Sole-author paper measuring whether photometric star / galaxy / quasar classifiers stay <em>calibrated</em> as sources get fainter, across 499,995 SDSS objects. Capable models stay well calibrated across the magnitude range (expected calibration error around 0.003 to 0.007); the real hazard is naive recalibration, where Platt scaling fit on bright sources roughly quintuples faint-end error while temperature scaling transfers best. Targeting IEEE URTC. In preparation.</p>
+        <div class="tags">
+          <span class="tag">probability calibration</span><span class="tag">expected calibration error</span><span class="tag">distribution shift</span><span class="tag">SDSS</span>
+        </div>
+        <div class="links">
+          <a class="muted">Draft available on request</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="block" id="research">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="num">02</span>
+        <h2>Research, in progress</h2>
+      </div>
+
+      <div class="rrow reveal">
+        <div class="place">Bioinformatics lab<small>UNT · Prof. Azad</small></div>
+        <div class="what">Recently joined a computational <b>pathogen-detection</b> project that uses protein language model embeddings. Currently getting up to speed on the workflows and datasets, and reviewing the relevant literature.</div>
+      </div>
+
+      <div class="rrow reveal">
+        <div class="place">Flu forecasting<small>UTD · Dr. Subhro Mitra</small></div>
+        <div class="what">Contributing to a machine-learning project that forecasts <b>influenza season timing and severity</b> from 20+ seasons of CDC surveillance data, working toward a calibration-focused angle on the predictions.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block contact" id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="num">03</span>
+        <h2>Contact</h2>
+      </div>
+      <p class="intro reveal">I like building things that ship, and finding where models quietly break.</p>
+      <div class="contact-links reveal">
+        <a class="clink" href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">github.com/Joshua-Anojulu &#8599;</a>
+        <a class="clink" href="mailto:joshanojulu@gmail.com">joshanojulu@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="f-mono">Joshua Anojulu</span>
+    <span class="f-mono">galaxy · star · quasar</span>
+  </div>
+</footer>
+
+<script>
+  // Subtle star scatter in the hero, drawn from the classifier's three classes.
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var svg = document.querySelector('.scatter');
+    if(!svg) return;
+    var W = 1000, H = 600;
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    var colors = ['#5BC8D8','#F4B860','#B08CFF'];
+    var weights = [0.30,0.45,0.25]; // mostly amber points, sparse cyan/violet
+    function pick(){var r=Math.random(),a=0;for(var i=0;i<weights.length;i++){a+=weights[i];if(r<a)return colors[i];}return colors[1];}
+    var n = 46, frag = '';
+    for(var i=0;i<n;i++){
+      var x=Math.random()*W, y=Math.random()*H*0.92;
+      var rad=Math.random()*1.7+0.5;
+      var op=(Math.random()*0.5+0.18).toFixed(2);
+      frag += '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+rad.toFixed(2)+'" fill="'+pick()+'" opacity="'+op+'"/>';
+    }
+    svg.innerHTML = frag;
+  })();
+
+  // Scroll reveal
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:0.12});
+    // stagger the hero on load
+    var hero = document.querySelectorAll('.hero .reveal');
+    hero.forEach(function(e,i){ setTimeout(function(){e.classList.add('in');}, 90*i); });
+    els.forEach(function(e){ if(!e.closest('.hero')) io.observe(e); });
+  })();
+</script>
+</body>
+</html>
