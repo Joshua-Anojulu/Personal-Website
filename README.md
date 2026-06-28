@@ -1,5 +1,10 @@
 # Personal Website
 
+An interactive matchday portfolio for Joshua Anojulu. The site is a single static
+HTML file with a playable penalty-kick unlock, formation-style project cards,
+and updated copy for Scholarships4U, Stellar Classifier, calibration research,
+and current research work.
+
 ## Built With
 
 - **HTML5**
