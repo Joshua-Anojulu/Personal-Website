@@ -174,10 +174,12 @@ var projectData = {
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var report = document.getElementById('match-report');
     var penalty = document.getElementById('penalty-card');
+    var stage = document.getElementById('penalty-stage');
     var goal = document.getElementById('goal-area');
     var target = document.getElementById('target');
     var keeper = document.getElementById('keeper');
     var ball = document.getElementById('ball');
+    var saveBurst = document.getElementById('save-burst');
     var note = document.getElementById('penalty-note');
     var shoot = document.getElementById('shoot-btn');
     var unlock = document.getElementById('unlock-btn');
@@ -188,6 +190,25 @@ var projectData = {
     var attempts = 0;
     var isShooting = false;
     var unlocked = false;
+    var resetTimer = 0;
+
+    function clamp(value,min,max){
+      return Math.max(min,Math.min(max,value));
+    }
+
+    function clearShotClasses(){
+      window.clearTimeout(resetTimer);
+      stage.classList.remove('is-goal','is-save');
+      penalty.classList.remove('is-goal','is-save');
+      keeper.classList.remove('is-diving-left','is-diving-right','is-jumping','is-beaten');
+      ball.classList.remove('is-shooting','is-deflected');
+    }
+
+    function keeperMoveForShot(x){
+      if(x < keeperX - 6) return 'is-diving-left';
+      if(x > keeperX + 6) return 'is-diving-right';
+      return 'is-jumping';
+    }
 
     function setAim(x,y){
       aim.x = Math.max(8,Math.min(92,x));
@@ -208,21 +229,29 @@ var projectData = {
     }
 
     function moveKeeper(){
-      if(reduce || unlocked) return;
+      if(reduce || unlocked || isShooting) return;
       keeperX = [28,41,55,69][Math.floor(Math.random()*4)];
       keeper.style.setProperty('--keeper-x',keeperX + '%');
     }
 
-    function unlockReport(message){
+    function unlockReport(message,scoredGoal){
       if(unlocked) return;
       unlocked = true;
+      if(scoredGoal){
+        stage.classList.add('is-goal');
+        penalty.classList.add('is-goal');
+        keeper.classList.add('is-beaten');
+        scoreline.textContent = 'GOAL';
+        window.setTimeout(function(){scoreline.textContent = '1 - 0';}, reduce ? 120 : 680);
+      }else{
+        scoreline.textContent = '1 - 0';
+      }
       report.classList.add('is-unlocked');
-      scoreline.textContent = '1 - 0';
       note.innerHTML = message || '<b>Goal.</b> Match report unlocked.';
       penalty.classList.remove('is-aiming');
       unlock.textContent = 'Report open';
       unlock.disabled = true;
-      setTimeout(function(){report.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});}, 260);
+      setTimeout(function(){report.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});}, scoredGoal ? 920 : 260);
     }
 
     function takeShot(){
@@ -231,22 +260,42 @@ var projectData = {
       isShooting = true;
       shoot.disabled = true;
       note.textContent = 'Shot away...';
-      ball.style.setProperty('--ball-x',aim.x + '%');
-      ball.style.setProperty('--ball-y',(10 + aim.y * 0.46) + '%');
+      clearShotClasses();
+      var shotX = aim.x;
+      var shotY = 10 + aim.y * 0.46;
+      var topCorner = aim.y < 25;
+      var outsideKeeper = Math.abs(aim.x - keeperX) > 17;
+      var forcedGoal = attempts >= 3;
+      var scored = topCorner || outsideKeeper || forcedGoal;
+      var diveClass = keeperMoveForShot(shotX);
+
+      keeper.classList.add(diveClass);
+      if(scored) keeper.classList.add('is-beaten');
+      ball.style.setProperty('--ball-x',shotX + '%');
+      ball.style.setProperty('--ball-y',shotY + '%');
       ball.classList.add('is-shooting');
 
       window.setTimeout(function(){
-        var topCorner = aim.y < 25;
-        var outsideKeeper = Math.abs(aim.x - keeperX) > 17;
-        var scored = topCorner || outsideKeeper || attempts >= 3;
         if(scored){
-          unlockReport(attempts >= 3 && !outsideKeeper && !topCorner ? '<b>Coach override.</b> Third attempt opens the report.' : '<b>Goal.</b> Match report unlocked.');
+          unlockReport(forcedGoal && !outsideKeeper && !topCorner ? '<b>Goal.</b> Third attempt sneaks through and opens the report.' : '<b>Goal.</b> Net ripple. Match report unlocked.', true);
         }else{
-          note.innerHTML = '<b>Saved.</b> The keeper read that one. Try a corner or go top shelf.';
-          ball.classList.remove('is-shooting');
-          shoot.disabled = false;
-          isShooting = false;
-          moveKeeper();
+          var deflectDir = shotX < keeperX ? -1 : 1;
+          var deflectX = clamp(shotX + deflectDir * 24,10,90);
+          var deflectY = clamp(shotY + 17,26,78);
+          saveBurst.style.setProperty('--burst-x',shotX + '%');
+          saveBurst.style.setProperty('--burst-y',shotY + '%');
+          ball.style.setProperty('--deflect-x',deflectX + '%');
+          ball.style.setProperty('--deflect-y',deflectY + '%');
+          stage.classList.add('is-save');
+          penalty.classList.add('is-save');
+          ball.classList.add('is-deflected');
+          note.innerHTML = '<b>Saved.</b> Gloves got there first. Try a top corner or pull it wider.';
+          resetTimer = window.setTimeout(function(){
+            clearShotClasses();
+            shoot.disabled = false;
+            isShooting = false;
+            moveKeeper();
+          }, reduce ? 180 : 850);
         }
       }, reduce ? 80 : 720);
     }
@@ -261,7 +310,7 @@ var projectData = {
       btn.addEventListener('click',function(){setLane(btn.getAttribute('data-lane'));});
     });
     shoot.addEventListener('click',takeShot);
-    unlock.addEventListener('click',function(){unlockReport('<b>Report opened.</b> You skipped the penalty intro.');});
+    unlock.addEventListener('click',function(){clearShotClasses(); unlockReport('<b>Report opened.</b> You skipped the penalty intro.', false);});
     setLane('right');
     moveKeeper();
     window.setInterval(moveKeeper,2200);

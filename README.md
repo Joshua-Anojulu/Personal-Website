@@ -1,11 +1,11 @@
 # Personal Website
 
 An interactive matchday portfolio for Joshua Anojulu. The site is a static
-HTML/CSS/JavaScript portfolio with a playable penalty-kick unlock,
-formation-style project cards, and updated copy for Scholarships4U, Stellar
-Classifier, calibration research, and current research work. The sideline
-toolkit updates with the selected project so each card shows its own stack,
-methods, and skills.
+HTML/CSS/JavaScript portfolio with a playable penalty-kick unlock, animated
+keeper saves, net-ripple goal feedback, formation-style project cards, and
+updated copy for Scholarships4U, Stellar Classifier, calibration research, and
+current research work. The sideline toolkit updates with the selected project
+so each card shows its own stack, methods, and skills.
 
 ## Built With
 

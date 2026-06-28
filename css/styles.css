@@ -203,6 +203,7 @@
     font-size:18px;
     letter-spacing:0.04em;
   }
+  .penalty-card.is-goal .scoreboard strong{animation:score-pop .75s ease both}
   .scoreboard span:last-child{text-align:right}
   .penalty-stage{
     position:relative;
@@ -256,6 +257,38 @@
     border:2px solid rgba(255,255,255,0.38);
     border-bottom:none;
   }
+  .net-ripple{
+    position:absolute;
+    inset:6px 8px 0;
+    z-index:2;
+    pointer-events:none;
+    opacity:0;
+    transform:scale(0.96);
+    transform-origin:50% 12%;
+    background:
+      radial-gradient(ellipse at 50% 12%,rgba(255,255,255,0.2),transparent 44%),
+      linear-gradient(90deg,rgba(255,255,255,0.24) 1px,transparent 1px) 0 0/22px 22px,
+      linear-gradient(0deg,rgba(255,255,255,0.2) 1px,transparent 1px) 0 0/22px 22px;
+  }
+  .penalty-stage.is-goal .net-ripple{animation:net-ripple .8s cubic-bezier(.2,.85,.2,1) both}
+  .save-burst{
+    --burst-x:50%;
+    --burst-y:42%;
+    position:absolute;
+    left:var(--burst-x);
+    top:var(--burst-y);
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:8;
+    opacity:0;
+    transform:translate(-50%,-50%) scale(0.45);
+    background:
+      radial-gradient(circle,rgba(246,196,83,0.9) 0 3px,transparent 4px),
+      conic-gradient(from 0deg,transparent 0 10%,rgba(246,196,83,0.9) 10% 13%,transparent 13% 24%,rgba(255,255,255,0.9) 24% 27%,transparent 27% 40%,rgba(246,196,83,0.9) 40% 43%,transparent 43% 60%,rgba(255,255,255,0.85) 60% 63%,transparent 63% 100%);
+  }
+  .penalty-stage.is-save .save-burst{animation:save-burst .55s ease-out both}
   .goal-label{
     position:absolute;
     top:12px;
@@ -270,37 +303,133 @@
   }
   .keeper{
     --keeper-x:50%;
+    --keeper-scale:1;
     position:absolute;
     left:var(--keeper-x);
-    top:45%;
-    width:78px;
-    height:54px;
-    transform:translate(-50%,-50%);
+    top:49%;
+    width:118px;
+    height:126px;
+    transform:translate(-50%,-50%) scale(var(--keeper-scale));
     transition:left .55s cubic-bezier(.2,.8,.2,1);
-    z-index:4;
+    transform-origin:50% 70%;
+    z-index:5;
+    animation:keeper-idle 1.8s ease-in-out infinite;
   }
-  .keeper:before{
-    content:"";
+  .keeper-head,
+  .keeper-body,
+  .keeper-arm,
+  .keeper-glove,
+  .keeper-leg{
     position:absolute;
+    display:block;
+  }
+  .keeper-head{
     left:50%;
-    top:0;
-    width:22px;
-    height:22px;
-    border-radius:50%;
-    background:var(--red);
+    top:2px;
+    width:28px;
+    height:28px;
+    border-radius:999px;
+    background:#f1c39a;
     transform:translateX(-50%);
-    box-shadow:0 22px 0 8px var(--red);
+    border:2px solid rgba(7,17,13,0.6);
+    box-shadow:inset 0 -5px 0 rgba(0,0,0,0.1);
   }
-  .keeper:after{
+  .keeper-head:before,
+  .keeper-head:after{
     content:"";
     position:absolute;
-    left:0;
-    top:27px;
-    width:78px;
-    height:12px;
-    border-radius:999px;
-    background:var(--red);
+    top:13px;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:#07110d;
   }
+  .keeper-head:before{left:8px}
+  .keeper-head:after{right:8px}
+  .keeper-body{
+    left:50%;
+    top:29px;
+    width:42px;
+    height:54px;
+    border-radius:14px 14px 12px 12px;
+    background:linear-gradient(160deg,#f26d5b,#b93633);
+    transform:translateX(-50%);
+    border:2px solid rgba(7,17,13,0.56);
+  }
+  .keeper-body:before{
+    content:"01";
+    position:absolute;
+    inset:13px 0 auto;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    color:rgba(255,255,255,0.82);
+  }
+  .keeper-arm{
+    top:42px;
+    width:50px;
+    height:13px;
+    border-radius:999px;
+    background:#d94a43;
+    border:1px solid rgba(7,17,13,0.48);
+  }
+  .keeper-arm-left{
+    left:12px;
+    transform:rotate(-25deg);
+    transform-origin:100% 50%;
+  }
+  .keeper-arm-right{
+    right:12px;
+    transform:rotate(25deg);
+    transform-origin:0 50%;
+  }
+  .keeper-glove{
+    top:33px;
+    width:28px;
+    height:24px;
+    border-radius:13px 13px 16px 16px;
+    background:linear-gradient(180deg,#f8fbff,#d9f2ff);
+    border:2px solid #5bc8d8;
+    box-shadow:0 5px 0 rgba(0,0,0,0.15),inset 0 -4px 0 rgba(91,200,216,0.26);
+  }
+  .keeper-glove-left{left:0;transform:rotate(-19deg)}
+  .keeper-glove-right{right:0;transform:rotate(19deg)}
+  .keeper-leg{
+    top:78px;
+    width:17px;
+    height:42px;
+    border-radius:999px;
+    background:#1b2a25;
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .keeper-leg-left{
+    left:40px;
+    transform:rotate(10deg);
+    transform-origin:50% 0;
+  }
+  .keeper-leg-right{
+    right:40px;
+    transform:rotate(-10deg);
+    transform-origin:50% 0;
+  }
+  .keeper-leg:after{
+    content:"";
+    position:absolute;
+    left:-5px;
+    bottom:-4px;
+    width:26px;
+    height:8px;
+    border-radius:999px;
+    background:#f8fbff;
+  }
+  .keeper.is-diving-left{animation:keeper-dive-left .72s cubic-bezier(.2,.78,.2,1) both}
+  .keeper.is-diving-right{animation:keeper-dive-right .72s cubic-bezier(.2,.78,.2,1) both}
+  .keeper.is-jumping{animation:keeper-jump .72s cubic-bezier(.2,.78,.2,1) both}
+  .keeper.is-beaten{filter:saturate(0.92) brightness(0.98)}
+  .keeper.is-beaten .keeper-head:before,
+  .keeper.is-beaten .keeper-head:after{height:2px;border-radius:0}
+  .penalty-stage.is-save .keeper-glove{animation:glove-flash .55s ease-out both}
   .target{
     --aim-x:76%;
     --aim-y:34%;
@@ -330,6 +459,8 @@
   .ball{
     --ball-x:50%;
     --ball-y:88%;
+    --deflect-x:50%;
+    --deflect-y:70%;
     position:absolute;
     left:50%;
     top:88%;
@@ -350,6 +481,13 @@
     top:var(--ball-y);
     transform:translate(-50%,-50%) scale(0.62) rotate(560deg);
   }
+  .ball.is-shooting.is-deflected{
+    left:var(--deflect-x);
+    top:var(--deflect-y);
+    transform:translate(-50%,-50%) scale(0.76) rotate(980deg);
+    transition:left .42s cubic-bezier(.12,.8,.2,1),top .42s cubic-bezier(.12,.8,.2,1),transform .42s cubic-bezier(.12,.8,.2,1);
+  }
+  .penalty-stage.is-goal .ball.is-shooting{filter:drop-shadow(0 0 18px rgba(246,196,83,0.45))}
   .shot-line{
     position:absolute;
     left:50%;
@@ -728,6 +866,45 @@
     0%,100%{box-shadow:0 0 0 8px rgba(246,196,83,0.12)}
     50%{box-shadow:0 0 0 15px rgba(246,196,83,0.04)}
   }
+  @keyframes score-pop{
+    0%{transform:scale(1);color:var(--ink);text-shadow:none}
+    38%{transform:scale(1.22);color:var(--amber);text-shadow:0 0 22px rgba(246,196,83,0.68)}
+    100%{transform:scale(1);color:var(--ink);text-shadow:none}
+  }
+  @keyframes net-ripple{
+    0%{opacity:0;transform:scale(0.95) skewX(0deg)}
+    28%{opacity:1;transform:scale(1.04) skewX(-2deg)}
+    58%{opacity:.72;transform:scale(1.01) skewX(2deg)}
+    100%{opacity:0;transform:scale(1.08) skewX(0deg)}
+  }
+  @keyframes save-burst{
+    0%{opacity:0;transform:translate(-50%,-50%) scale(0.38) rotate(0deg)}
+    25%{opacity:1;transform:translate(-50%,-50%) scale(1.05) rotate(15deg)}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(1.55) rotate(35deg)}
+  }
+  @keyframes keeper-idle{
+    0%,100%{transform:translate(-50%,-50%) scale(var(--keeper-scale))}
+    50%{transform:translate(-50%,-54%) scale(var(--keeper-scale))}
+  }
+  @keyframes keeper-dive-left{
+    0%{transform:translate(-50%,-50%) scale(var(--keeper-scale)) rotate(0deg)}
+    42%{transform:translate(-92%,-61%) scale(var(--keeper-scale)) rotate(-18deg)}
+    100%{transform:translate(-86%,-55%) scale(var(--keeper-scale)) rotate(-15deg)}
+  }
+  @keyframes keeper-dive-right{
+    0%{transform:translate(-50%,-50%) scale(var(--keeper-scale)) rotate(0deg)}
+    42%{transform:translate(-8%,-61%) scale(var(--keeper-scale)) rotate(18deg)}
+    100%{transform:translate(-14%,-55%) scale(var(--keeper-scale)) rotate(15deg)}
+  }
+  @keyframes keeper-jump{
+    0%{transform:translate(-50%,-50%) scale(var(--keeper-scale))}
+    48%{transform:translate(-50%,-78%) scale(var(--keeper-scale))}
+    100%{transform:translate(-50%,-60%) scale(var(--keeper-scale))}
+  }
+  @keyframes glove-flash{
+    0%,100%{box-shadow:0 5px 0 rgba(0,0,0,0.15),inset 0 -4px 0 rgba(91,200,216,0.26)}
+    34%{box-shadow:0 0 0 7px rgba(91,200,216,0.2),0 0 22px rgba(246,196,83,0.7),inset 0 -4px 0 rgba(91,200,216,0.26)}
+  }
 
   @media (max-width:960px){
     .hero-grid,
@@ -748,8 +925,7 @@
     .hero{padding:48px 0 58px}
     .penalty-card{padding:12px}
     .penalty-stage{height:360px;min-height:360px}
-    .keeper{width:62px;height:46px}
-    .keeper:after{width:62px}
+    .keeper{--keeper-scale:.78;top:50%}
     .goal-area{left:6%;width:88%;top:24px}
     .stat-grid,
     .staff-list{grid-template-columns:1fr}
@@ -779,5 +955,10 @@
     *{scroll-behavior:auto !important}
     .reveal{opacity:1;transform:none;transition:none}
     .btn,.clink,.player,.staff-btn,.ball,.keeper{transition:none}
+    .keeper,.keeper.is-diving-left,.keeper.is-diving-right,.keeper.is-jumping{animation:none}
+    .penalty-card.is-goal .scoreboard strong,
+    .penalty-stage.is-goal .net-ripple,
+    .penalty-stage.is-save .save-burst,
+    .penalty-stage.is-save .keeper-glove{animation:none}
     .penalty-card.is-aiming .target{animation:none}
   }
