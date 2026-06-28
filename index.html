@@ -19,7 +19,7 @@
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#match-report">Match report</a>
-      <a href="#toolkit">Skill bench</a>
+      <a href="#toolkit">Project skills</a>
       <a href="#contact">Contact</a>
       <a href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">GitHub</a>
     </nav>
@@ -33,7 +33,7 @@
         <p class="eyebrow reveal">Matchday portfolio // CS student @ TAMS -> UNT</p>
         <h1 class="reveal">Joshua Anojulu</h1>
         <p class="lead reveal">Score once to unlock the scouting report.</p>
-        <p class="sub reveal">I build full-stack software and run machine-learning experiments on real scientific data. This version turns the site into a playable match: <b>shipped apps up front, research under pressure, and the skill bench behind the redesign.</b></p>
+        <p class="sub reveal">I build full-stack software and run machine-learning experiments on real scientific data. This version turns the site into a playable match: <b>shipped apps up front, research under pressure, and the skills behind each project on the sideline.</b></p>
         <div class="hero-actions reveal">
           <a class="btn btn-secondary" href="#match-report">View report</a>
           <a class="btn" href="https://scholarships4u.dev/" target="_blank" rel="noopener">Open Scholarships4U</a>
@@ -157,42 +157,42 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div>
-          <p class="eyebrow">03 // Skill bench</p>
-          <h2>The sideline tools</h2>
+          <p class="eyebrow">03 // Project skills</p>
+          <h2>The sideline toolkit</h2>
         </div>
-        <p>The new skill folders become the coaching staff for the portfolio instead of sitting offscreen as implementation trivia.</p>
+        <p>This panel updates with the selected player card, so each project shows the actual stack, methods, and skills behind it.</p>
       </div>
 
       <div class="toolkit-grid">
         <div class="staff-board reveal">
-          <h3>Coaching staff</h3>
-          <div class="staff-list" aria-label="Skill folders">
-            <button type="button" class="staff-btn is-active" data-skill="uiux">
-              <b>UI/UX Pro Max</b>
-              <span>Interaction patterns, motion checks, responsive polish.</span>
+          <h3 id="toolkit-title">Scholarships4U toolkit</h3>
+          <div class="staff-list" id="toolkit-list" aria-label="Selected project skills">
+            <button type="button" class="staff-btn is-active" data-tool-index="0">
+              <b>FastAPI backend</b>
+              <span>Typed API routes for matching, accounts, AI, and saved data.</span>
             </button>
-            <button type="button" class="staff-btn" data-skill="designsystem">
-              <b>Design System</b>
-              <span>Tokens, spacing rhythm, component consistency.</span>
+            <button type="button" class="staff-btn" data-tool-index="1">
+              <b>Curated data modeling</b>
+              <span>Pydantic schemas for scholarships, programs, and verification states.</span>
             </button>
-            <button type="button" class="staff-btn" data-skill="uistyling">
-              <b>UI Styling</b>
-              <span>Accessible controls, states, contrast, layout.</span>
+            <button type="button" class="staff-btn" data-tool-index="2">
+              <b>Account systems</b>
+              <span>Saved profiles, bookmarks, tracker statuses, and session cookies.</span>
             </button>
-            <button type="button" class="staff-btn" data-skill="brand">
-              <b>Brand</b>
-              <span>Voice, identity, and keeping the soccer idea professional.</span>
+            <button type="button" class="staff-btn" data-tool-index="3">
+              <b>LLM features</b>
+              <span>Essay advice, draft review, and resume auto-fill with consent gates.</span>
             </button>
-            <button type="button" class="staff-btn" data-skill="slides">
-              <b>Slides</b>
-              <span>Story structure for research and portfolio narrative.</span>
+            <button type="button" class="staff-btn" data-tool-index="4">
+              <b>Deployment</b>
+              <span>Render, Postgres, migrations, password reset, and production env vars.</span>
             </button>
-            <button type="button" class="staff-btn" data-skill="banner">
-              <b>Design + Banners</b>
-              <span>Hero art direction, social graphics, visual systems.</span>
+            <button type="button" class="staff-btn" data-tool-index="5">
+              <b>Vanilla frontend</b>
+              <span>Responsive HTML, CSS, and JavaScript without a build step.</span>
             </button>
           </div>
-          <p class="playbook-note" id="playbook-note"><b>UI/UX Pro Max:</b> gives the site its matchday interaction, reveal states, reduced-motion fallback, and mobile-first control sizing.</p>
+          <p class="playbook-note" id="playbook-note"><b>FastAPI backend:</b> routes the profile flow, matching response, account actions, and server-side AI requests behind one app.</p>
         </div>
 
         <div class="timeline reveal">

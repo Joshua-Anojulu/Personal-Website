@@ -3,7 +3,9 @@
 An interactive matchday portfolio for Joshua Anojulu. The site is a static
 HTML/CSS/JavaScript portfolio with a playable penalty-kick unlock,
 formation-style project cards, and updated copy for Scholarships4U, Stellar
-Classifier, calibration research, and current research work.
+Classifier, calibration research, and current research work. The sideline
+toolkit updates with the selected project so each card shows its own stack,
+methods, and skills.
 
 ## Built With
 
@@ -16,11 +18,11 @@ Classifier, calibration research, and current research work.
 
 ```text
 .
-├── index.html
-├── css/
-│   └── styles.css
-└── js/
-    └── site.js
+|-- index.html
+|-- css/
+|   `-- styles.css
+`-- js/
+    `-- site.js
 ```
 
 ## Getting Started

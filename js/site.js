@@ -7,6 +7,39 @@ var projectData = {
       links: [
         ['Live app','https://scholarships4u.dev/'],
         ['Source','https://github.com/Joshua-Anojulu/scholarship-matcher']
+      ],
+      toolkitTitle: 'Scholarships4U toolkit',
+      toolkit: [
+        {
+          label: 'FastAPI backend',
+          summary: 'Typed API routes for matching, accounts, AI, and saved data.',
+          note: '<b>FastAPI backend:</b> routes the profile flow, matching response, account actions, and server-side AI requests behind one app.'
+        },
+        {
+          label: 'Curated data modeling',
+          summary: 'Pydantic schemas for scholarships, programs, and verification states.',
+          note: '<b>Curated data modeling:</b> keeps real scholarships, summer programs, special requirements, deadlines, and verification flags explicit instead of hand-wavy.'
+        },
+        {
+          label: 'Account systems',
+          summary: 'Saved profiles, bookmarks, tracker statuses, and session cookies.',
+          note: '<b>Account systems:</b> optional user accounts save the profile, bookmarks, tracker notes, and application statuses without blocking guest use.'
+        },
+        {
+          label: 'LLM features',
+          summary: 'Essay advice, draft review, and resume auto-fill with consent gates.',
+          note: '<b>LLM features:</b> Anthropic-powered essay guidance, draft feedback, and resume extraction stay server-side and ask before sending sensitive student content.'
+        },
+        {
+          label: 'Deployment',
+          summary: 'Render, Postgres, migrations, password reset, and production env vars.',
+          note: '<b>Deployment:</b> Render, Postgres, Alembic migrations, Resend password reset, and env-var handling make the demo usable outside localhost.'
+        },
+        {
+          label: 'Vanilla frontend',
+          summary: 'Responsive HTML, CSS, and JavaScript without a build step.',
+          note: '<b>Vanilla frontend:</b> the app keeps the interface lightweight while still supporting sorting, filters, saved items, account modals, and theme behavior.'
+        }
       ]
     },
     stellar: {
@@ -16,6 +49,39 @@ var projectData = {
       tags: ['scikit-learn','Python','SDSS','pandas','model evaluation'],
       links: [
         ['Source','https://github.com/Joshua-Anojulu/Stellar-Classifier']
+      ],
+      toolkitTitle: 'Stellar Classifier toolkit',
+      toolkit: [
+        {
+          label: 'Python analysis',
+          summary: 'Notebook-to-repo workflow with repeatable experiment sections.',
+          note: '<b>Python analysis:</b> keeps the study runnable and modular instead of leaving the work as a one-off notebook.'
+        },
+        {
+          label: 'pandas + SDSS',
+          summary: 'Tabular cleaning and feature handling for sky-survey data.',
+          note: '<b>pandas + SDSS:</b> supports the data preparation needed to compare galaxies, stars, and quasars across photometric features.'
+        },
+        {
+          label: 'scikit-learn',
+          summary: 'Classifier training, evaluation, and controlled comparisons.',
+          note: '<b>scikit-learn:</b> powers the model training and makes it easier to isolate which experiments actually change performance.'
+        },
+        {
+          label: 'Leakage checks',
+          summary: 'Tests whether redshift shortcuts inflate classifier results.',
+          note: '<b>Leakage checks:</b> separate real photometric signal from features that make the benchmark look better than it should.'
+        },
+        {
+          label: 'Noise experiments',
+          summary: 'Injected-noise tests for robustness under degraded inputs.',
+          note: '<b>Noise experiments:</b> show how the classifier behaves when the data gets messier instead of only reporting clean-set accuracy.'
+        },
+        {
+          label: 'Generalization tests',
+          summary: 'Brightness-regime train/test splits for distribution shift.',
+          note: '<b>Generalization tests:</b> ask whether a model trained on one brightness regime still behaves when evaluated on another.'
+        }
       ]
     },
     calibration: {
@@ -25,6 +91,39 @@ var projectData = {
       tags: ['probability calibration','ECE','distribution shift','SDSS','IEEE URTC'],
       links: [
         ['Draft available on request', null]
+      ],
+      toolkitTitle: 'Calibration paper toolkit',
+      toolkit: [
+        {
+          label: 'Probability calibration',
+          summary: 'Reliability analysis beyond raw classification accuracy.',
+          note: '<b>Probability calibration:</b> asks whether predicted probabilities mean what they claim, not just whether the top label is correct.'
+        },
+        {
+          label: 'Expected calibration error',
+          summary: 'ECE measurement across source brightness regimes.',
+          note: '<b>Expected calibration error:</b> gives the paper a concrete way to compare reliability across magnitude ranges.'
+        },
+        {
+          label: 'Magnitude shift',
+          summary: 'Distribution-shift framing for fainter astronomical sources.',
+          note: '<b>Magnitude shift:</b> turns the study into a stress test: what happens when sources get fainter and the data regime changes?'
+        },
+        {
+          label: 'Recalibration methods',
+          summary: 'Platt scaling versus temperature scaling transfer tests.',
+          note: '<b>Recalibration methods:</b> compare how calibration fixes transfer, including the bright-source Platt scaling failure case.'
+        },
+        {
+          label: 'Large-scale SDSS audit',
+          summary: '499,995-object analysis across galaxy, star, and quasar classes.',
+          note: '<b>Large-scale SDSS audit:</b> gives the calibration claims enough volume to be more than a tiny benchmark result.'
+        },
+        {
+          label: 'Research writing',
+          summary: 'Sole-author paper framing, results, and IEEE URTC target.',
+          note: '<b>Research writing:</b> turns the experiments into a clear argument about where model confidence holds and where it breaks.'
+        }
       ]
     },
     research: {
@@ -34,17 +133,41 @@ var projectData = {
       tags: ['protein embeddings','pathogen detection','CDC data','forecasting','calibration'],
       links: [
         ['GitHub profile','https://github.com/Joshua-Anojulu']
+      ],
+      toolkitTitle: 'Research-in-progress toolkit',
+      toolkit: [
+        {
+          label: 'Protein language models',
+          summary: 'Embedding-based workflows for pathogen-detection research.',
+          note: '<b>Protein language models:</b> the bioinformatics work uses learned protein representations as the starting point for pathogen-detection workflows.'
+        },
+        {
+          label: 'Literature review',
+          summary: 'Getting oriented on datasets, methods, and lab workflows.',
+          note: '<b>Literature review:</b> keeps the early-stage bioinformatics work grounded before making modeling claims.'
+        },
+        {
+          label: 'CDC surveillance data',
+          summary: '20+ influenza seasons for timing and severity modeling.',
+          note: '<b>CDC surveillance data:</b> gives the flu project its historical signal for season timing and severity prediction.'
+        },
+        {
+          label: 'Forecasting models',
+          summary: 'Machine-learning approach to seasonal flu outcomes.',
+          note: '<b>Forecasting models:</b> frame flu season timing and severity as predictive targets rather than descriptive summaries only.'
+        },
+        {
+          label: 'Calibration angle',
+          summary: 'Checking whether predictions are trustworthy, not just close.',
+          note: '<b>Calibration angle:</b> carries the same reliability instinct from the astronomy work into public-health forecasting.'
+        },
+        {
+          label: 'Research collaboration',
+          summary: 'Lab onboarding, project constraints, and reproducible handoffs.',
+          note: '<b>Research collaboration:</b> means learning existing workflows and making contributions that fit the project instead of freelancing a disconnected analysis.'
+        }
       ]
     }
-  };
-
-  var skillNotes = {
-    uiux: '<b>UI/UX Pro Max:</b> gives the site its matchday interaction, reveal states, reduced-motion fallback, and mobile-first control sizing.',
-    designsystem: '<b>Design System:</b> keeps the pitch, cards, buttons, stats, and staff controls on one spacing and color system.',
-    uistyling: '<b>UI Styling:</b> handles visible focus states, stable hover states, readable panels, and controls that remain tappable on mobile.',
-    brand: '<b>Brand:</b> keeps the soccer concept from becoming gimmicky by tying every metaphor back to shipped work and research evidence.',
-    slides: '<b>Slides:</b> informs the timeline structure: kickoff, build-up, defensive stand, final whistle.',
-    banner: '<b>Design + Banners:</b> could extend this into social headers or project thumbnails using the same matchday identity.'
   };
 
   (function(){
@@ -152,7 +275,21 @@ var projectData = {
       tags: document.getElementById('detail-tags'),
       links: document.getElementById('detail-links')
     };
+    var toolkit = {
+      title: document.getElementById('toolkit-title'),
+      list: document.getElementById('toolkit-list'),
+      note: document.getElementById('playbook-note')
+    };
     var players = document.querySelectorAll('.player');
+    function renderToolkit(data, activeIndex){
+      var activeTool = data.toolkit[activeIndex] || data.toolkit[0];
+      toolkit.title.textContent = data.toolkitTitle;
+      toolkit.list.innerHTML = data.toolkit.map(function(tool,index){
+        var activeClass = index === activeIndex ? ' is-active' : '';
+        return '<button type="button" class="staff-btn' + activeClass + '" data-tool-index="' + index + '"><b>' + tool.label + '</b><span>' + tool.summary + '</span></button>';
+      }).join('');
+      toolkit.note.innerHTML = activeTool.note;
+    }
     function renderProject(key){
       var data = projectData[key];
       detail.kicker.textContent = data.kicker;
@@ -163,23 +300,21 @@ var projectData = {
         if(!link[1]) return '<a class="muted">' + link[0] + '</a>';
         return '<a href="' + link[1] + '" target="_blank" rel="noopener">' + link[0] + '</a>';
       }).join('');
+      renderToolkit(data,0);
       players.forEach(function(player){player.classList.toggle('is-active',player.getAttribute('data-project') === key);});
     }
     players.forEach(function(player){
       player.addEventListener('click',function(){renderProject(player.getAttribute('data-project'));});
     });
-  })();
-
-  (function(){
-    var note = document.getElementById('playbook-note');
-    var buttons = document.querySelectorAll('.staff-btn');
-    buttons.forEach(function(button){
-      button.addEventListener('click',function(){
-        var key = button.getAttribute('data-skill');
-        note.innerHTML = skillNotes[key];
-        buttons.forEach(function(btn){btn.classList.toggle('is-active',btn === button);});
-      });
+    toolkit.list.addEventListener('click',function(event){
+      var button = event.target.closest('.staff-btn');
+      if(!button) return;
+      var activePlayer = document.querySelector('.player.is-active');
+      var activeKey = activePlayer ? activePlayer.getAttribute('data-project') : 'scholarships';
+      var activeIndex = Number(button.getAttribute('data-tool-index')) || 0;
+      renderToolkit(projectData[activeKey],activeIndex);
     });
+    renderProject('scholarships');
   })();
 
   (function(){
