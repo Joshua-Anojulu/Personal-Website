@@ -42,6 +42,48 @@ var projectData = {
         }
       ]
     },
+    satellite: {
+      kicker: '07 // Midfield / geospatial ML',
+      title: 'Satellite Land-Cover Classifier',
+      copy: 'A remote-sensing pipeline that fine-tunes <b>ResNet50</b> on EuroSAT Sentinel-2 land-cover imagery, reaches <b>98.26% test accuracy</b> on 2,700 held-out images, then applies the model to 2016 to 2024 Sentinel-2 scenes to detect forest-to-non-forest change. The deforestation run is validated against <b>Global Forest Watch</b> across two Amazon frontiers, with a key domain-shift fix: per-channel moment matching stops rainforest from being misread as water.',
+      tags: ['PyTorch','ResNet50','EuroSAT','Sentinel-2','rasterio','Global Forest Watch'],
+      links: [
+        ['Source','https://github.com/Joshua-Anojulu/satellite-deforestation-classifier']
+      ],
+      toolkitTitle: 'Satellite classifier toolkit',
+      toolkit: [
+        {
+          label: 'PyTorch transfer learning',
+          summary: 'ResNet50 fine-tuning with seeded splits and best-checkpoint saving.',
+          note: '<b>PyTorch transfer learning:</b> adapts ImageNet ResNet50 to EuroSAT land-cover classification with reproducible splits, two-phase training, and saved best validation checkpoints.'
+        },
+        {
+          label: 'Remote-sensing data',
+          summary: 'EuroSAT training data plus two-date Sentinel-2 scenes.',
+          note: '<b>Remote-sensing data:</b> connects benchmark EuroSAT patches to real Sentinel-2 scenes so the project moves beyond a classroom classifier.'
+        },
+        {
+          label: 'Domain-shift correction',
+          summary: 'Moment matching for Sentinel-2 scenes before classification.',
+          note: '<b>Domain-shift correction:</b> fixes the radiometric mismatch that made a high-accuracy model label rainforest as water, which is the project&apos;s most important methodological lesson.'
+        },
+        {
+          label: 'Geospatial pipeline',
+          summary: 'openEO/rasterio downloads, georeferenced patches, and change maps.',
+          note: '<b>Geospatial pipeline:</b> downloads Sentinel-2 composites, tiles georeferenced patches, classifies land cover, and exports forest-loss maps and event lists.'
+        },
+        {
+          label: 'GFW validation',
+          summary: 'Hansen Global Forest Change scoring for precision, recall, and F1.',
+          note: '<b>GFW validation:</b> compares detected loss against Global Forest Watch instead of judging the change maps by appearance alone.'
+        },
+        {
+          label: 'Research expansion',
+          summary: 'Multi-site, NDVI, and 13-band multispectral work in progress.',
+          note: '<b>Research expansion:</b> the local branch is growing into multi-biome testing, NDVI baseline comparison, and 13-band multispectral model experiments.'
+        }
+      ]
+    },
     stellar: {
       kicker: '08 // Midfield / ML experiments',
       title: 'Stellar Classifier',

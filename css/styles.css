@@ -598,7 +598,7 @@
   }
   .formation-pitch{
     position:relative;
-    min-height:540px;
+    min-height:660px;
     border-radius:8px;
     border:1px solid rgba(255,255,255,0.18);
     overflow:hidden;
@@ -668,12 +668,15 @@
   }
   .player b{display:block;font-size:15px;line-height:1.2;margin-bottom:3px}
   .player span{display:block;font-family:var(--mono);font-size:11px;color:var(--muted)}
-  .player[data-project="scholarships"]{left:50%;top:10%;transform:translateX(-50%)}
-  .player[data-project="stellar"]{left:12%;top:43%}
-  .player[data-project="calibration"]{right:12%;top:43%}
+  .player[data-project="scholarships"]{left:50%;top:8%;transform:translateX(-50%)}
+  .player[data-project="satellite"]{left:50%;top:30%;transform:translateX(-50%)}
+  .player[data-project="stellar"]{left:10%;top:54%}
+  .player[data-project="calibration"]{right:10%;top:54%}
   .player[data-project="research"]{left:50%;bottom:8%;transform:translateX(-50%)}
   .player[data-project="scholarships"]:hover,
   .player[data-project="scholarships"].is-active,
+  .player[data-project="satellite"]:hover,
+  .player[data-project="satellite"].is-active,
   .player[data-project="research"]:hover,
   .player[data-project="research"].is-active{
     transform:translate(-50%,-4px);
@@ -916,10 +919,16 @@
     .staff-list{grid-template-columns:1fr}
     .sec-head{display:block}
     .sec-head p{margin-top:12px}
-    .formation-pitch{min-height:500px}
+    .formation-pitch{min-height:600px}
     .player{width:44%;padding:12px}
-    .player[data-project="stellar"]{left:8%;top:42%}
-    .player[data-project="calibration"]{right:8%;top:42%}
+    .player[data-project="satellite"]{left:8%;top:31%;transform:none}
+    .player[data-project="stellar"]{left:auto;right:8%;top:31%}
+    .player[data-project="calibration"]{left:8%;right:auto;top:55%}
+    .player[data-project="research"]{left:auto;right:8%;top:55%;bottom:auto;transform:none}
+    .player[data-project="satellite"]:hover,
+    .player[data-project="satellite"].is-active,
+    .player[data-project="research"]:hover,
+    .player[data-project="research"].is-active{transform:translateY(-4px)}
     .event{grid-template-columns:1fr;gap:4px}
   }
   @media (max-width:440px){
@@ -928,11 +937,13 @@
     .scoreboard{grid-template-columns:1fr;gap:4px;text-align:left}
     .scoreboard span:last-child{text-align:left}
     .lane-buttons{grid-template-columns:1fr}
+    .formation-pitch{min-height:740px}
     .player{width:78%;left:50% !important;right:auto !important;transform:translateX(-50%) !important}
-    .player[data-project="scholarships"]{top:8%}
-    .player[data-project="stellar"]{top:31%}
-    .player[data-project="calibration"]{top:54%}
-    .player[data-project="research"]{bottom:7%}
+    .player[data-project="scholarships"]{top:5%}
+    .player[data-project="satellite"]{top:24%}
+    .player[data-project="stellar"]{top:43%}
+    .player[data-project="calibration"]{top:62%}
+    .player[data-project="research"]{top:81%;bottom:auto}
     .player:hover,
     .player.is-active{transform:translate(-50%,-4px) !important}
   }
