@@ -279,6 +279,9 @@ ul,ol{list-style:none}
 /* #top is <main>, which is not a .block, so it needs the offset declared here.
    Every href="#x" on this page has a matching id with scroll-margin-top. */
 #top{scroll-margin-top:var(--bar-h)}
+/* The research divider is mid-section, so it needs breathing room the section
+   tops do not: landing it flush under the bar hides the label it jumped to. */
+#research{scroll-margin-top:calc(var(--bar-h) + 2rem)}
 /* overflow-x:clip at the SECTION, which is the actual source fix: the ghost is
    supposed to bleed past the content column, and it still does, but it is now
    clipped at the section box (full viewport width) instead of widening the
