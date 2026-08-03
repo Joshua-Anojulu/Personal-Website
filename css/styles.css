@@ -66,7 +66,11 @@ body{
   font-size:clamp(1rem,.96rem + .2vw,1.0625rem);
   line-height:1.62;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  /* `clip`, not `hidden`. Measured at 390x844 on the built page, the `hidden`
+     version did NOT hold: the document still scrolled sideways by 45px. `clip`
+     is the value that actually stops it, and unlike `hidden` it creates no
+     scroll container, so it cannot break a sticky or steal a scroll chain. */
+  overflow-x:clip;
 }
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0}
@@ -261,7 +265,15 @@ ul,ol{list-style:none}
 /* #top is <main>, which is not a .block, so it needs the offset declared here.
    Every href="#x" on this page has a matching id with scroll-margin-top. */
 #top{scroll-margin-top:var(--bar-h)}
-.block{position:relative;z-index:2;padding-block:var(--section-y);scroll-margin-top:var(--bar-h)}
+/* overflow-x:clip at the SECTION, which is the actual source fix: the ghost is
+   supposed to bleed past the content column, and it still does, but it is now
+   clipped at the section box (full viewport width) instead of widening the
+   document. At 390px the "Research" ghost is 465px wide, and its right edge was
+   the page's entire horizontal overflow. `clip` pairs legally with the default
+   `overflow-y:visible`; `hidden` would coerce the other axis to `auto` and turn
+   every section into a scroll container. */
+.block{position:relative;z-index:2;padding-block:var(--section-y);
+  scroll-margin-top:var(--bar-h);overflow-x:clip}
 .stock{--fg-soft:var(--key-soft);--rule:rgba(20,20,15,.16);--rule-strong:rgba(20,20,15,.42);
   --accent:var(--magenta);background:var(--stock);color:var(--key)}
 .key{--fg-soft:rgba(236,234,228,.66);--rule:rgba(236,234,228,.2);
