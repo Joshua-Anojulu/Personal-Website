@@ -479,6 +479,23 @@ footer{position:relative;z-index:2;background:var(--stock);border-top:1px solid 
              transform var(--dur-transition) var(--ease)}
 .js .reveal.is-in{opacity:1;transform:none}
 
+/* ABOVE THE FOLD uses .rise, not .reveal, and the reason is measured. .reveal
+   holds opacity:0 until site.js adds .is-in, so the whole hero waited on
+   JavaScript: Lighthouse put the LCP element at .hero-note with FCP and LCP
+   both 3.3s on mobile. .rise is a pure CSS animation that starts at first
+   paint and needs no JS at all.
+
+   It also fails open harder than .reveal does. The base opacity stays 1 and
+   only the keyframes dip it, so if animations are off, unsupported or reduced,
+   the content is simply visible. Nothing can leave it stuck hidden. */
+.rise{animation:rise var(--dur-transition) var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(var(--reveal-y))}}
+.rise-1{animation-delay:60ms}
+.rise-2{animation-delay:130ms}
+.rise-3{animation-delay:200ms}
+.rise-4{animation-delay:270ms}
+.rise-5{animation-delay:330ms}
+
 /* =========================== RESPONSIVE =================================== */
 @media (max-width:900px){
   .imprint{grid-template-columns:1fr}
@@ -515,6 +532,7 @@ footer{position:relative;z-index:2;background:var(--stock);border-top:1px solid 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .reveal{opacity:1;transform:none;transition:none}
+  .rise{animation:none}   /* base opacity is 1, so this IS the assembled state */
   .ambient,.ambient *{animation:none !important}
   .cue-rule{animation:none;transform:none}
   .btn,.filter,.plate{transition:none}
