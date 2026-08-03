@@ -1,14 +1,14 @@
 # Personal Website
 
-A matchday portfolio for Joshua Anojulu, built as a team sheet on a floodlit
-pitch. Static HTML, CSS and JavaScript with no build step and no dependencies.
+A personal site for Joshua Anojulu, built as a printer's proofing table at press
+check. Static HTML, CSS and JavaScript with no build step and no dependencies.
 
-The squad is seven entries ordered by shirt number: three shipped and public
-projects, then four research entries whose repositories are private. The match
-statistics table carries the real per-magnitude calibration matrix from the SDSS
-study, filterable by magnitude bin, and every figure on the page is a measured
-value rather than an estimate. The penalty is a signposted easter egg, not a
-gate, so nothing on the page is hidden behind it.
+Seven projects, numbered like plates on a proof sheet: three shipped and public,
+four research. The research repositories are private, so those entries carry the
+result instead of a link, and nothing on the page links somewhere a visitor
+cannot open. The research section publishes one result in full, the real
+per-magnitude calibration matrix from the SDSS study, filterable by magnitude
+bin. Every figure on the page is a measured value rather than an estimate.
 
 ## Design
 
@@ -18,15 +18,18 @@ things that must not change silently. Read it before touching the visual layer,
 including from Codex or Cursor, so a later session does not start from the model
 average.
 
-Two implementation rules in there are load-bearing and easy to break by tidying:
+Three rules in there are load-bearing and easy to break by tidying:
 
 - The reveal system **fails open**. `.reveal { opacity: 0 }` is scoped to `.js`,
-  which an inline head script sets. Without JavaScript, or with an
-  IntersectionObserver that never delivers, content stays visible instead of
-  rendering blank.
+  which an inline head script sets, and a synchronous sweep handles
+  above-the-fold. Without JavaScript, or with an IntersectionObserver that never
+  delivers, content stays visible instead of rendering blank.
 - The ambient gate **fails open** as well. The CSS default is `running` and the
   JavaScript sets `paused`, so a wiring failure costs battery rather than
-  silently freezing the page with no error.
+  silently freezing the page.
+- The data table compares the three recalibration methods **against each other,
+  per row**. Comparing them against raw ECE reverses the finding the caption
+  states.
 
 ## Built With
 
@@ -49,8 +52,9 @@ Two implementation rules in there are load-bearing and easy to break by tidying:
 
 ## Getting Started
 
-No build tools or dependencies. Serve the folder over HTTP rather than opening
-the file directly, so relative paths resolve the way they do in production.
+No build tools and no dependencies. Serve the folder over HTTP rather than
+opening the file directly, so relative paths resolve the way they do in
+production.
 
 ```bash
 git clone https://github.com/Joshua-Anojulu/Personal-Website.git

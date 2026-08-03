@@ -3,59 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joshua Anojulu | Matchday Portfolio</title>
-<meta name="description" content="Joshua Anojulu builds full-stack software and runs machine-learning experiments on real scientific data. A matchday team sheet of shipped work and research.">
+<title>Joshua Anojulu</title>
+<meta name="description" content="Joshua Anojulu builds software that ships and runs experiments that check whether the result holds. Shipped projects, research, and the measured data behind it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <!-- Set before first paint so the reveal system fails OPEN: without this class
-     the .reveal rules never apply and all content renders visible. -->
+     the .reveal rules never apply and every block renders visible. -->
 <script>document.documentElement.className += ' js';</script>
 </head>
 <body>
-<a class="skip" href="#match-report">Skip to match report</a>
+<a class="skip" href="#work">Skip to the work</a>
 
-<!-- Ambient: floodlight bloom. One system, 3 members, gated by useAmbientGate equivalent in site.js. -->
-<div class="floodlights ambient" id="floodlights" aria-hidden="true">
-  <span class="floodlight fl-1"></span>
-  <span class="floodlight fl-2"></span>
-  <span class="floodlight fl-3"></span>
+<!-- Ambient system 1 of 1: the press sheet drifting under the platen. Three
+     members, transform only, gated off-screen and when the tab is hidden. -->
+<div class="press ambient" id="press" aria-hidden="true">
+  <span class="ink ink-c"></span>
+  <span class="ink ink-m"></span>
+  <span class="ink ink-k"></span>
 </div>
 <div class="grain" aria-hidden="true"></div>
+
+<!-- Crop marks: the sheet's trim, fixed to the viewport corners. -->
+<div class="crop" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <header class="bar" id="bar">
   <div class="bar-in">
     <a class="mark" href="#top" aria-label="Joshua Anojulu, home">
-      <span class="crest" aria-hidden="true"></span>
-      <span class="mark-text">joshua anojulu</span>
+      <span class="reg" aria-hidden="true"></span>
+      <span class="mark-text">Joshua Anojulu</span>
     </a>
-    <!-- Diegetic chrome: the nav sits ON the halfway line, with the centre spot as the marker. -->
     <nav class="nav-links" aria-label="Primary">
-      <a href="#match-report">Match report</a>
-      <a href="#toolkit">Project skills</a>
+      <a href="#work">Work</a>
+      <a href="#data">Research</a>
       <a href="#contact">Contact</a>
       <a href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">GitHub</a>
     </nav>
-    <a class="btn btn-primary bar-cta" href="#match-report">Match report</a>
+    <a class="btn btn-primary bar-cta" href="#work">Work</a>
   </div>
-  <span class="bar-line" aria-hidden="true"><i class="centre-spot"></i></span>
 </header>
 
 <main id="top">
 
-  <!-- ==================== CH1. THE TEAM SHEET (deep pitch, night) ==================== -->
+  <!-- ============ CH1. THE PRESS SHEET. Stock, type as the subject. ========= -->
   <section class="hero" aria-labelledby="hero-name">
-    <div class="pitch-marks" aria-hidden="true">
-      <span class="mark-box"></span>
-      <span class="mark-arc"></span>
-      <span class="mark-spot"></span>
+    <div class="sheet-marks" aria-hidden="true">
+      <span class="reg reg-tl"></span>
+      <span class="reg reg-br"></span>
+      <span class="rule-h"></span>
     </div>
 
     <div class="wrap hero-in">
-      <p class="eyebrow reveal">Matchday portfolio // CS student @ TAMS -&gt; UNT</p>
+      <p class="eyebrow reveal">
+        <span class="ink-dot ink-dot-c"></span>
+        Computer science, TAMS at the University of North Texas
+      </p>
 
-      <!-- Dieste move: the name split across the composition, chalk on grass. -->
+      <!-- Dieste: the name split across the frame, set as the whole visual. -->
       <h1 class="hero-name" id="hero-name">
         <span class="n1 reveal">Joshua</span>
         <span class="n2 reveal">Anojulu</span>
@@ -64,43 +69,47 @@
       <div class="hero-foot">
         <p class="sub reveal">I build software that ships and run experiments that check whether the result holds.</p>
         <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="#match-report">Match report</a>
+          <a class="btn btn-primary" href="#work">Work</a>
           <a class="btn btn-ghost" href="https://ensurecollege.com/" target="_blank" rel="noopener">EnsureCollege, live</a>
         </div>
-        <!-- Ch2.6: the honest line sits next to the action, not in a footnote. -->
-        <p class="hero-note reveal">Seven entries below. Three shipped and public, four research, and the research repositories are private.</p>
+        <p class="hero-note reveal">Seven projects. Three shipped and public, four research. The research repositories are private, so those entries carry the result instead of a link.</p>
       </div>
     </div>
 
-    <a class="scroll-cue" href="#match-report">
-      <span>Kick off</span>
-      <span class="cue-arrow" aria-hidden="true"></span>
-    </a>
+    <a class="scroll-cue" href="#work"><span>Work</span><span class="cue-rule" aria-hidden="true"></span></a>
   </section>
 
-  <!-- ==================== CH2. MATCH REPORT (chalk, the content layer) ==================== -->
-  <section class="block chalk" id="match-report" aria-labelledby="h-match-report">
+  <!-- ============ CH2. THE PROOFS. Content layer, density 7. =============== -->
+  <section class="block stock" id="work" aria-labelledby="h-work">
     <div class="wrap">
       <header class="sec-head">
-        <h2 id="h-match-report">Match report</h2>
-        <p class="sec-lede">The squad, by shirt number. Shipped work starts the line, research holds the back four.</p>
+        <p class="sec-num" aria-hidden="true">01</p>
+        <h2 id="h-work">Work</h2>
+        <p class="sec-lede">Seven projects, numbered like plates on a proof sheet. Shipped work first, then the research.</p>
+      </header>
+      <ol class="plates" id="plates"></ol>
+    </div>
+  </section>
+
+  <!-- ============ CH3. THE COLOUR BAR. The measured data. ================== -->
+  <section class="block key" id="data" aria-labelledby="h-data">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="sec-num" aria-hidden="true">02</p>
+        <h2 id="h-data">Research</h2>
+        <p class="sec-lede">
+          One result in full, because it is the one worth reading closely. Expected calibration
+          error on 499,995 SDSS DR17 sources, where lower is better.
+        </p>
       </header>
 
-      <!-- Layout family A: the team sheet. A numbered ledger, not a card grid. -->
-      <ol class="teamsheet" id="teamsheet"></ol>
-
-      <!-- Layout family B: a real data table. This is the density-7 content layer. -->
-      <div class="stats" id="stats">
-        <header class="stats-head">
-          <h3 id="h-stats">Calibration under magnitude shift</h3>
-          <p class="stats-lede">
-            Expected calibration error on SDSS DR17, where lower is better. Each recalibrator was
-            fitted on bright sources and then applied to the selected bin, so these three columns
-            are a transfer test. Green marks the best transfer in a row and red the worst. At the
-            faint end the capable models tell the clearest story: random forest and MLP both hold
-            under temperature scaling and break badly under Platt.
-          </p>
-        </header>
+      <div class="readout">
+        <p class="readout-lede">
+          Each recalibrator was fitted on bright sources and then applied to the selected magnitude
+          bin, so these three columns are a transfer test. Green marks the best transfer in a row,
+          magenta the worst. At the faint end the capable models tell the clearest story: random
+          forest and MLP both hold under temperature scaling and break badly under Platt.
+        </p>
 
         <div class="filters" role="group" aria-labelledby="filters-label">
           <span class="filters-label" id="filters-label">Magnitude bin</span>
@@ -108,7 +117,7 @@
         </div>
 
         <div class="table-scroll">
-          <table class="stats-table">
+          <table class="data-table">
             <caption class="sr-only">Expected calibration error by model and recalibration method for the selected magnitude bin</caption>
             <thead>
               <tr>
@@ -119,75 +128,37 @@
                 <th scope="col">Temperature, bright fit</th>
               </tr>
             </thead>
-            <tbody id="stats-body"></tbody>
+            <tbody id="data-body"></tbody>
           </table>
         </div>
-        <p class="stats-note">
-          Measured values from the study's own results, not estimates. Written up for IEEE URTC 2026.
-        </p>
+        <p class="readout-note">Measured values from the study's own results, not estimates. Written up for IEEE URTC 2026.</p>
       </div>
     </div>
   </section>
 
-  <!-- ==================== CH3. PROJECT SKILLS (pitch green) ==================== -->
-  <section class="block pitch" id="toolkit" aria-labelledby="h-toolkit">
+  <!-- ============ CH4. THE IMPRINT. Colophon and contact. ================== -->
+  <section class="block stock" id="contact" aria-labelledby="h-contact">
     <div class="wrap">
       <header class="sec-head">
-        <h2 id="h-toolkit">Project skills</h2>
-        <p class="sec-lede">Pick an entry from the match report and this panel follows it, so each set of skills stays attached to the work that actually used them.</p>
+        <p class="sec-num" aria-hidden="true">03</p>
+        <h2 id="h-contact">Contact</h2>
       </header>
-
-      <!-- Layout family C: two asymmetric columns, a live panel beside a static list. -->
-      <div class="toolkit-grid">
-        <div class="toolkit-panel">
-          <p class="toolkit-kicker" id="toolkit-kicker">01 // Striker</p>
-          <h3 id="toolkit-title">EnsureCollege</h3>
-          <ul class="skill-list" id="skill-list"></ul>
+      <div class="imprint">
+        <div>
+          <p class="contact-lede">I like building things that ship, and finding where models quietly break.</p>
+          <p class="contact-status">
+            <span class="status-key">Availability</span>
+            From August to December 2026 I am interning as a software engineer, so I am not looking
+            for another role in that window. Email is the fastest way to reach me about research,
+            the projects above, or anything after December.
+          </p>
         </div>
-
-        <!-- Ch4.4: signposted play. A real button, labelled, not a mystery div. -->
-        <div class="penalty" id="penalty">
-          <p class="penalty-label">Take a penalty. The keeper picks a corner too.</p>
-          <div class="goal" id="goal">
-            <span class="net" aria-hidden="true"></span>
-            <span class="keeper" id="keeper" aria-hidden="true">
-              <span class="keeper-head"></span>
-              <span class="keeper-body"></span>
-              <span class="keeper-glove kg-l"></span>
-              <span class="keeper-glove kg-r"></span>
-            </span>
-            <span class="ball" id="ball" aria-hidden="true"></span>
-          </div>
-          <div class="penalty-controls">
-            <button type="button" class="lane" data-lane="left">Left</button>
-            <button type="button" class="lane" data-lane="middle">Middle</button>
-            <button type="button" class="lane" data-lane="right">Right</button>
-          </div>
-          <p class="penalty-out" id="penalty-out" role="status" aria-live="polite">Scored 0 of 0.</p>
-        </div>
+        <ul class="contact-links">
+          <li><span class="link-key">Email</span><a href="mailto:joshanojulu@gmail.com">joshanojulu@gmail.com</a></li>
+          <li><span class="link-key">Code</span><a href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">github.com/Joshua-Anojulu</a></li>
+          <li><span class="link-key">Live</span><a href="https://ensurecollege.com/" target="_blank" rel="noopener">ensurecollege.com</a></li>
+        </ul>
       </div>
-    </div>
-  </section>
-
-  <!-- ==================== CH4. CONTACT (deep pitch, night) ==================== -->
-  <section class="block deep" id="contact" aria-labelledby="h-contact">
-    <div class="wrap contact-in">
-      <h2 id="h-contact">Contact</h2>
-      <p class="contact-lede">I like building things that ship, and finding where models quietly break.</p>
-      <!-- Ch2.5, portfolio question 5: are you available? Answered plainly rather
-           than left for the reader to guess. -->
-      <p class="contact-status">
-        <span class="lamp lamp-open">Availability</span>
-        From August to December 2026 I am interning as a software engineer, so I am not looking
-        for another role in that window. Email is the fastest way to reach me about research,
-        the projects above, or anything after December.
-      </p>
-      <ul class="contact-links">
-        <li><a href="mailto:joshanojulu@gmail.com">joshanojulu@gmail.com</a></li>
-        <li><a href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">github.com/Joshua-Anojulu</a></li>
-        <li><a href="https://ensurecollege.com/" target="_blank" rel="noopener">ensurecollege.com</a></li>
-      </ul>
-      <a class="btn btn-primary" href="#match-report">Match report</a>
     </div>
   </section>
 </main>
@@ -195,7 +166,7 @@
 <footer>
   <div class="wrap foot-in">
     <span>Joshua Anojulu</span>
-    <span class="foot-meta">Matchday portfolio &middot; built by hand, no framework</span>
+    <span class="foot-meta">Set in Archivo and IBM Plex Mono &middot; built by hand, no framework</span>
   </div>
 </footer>
 
