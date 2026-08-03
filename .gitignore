@@ -2,3 +2,6 @@
 .claude/
 .codex/
 server.*.log
+
+# OMC operational state, not part of the site
+.omc/
