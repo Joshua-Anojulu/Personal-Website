@@ -10,9 +10,12 @@ review_provenance:
 > **SUPERSEDED 2026-08-02. Do not build from this file.**
 >
 > This plan proposed replacing the matchday world with an observatory instrument
-> rack. The direction changed: the matchday world is being **kept** and redesigned
-> in place under the Ch8 redesign protocol, because it already commits to a world
-> and that instinct was correct.
+> rack. The site went through two further directions after it, so this file is now
+> two removes from what shipped:
+>
+> 1. **instrument rack** (this plan) - never built
+> 2. **matchday team sheet** - built, then abandoned
+> 3. **printer's proofing table** - what actually ships today
 >
 > The live design contract is **`DESIGN.md`**. Read that instead.
 >
