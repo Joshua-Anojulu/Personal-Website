@@ -238,10 +238,48 @@
     Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
   }
 
+  /* ======================= nav: the three states =========================
+     hero -> handoff -> solid, driven by two zero-height sentinels in the hero.
+     No scroll listener: Ch3.1 bans window scroll events, scrollY in state, and
+     rAF loops that touch state.
+
+     Fails to `solid` rather than `hero` when observers are unavailable, because
+     a solid bar is legible over every chapter while a transparent one is only
+     correct over the hero.
+     ==================================================================== */
+  function initNavStates() {
+    var bar = document.getElementById('bar');
+    var sHandoff = document.getElementById('sentinel-handoff');
+    var sSolid = document.getElementById('sentinel-solid');
+    if (!bar) return;
+    if (!sHandoff || !sSolid || !('IntersectionObserver' in window)) {
+      bar.dataset.state = 'solid';
+      return;
+    }
+
+    function apply() {
+      var pastHandoff = sHandoff.getBoundingClientRect().top < 0;
+      var pastSolid = sSolid.getBoundingClientRect().top < 0;
+      bar.dataset.state = pastSolid ? 'solid' : (pastHandoff ? 'handoff' : 'hero');
+    }
+
+    // Synchronous first pass, so a reload partway down the page paints the
+    // correct state immediately instead of flashing the hero treatment.
+    apply();
+
+    var io = new IntersectionObserver(apply, { threshold: 0 });
+    io.observe(sHandoff);
+    io.observe(sSolid);
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') apply();
+    });
+  }
+
   renderPlates();
   renderFilters();
   renderTable();
   initReveals();
   initAmbientGate();
   initNavState();
+  initNavStates();
 })();

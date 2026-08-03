@@ -50,9 +50,11 @@ Supplied by Josh, matched for feel and never for layout or content:
 |---|---|
 | Wordmark and nav | A registration mark beside the name, nav on a hairline rule |
 | Project entry | A numbered plate on a proof sheet |
-| Chapter boundary | A different press artifact each time: colour bar, scored trim line, registration mark |
+| Chapter boundary | Paired `+` crop marks at the content column corners with a hairline between them. The SAME device at every join, varied only by the chapter accent. See below. |
+| Block origin | A single `+` anchoring the section number. The second and final use of the glyph. |
+| Section surface | The title restated as a pale oversized ghost headline bleeding past the column |
+| Outer gutters | Vertical mono marginalia. The centre column is type, the margins carry everything else. |
 | Research metrics | A densitometer readout, tabular figures |
-| Page trim | Crop marks fixed at the viewport corners |
 | Primary button | Overprint: ink knocked out of stock, with a magenta offset that collapses on press |
 
 ## Layout families used (Ch5.7, no family repeated)
@@ -79,6 +81,32 @@ though nothing else changed.
 **On ban 3:** every number on the page is measured. The calibration matrix in `js/site.js` is real
 output from the study's `results/metrics_by_magnitude_agg.csv`; the satellite and influenza figures
 come from those projects' reported results. Add a number only if it is sourced.
+
+## The crop-mark system, and why it repeats
+
+Added 2026-08-03 from `~/.claude/design-library/print-tech-paper/01-performance-lab.md`, which is
+Josh's own reference and whose provenance line outranks anything the model selected.
+
+**Two uses of the glyph, and no third.** Paired at the content column corners with a hairline
+between them for a boundary; single at a block's top-left as an origin anchor. That restraint is
+what keeps it reading as a system rather than sprinkled ornament, and it is the reason the
+viewport-corner crop marks were **removed** rather than kept: they were a third use.
+
+This deliberately contradicts Ch1.4's "never reuse a divider twice on one page". House-style Ch0
+ranks a supplied reference above the engine, and the entry calls the repetition out as the point.
+Variation comes from the chapter accent, not from a different shape.
+
+**The ghost headline is a committed surface with no image and no gradient**, which is why it does
+not engage ban 1. It sits behind the `h2` only. Ch2.4 forbids texture behind anything the user
+reads, and the first build of it overlapped the section lede by 46px, measured on the rendered
+page. The lede now carries a top margin sized to clear it. **If the ghost scale changes,
+re-measure that clearance rather than assuming it holds.**
+
+**Margin photography is NOT implemented and that is a known gap.** The entry pins motion-blurred
+photographs in the outer gutters. Ch6.3 row 2 still applies: no generation tool, no supplied
+photography. The gutters carry mono marginalia instead, which honours the principle (the centre
+column is type, the margins carry everything else) without faking the asset. Real photography in
+the gutters would complete the technique.
 
 ## Overrides taken, with reasons
 

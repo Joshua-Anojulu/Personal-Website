@@ -16,8 +16,9 @@
 <body>
 <a class="skip" href="#work">Skip to the work</a>
 
-<!-- Ambient system 1 of 1: the press sheet drifting under the platen. Three
-     members, transform only, gated off-screen and when the tab is hidden. -->
+<!-- Ambient system 1 of 1: ink blooming into stock. Three members, transform
+     only, gated off-screen and when the tab is hidden. Held at opacity .09:
+     the type is the hero's subject and this must stay under it (ban 1). -->
 <div class="press ambient" id="press" aria-hidden="true">
   <span class="ink ink-c"></span>
   <span class="ink ink-m"></span>
@@ -25,10 +26,10 @@
 </div>
 <div class="grain" aria-hidden="true"></div>
 
-<!-- Crop marks: the sheet's trim, fixed to the viewport corners. -->
-<div class="crop" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-
-<header class="bar" id="bar">
+<!-- Three-state nav. State is set by two IntersectionObserver sentinels, never
+     by a scroll listener. Over the hero the wordmark is the registration glyph
+     alone; during handoff the CTA duplicates; solid spells the wordmark out. -->
+<header class="bar" id="bar" data-state="hero">
   <div class="bar-in">
     <a class="mark" href="#top" aria-label="Joshua Anojulu, home">
       <span class="reg" aria-hidden="true"></span>
@@ -40,13 +41,17 @@
       <a href="#contact">Contact</a>
       <a href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">GitHub</a>
     </nav>
-    <a class="btn btn-primary bar-cta" href="#work">Work</a>
+    <div class="bar-actions">
+      <a class="btn btn-ghost cta-outline" href="#work">Work</a>
+      <a class="btn btn-primary cta-dupe" href="#work" tabindex="-1" aria-hidden="true">Work</a>
+      <a class="cta-link" href="#work">Work <span class="cta-arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- ============ CH1. THE PRESS SHEET. Stock, type as the subject. ========= -->
+  <!-- ============ CH1. THE PRESS SHEET ==================================== -->
   <section class="hero" aria-labelledby="hero-name">
     <div class="sheet-marks" aria-hidden="true">
       <span class="reg reg-tl"></span>
@@ -60,7 +65,6 @@
         Computer science, TAMS at the University of North Texas
       </p>
 
-      <!-- Dieste: the name split across the frame, set as the whole visual. -->
       <h1 class="hero-name" id="hero-name">
         <span class="n1 reveal">Joshua</span>
         <span class="n2 reveal">Anojulu</span>
@@ -76,32 +80,50 @@
       </div>
     </div>
 
+    <!-- Nav-state sentinels. Zero-height, no layout effect. -->
+    <span class="nav-sentinel" id="sentinel-handoff" aria-hidden="true"></span>
+    <span class="nav-sentinel" id="sentinel-solid" aria-hidden="true"></span>
+
     <a class="scroll-cue" href="#work"><span>Work</span><span class="cue-rule" aria-hidden="true"></span></a>
   </section>
 
-  <!-- ============ CH2. THE PROOFS. Content layer, density 7. =============== -->
+  <!-- ============ CH2. THE PROOFS ========================================= -->
   <section class="block stock" id="work" aria-labelledby="h-work">
     <div class="wrap">
+      <!-- Trim: paired crop marks at the column corners, hairline between.
+           This replaces the section rule entirely. -->
+      <span class="trim" aria-hidden="true"></span>
+
       <header class="sec-head">
-        <p class="sec-num" aria-hidden="true">01</p>
+        <!-- Ghost: the section title restated oversized and pale, bleeding past
+             the column. A committed surface with no image and no gradient. -->
+        <span class="ghost" aria-hidden="true">Work</span>
+        <p class="sec-num"><span class="origin" aria-hidden="true">+</span>01</p>
         <h2 id="h-work">Work</h2>
         <p class="sec-lede">Seven projects, numbered like plates on a proof sheet. Shipped work first, then the research.</p>
       </header>
+
+      <span class="gutter-note gutter-l" aria-hidden="true">Proof sheet</span>
       <ol class="plates" id="plates"></ol>
     </div>
   </section>
 
-  <!-- ============ CH3. THE COLOUR BAR. The measured data. ================== -->
+  <!-- ============ CH3. THE COLOUR BAR ===================================== -->
   <section class="block key" id="data" aria-labelledby="h-data">
     <div class="wrap">
+      <span class="trim" aria-hidden="true"></span>
+
       <header class="sec-head">
-        <p class="sec-num" aria-hidden="true">02</p>
+        <span class="ghost" aria-hidden="true">Research</span>
+        <p class="sec-num"><span class="origin" aria-hidden="true">+</span>02</p>
         <h2 id="h-data">Research</h2>
         <p class="sec-lede">
           One result in full, because it is the one worth reading closely. Expected calibration
           error on 499,995 SDSS DR17 sources, where lower is better.
         </p>
       </header>
+
+      <span class="gutter-note gutter-r" aria-hidden="true">Densitometer</span>
 
       <div class="readout">
         <p class="readout-lede">
@@ -136,13 +158,17 @@
     </div>
   </section>
 
-  <!-- ============ CH4. THE IMPRINT. Colophon and contact. ================== -->
+  <!-- ============ CH4. THE IMPRINT ======================================== -->
   <section class="block stock" id="contact" aria-labelledby="h-contact">
     <div class="wrap">
+      <span class="trim" aria-hidden="true"></span>
+
       <header class="sec-head">
-        <p class="sec-num" aria-hidden="true">03</p>
+        <span class="ghost" aria-hidden="true">Contact</span>
+        <p class="sec-num"><span class="origin" aria-hidden="true">+</span>03</p>
         <h2 id="h-contact">Contact</h2>
       </header>
+
       <div class="imprint">
         <div>
           <p class="contact-lede">I like building things that ship, and finding where models quietly break.</p>
@@ -164,9 +190,12 @@
 </main>
 
 <footer>
-  <div class="wrap foot-in">
-    <span>Joshua Anojulu</span>
-    <span class="foot-meta">Set in Archivo and IBM Plex Mono &middot; built by hand, no framework</span>
+  <div class="wrap">
+    <span class="trim" aria-hidden="true"></span>
+    <div class="foot-in">
+      <span>Joshua Anojulu</span>
+      <span class="foot-meta">Set in Archivo and IBM Plex Mono &middot; built by hand, no framework</span>
+    </div>
   </div>
 </footer>
 
