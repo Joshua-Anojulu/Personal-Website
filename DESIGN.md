@@ -67,7 +67,8 @@ Supplied by Josh, matched for feel and never for layout or content:
 ## Layout families used (Ch5.7, no family repeated)
 
 1. Hero: full-bleed type composition, name split across the frame
-2. Work: numbered plates in a ledger. Not a card grid, and there are **zero** equal-card rows
+2. Work: numbered plates in a ledger, in **two groups**. Not a card grid, and there are **zero**
+   equal-card rows
 3. Research: a real data table with filter controls
 4. Contact: a two-column colophon
 
@@ -114,6 +115,22 @@ photographs in the outer gutters. Ch6.3 row 2 still applies: no generation tool,
 photography. The gutters carry mono marginalia instead, which honours the principle (the centre
 column is type, the margins carry everything else) without faking the asset. Real photography in
 the gutters would complete the technique.
+
+## The two Work groups
+
+**Shipped** (plates 01 to 04) and **Research** (05 to 08). The plate numbers run **straight
+through both**, because a proof sheet numbers its plates continuously no matter how the run is
+divided. Do not restart the numbering at a group heading.
+
+The group marker is **type and rule only, with no `+` glyph**. Both permitted uses of that glyph
+are already spent (paired for a chapter boundary, single for a section origin), and the library
+entry is explicit that a third use is what turns the system back into ornament.
+
+**Known ambiguity, not yet resolved:** the second group is headed "Research" and so is the `#data`
+section that the nav points at. The Ch2.2 gate still passes, since the nav label still matches the
+`h2` exactly, but a reader meets the word twice. The alternatives are renaming the group (say
+"Studies") or renaming the `#data` heading, and the second is a nav label, which does not change
+without Josh saying so.
 
 ## Overrides taken, with reasons
 
@@ -203,6 +220,11 @@ the horizontal-scroll defect was found. It does **not** work for tap targets, be
 ## History
 
 An earlier direction rendered this same content as a matchday team sheet, and before that as an
-observatory instrument rack (see `PLAN.md`, superseded). Both are abandoned. The content roster of
-seven projects, the exclusion reasoning, and the measured data survived all three directions and
-are the stable part.
+observatory instrument rack (see `PLAN.md`, superseded). Both are abandoned. The content roster,
+the exclusion reasoning, and the measured data survived all three directions and are the stable
+part.
+
+The roster went from seven plates to **eight** on 2026-08-03 with `ccspike`, a public MIT-licensed
+TypeScript CLI. It qualified on the same bar as the rest: public source, a real README, tests and
+CI, and numbers that are measured rather than claimed. Its own README refuses to sum token
+categories or assert causation, which is the register this page is already written in.

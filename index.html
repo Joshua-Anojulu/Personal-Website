@@ -91,7 +91,7 @@
         <div class="hero-actions rise rise-4">
           <a class="btn btn-primary" href="#work">Work</a>
         </div>
-        <p class="hero-note rise rise-5">Seven projects. Three shipped and public, four research. The research repositories are private, so those entries carry the result instead of a link.</p>
+        <p class="hero-note rise rise-5">Eight projects in two groups. Four shipped and public, four research. The research repositories are private, so those entries carry the result instead of a link.</p>
       </div>
     </div>
 
@@ -115,19 +115,28 @@
         <span class="ghost" aria-hidden="true">Work</span>
         <p class="sec-num"><span class="origin" aria-hidden="true">+</span>01</p>
         <h2 id="h-work">Work</h2>
-        <p class="sec-lede">Seven projects, numbered like plates on a proof sheet. Shipped work first, then the research.</p>
+        <p class="sec-lede">Eight projects in two groups, numbered like plates on a proof sheet. What ships first, then the research. The numbering runs straight through both.</p>
       </header>
 
       <span class="gutter-note gutter-l" aria-hidden="true">Proof sheet</span>
 
       <!-- The plates are STATIC. They used to be injected from a PLATES array in
            site.js, which meant a 404 on that file rendered this section empty.
-           Everything else on this page fails open; the content itself must too. -->
-      <ol class="plates">
+           Everything else on this page fails open; the content itself must too.
+
+           Two groups, continuously numbered 01 to 08. A proof sheet numbers its
+           plates straight through regardless of how they are grouped, so the
+           numbering does NOT restart at each group heading. -->
+      <div class="group">
+        <h3 class="group-head">
+          <span class="group-label">Shipped</span>
+          <span class="group-count">Four that run, plates 01 to 04</span>
+        </h3>
+        <ol class="plates">
         <li class="plate reveal">
           <span class="plate-num">01</span>
           <div class="plate-head">
-            <h3 class="plate-name">EnsureCollege</h3>
+            <h4 class="plate-name">EnsureCollege</h4>
             <span class="plate-kind">Shipped, live</span>
           </div>
           <p class="plate-body">A college-planning app that matches students to national scholarships and selective summer programs, with transparent scoring, source-linked requirements, saved plans and deadline tracking.</p>
@@ -144,7 +153,7 @@
         <li class="plate reveal">
           <span class="plate-num">02</span>
           <div class="plate-head">
-            <h3 class="plate-name">localflow</h3>
+            <h4 class="plate-name">localflow</h4>
             <span class="plate-kind">Shipped, open source</span>
           </div>
           <p class="plate-body">Local-first, system-wide dictation for Windows 11. Hold Left Ctrl, transcribe with faster-whisper large-v3-turbo on your own GPU, paste into whatever app has focus. No cloud, no quota, and no audio leaves the machine.</p>
@@ -160,7 +169,7 @@
         <li class="plate reveal">
           <span class="plate-num">03</span>
           <div class="plate-head">
-            <h3 class="plate-name">plan-hardening</h3>
+            <h4 class="plate-name">plan-hardening</h4>
             <span class="plate-kind">Shipped, open source</span>
           </div>
           <p class="plate-body">An adversarial plan-review harness. One model drafts an implementation plan, a second attacks it in a read-only sandbox and returns a verdict, and the loop repeats until the plan survives or hits a round cap. Read-only is enforced by mechanism, not by asking politely.</p>
@@ -176,7 +185,32 @@
         <li class="plate reveal">
           <span class="plate-num">04</span>
           <div class="plate-head">
-            <h3 class="plate-name">Calibration under magnitude shift</h3>
+            <h4 class="plate-name">ccspike</h4>
+            <span class="plate-kind">Shipped, open source</span>
+          </div>
+          <p class="plate-body">Ranks the requests that dominated a Claude Code usage window, per token category and per tab, reading transcripts already on disk. On one measured five hour window of 425 requests, ten requests held 79.4% of cache creation. Widen the same workload to 24 hours and that flattens to 34.3%, so every ranking prints its own share and you can see whether it means anything before acting on it. It never sums token categories and never claims causation, because neither is identifiable from the data.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">TypeScript</span><span class="plate-tag">Node</span><span class="plate-tag">CLI</span><span class="plate-tag">zero runtime deps</span><span class="plate-tag">MIT</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-live">Shipped</span>
+            <a class="plate-link" href="https://github.com/Joshua-Anojulu/ccspike" target="_blank" rel="noopener">github.com/Joshua-Anojulu/ccspike</a>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <h3 class="group-head">
+        <span class="group-label">Research</span>
+        <span class="group-count">Four studies, plates 05 to 08</span>
+      </h3>
+      <ol class="plates">
+
+        <li class="plate reveal">
+          <span class="plate-num">05</span>
+          <div class="plate-head">
+            <h4 class="plate-name">Calibration under magnitude shift</h4>
             <span class="plate-kind">Research</span>
           </div>
           <p class="plate-body">Do photometric star, galaxy and quasar classifiers give probabilities you can actually trust, and does that hold as sources get fainter? Measured on 499,995 SDSS DR17 sources. The full result is in the next section.</p>
@@ -190,9 +224,9 @@
         </li>
 
         <li class="plate reveal">
-          <span class="plate-num">05</span>
+          <span class="plate-num">06</span>
           <div class="plate-head">
-            <h3 class="plate-name">Domain shift in remote sensing</h3>
+            <h4 class="plate-name">Domain shift in remote sensing</h4>
             <span class="plate-kind">Research</span>
           </div>
           <p class="plate-body">A ResNet50 fine-tuned on EuroSAT reaches 98% benchmark accuracy, then collapses out of biome: F1 of 0.001 in the Congo Basin, on a composite the diagnostics show to be clean. A label-free AdaBN pass recovers it to 0.397. Benchmark accuracy does not transfer for free.</p>
@@ -206,9 +240,9 @@
         </li>
 
         <li class="plate reveal">
-          <span class="plate-num">06</span>
+          <span class="plate-num">07</span>
           <div class="plate-head">
-            <h3 class="plate-name">Anti-virulence screen</h3>
+            <h4 class="plate-name">Anti-virulence screen</h4>
             <span class="plate-kind">Research, null result</span>
           </div>
           <p class="plate-body">A structure-based docking screen against a bacterial virulence target. The result is null, and the SpeB positive control failed. A screen that cannot recover its own positive control cannot rank actives, so the work is being reframed as a benchmark of the pipeline itself.</p>
@@ -222,9 +256,9 @@
         </li>
 
         <li class="plate reveal">
-          <span class="plate-num">07</span>
+          <span class="plate-num">08</span>
           <div class="plate-head">
-            <h3 class="plate-name">Influenza peak timing</h3>
+            <h4 class="plate-name">Influenza peak timing</h4>
             <span class="plate-kind">Research, preliminary</span>
           </div>
           <p class="plate-body">Forecasting the timing and severity of US influenza season peaks from CDC surveillance data, standing at a fixed decision week inside an ongoing season. 19 seasons modelled. These results are preliminary and descriptive, and nothing here is a final claim.</p>
@@ -237,6 +271,7 @@
           </div>
         </li>
       </ol>
+      </div>
     </div>
   </section>
 

@@ -373,6 +373,20 @@ ul,ol{list-style:none}
    THE PROOFS. Layout family A: numbered plates in a ledger, not a card grid.
    Density 7. No card borders: the rule and the spacing do the separating.
    =========================================================================== */
+/* GROUPS. A signature marker on the proof sheet: the run of plates is divided,
+   but the plate numbers keep counting straight through.
+
+   No "+" glyph here on purpose. The library entry allows exactly two uses of it,
+   paired for a boundary and single for an origin, and both are already spent.
+   A third use is what turns the system back into ornament, so the group marker
+   is type and rule only. */
+.group + .group{margin-top:clamp(3.25rem,7vw,5.5rem)}
+.group-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:.35rem 1.5rem;font-family:var(--mono);font-weight:500;font-size:.78rem;
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.1rem}
+.group-label{color:var(--accent)}
+.group-count{font-size:.66rem;letter-spacing:.14em;color:var(--fg-soft)}
+
 .plates{border-top:1px solid var(--rule-strong)}
 .plate{display:grid;grid-template-columns:4rem minmax(0,1fr) auto;
   gap:.35rem clamp(1rem,3vw,2.5rem);align-items:start;
