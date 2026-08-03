@@ -63,7 +63,9 @@
       num: '04', name: 'Calibration robustness', role: 'Defence / research',
       body: 'Do photometric star, galaxy and quasar classifiers give probabilities you can actually trust, and does that hold as sources get fainter? Measured on 499,995 SDSS DR17 sources. The full result is in the table below.',
       tags: ['scikit-learn', 'SDSS DR17', 'calibration', 'bootstrap'],
-      status: { label: 'In submission', kind: 'open' },
+      // "Written up for" rather than "in submission": the paper is ready but the
+      // venue deadline has not passed yet, so the stronger claim would be false.
+      status: { label: 'URTC 2026', kind: 'open' },
       restricted: 'Source: restricted',
       skillTitle: 'Calibration robustness', skillKicker: '04 // Defence',
       skills: [
