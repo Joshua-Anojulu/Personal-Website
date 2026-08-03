@@ -5,9 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Joshua Anojulu</title>
 <meta name="description" content="Joshua Anojulu builds software that ships and runs experiments that check whether the result holds. Shipped projects, research, and the measured data behind it.">
+<!-- Favicon is the registration mark, the page's own recurring motif, inlined as
+     a data URI. It is also the fix for a real 404: without it the browser asks
+     for /favicon.ico at the DOMAIN root, which on a project page is not this
+     repo, and Lighthouse logged the miss as a console error. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23eceae4'/%3E%3Cg stroke='%23bd005e' stroke-width='2' fill='none'%3E%3Ccircle cx='16' cy='16' r='7'/%3E%3Cpath d='M16 2v6M16 24v6M2 16h6M24 16h6'/%3E%3C/g%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- The font stylesheet is loaded NON-BLOCKING: it was the single largest
+     render-blocking request at 804ms of the 3.3s LCP. media="print" makes the
+     browser fetch it at low priority without blocking first paint, and the
+     onload flips it to all. display=swap is already in the URL, so text paints
+     in the fallback face and swaps, rather than waiting invisibly.
+     The <noscript> copy keeps the fonts for a JS-disabled reader. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="css/styles.css">
 <!-- Set before first paint so the reveal system fails OPEN: without this class
      the .reveal rules never apply and every block renders visible. -->

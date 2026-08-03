@@ -13,7 +13,14 @@ regenerate_when: the design read changes, or the source authority is edited
 **World:** a printer's proofing table at press check
 **Dials:** WORLD 8 / MOTION 8 / VARIANCE 7 / DENSITY 4 stage, 7 content
 **Primary action:** "Work" - this exact label in the nav, the hero, the sticky bar and the section heading
-**Palette:** process inks. Stock `#eceae4`, key `#14140f`, process cyan `#0b8fd4`, process magenta `#d6006e`, process yellow `#f2b705` (colour bar only), held-reading green `#1c7a4f`
+**Palette:** process inks. Stock `#eceae4`, key `#14140f`, process cyan `#0b8fd4`, process magenta `#bd005e`, process yellow `#f2b705` (colour bar only), held-reading green `#186b45`
+
+> Magenta and green are darker than the first pull for a **measured** reason, not an aesthetic
+> one. At `#d6006e` magenta scored 4.27:1 on stock and at `#1c7a4f` green scored 4.42:1 under
+> stock text, so every small use failed WCAG AA. Lighthouse caught it. The `.state-open` pill also
+> flipped to dark text, because process cyan is a light ink (stock on it is 2.96:1) and cyan
+> cannot be darkened without breaking its other job as the Research chapter accent on near-black.
+> **Re-check with a contrast calculator before changing any of these; do not nudge them by eye.**
 **Type:** display Archivo (variable, wght 400-900, wdth 62-125), body Inter, mono IBM Plex Mono
 
 ## Why this family, and why WORLD is 8
@@ -149,6 +156,28 @@ the gutters would complete the technique.
   Note the ink is only ever *visible* over the hero: sections are opaque and sit above it, which is
   what keeps Ch2.4 satisfied (no texture behind anything the user reads).
 - **No build step.** Vanilla HTML, CSS and JS, three files, no bundler and no CDN script tag.
+- **Hiding a control with `opacity: 0` alone leaves it keyboard focusable.** The three-state nav's
+  out-of-state CTAs also carry `visibility: hidden`, with `visibility` in their transition so the
+  crossfade is unchanged. A focus walk of the built page landed on the invisible `.cta-link` while
+  the bar was still in its hero state. Anything hidden by state must leave the tab order.
+- **The font stylesheet loads non-blocking** (`media="print"` plus an `onload` flip, with a
+  `<noscript>` copy). It was 804ms of an LCP that measured 3.3s on mobile.
+
+## Verifying this page, and the two traps in doing it
+
+Both cost real time. Neither is a defect in the page.
+
+1. **`data-state` cannot be set by hand to test the nav.** The IntersectionObserver reasserts it,
+   and in a backgrounded tab Chrome *defers* those callbacks, so a hand-set value sticks and every
+   later reading is a lie. Scroll for real, then screenshot. The same deferral is why the reveal
+   system had to be made fail-open.
+2. **Reading computed style immediately after a state change reads mid-transition,** not the end
+   state. Wait past `--dur-transition`, or screenshot.
+
+A real narrow viewport is available without devtools: load the page in an `<iframe>` sized
+`390x844`. Media queries and `dvh` resolve against the iframe, so it is a genuine test. That is how
+the horizontal-scroll defect was found. It does **not** work for tap targets, because
+`@media (pointer:coarse)` still does not match on a desktop machine.
 
 ## History
 

@@ -22,10 +22,16 @@
   --stock-2:#e3e0d8;      /* second pull, slightly denser */
   --key:#14140f;          /* process K */
   --key-soft:#5a5a52;
-  --cyan:#0b8fd4;         /* process C */
-  --magenta:#d6006e;      /* process M */
+  --cyan:#0b8fd4;         /* process C. 5.19:1 on key */
+  /* Magenta and green are BOTH darker than the first pull, and the reason is
+     measured, not aesthetic. At #d6006e magenta scored 4.27:1 on stock and at
+     #1c7a4f green scored 4.42:1 under stock text, so every small use (.sec-num,
+     .plate-num, .origin, .cta-link, the state pills) failed WCAG AA's 4.5
+     minimum. Lighthouse flagged it. Re-check with a contrast calculator before
+     touching either value; do not nudge them back up by eye. */
+  --magenta:#bd005e;      /* process M. 5.25:1 both directions on stock */
   --yellow:#f2b705;       /* process Y, used sparingly */
-  --green:#1c7a4f;        /* the "held" reading in the data table */
+  --green:#186b45;        /* the "held" reading. 5.41:1 under stock text */
 
   /* per-chapter, redeclared on each section: one flat theme per chapter */
   --fg-soft:var(--key-soft);
@@ -161,8 +167,15 @@ ul,ol{list-style:none}
    it briefly shows both, which is what makes the handoff read as deliberate.
    --------------------------------------------------------------------------- */
 .bar-actions{position:relative;display:flex;align-items:center;gap:.6rem;flex:0 0 auto}
+/* `visibility` is in this transition on purpose. The out-of-state CTAs are
+   hidden with opacity, and opacity alone leaves them KEYBOARD FOCUSABLE: a tab
+   walk of the built page landed on the invisible .cta-link while the bar was
+   still in its hero state. visibility:hidden removes them from the tab order,
+   and because visibility animates discretely it flips at the far end of the
+   fade out and at the near end of the fade in, so the crossfade is unchanged. */
 .bar-actions > *{transition:opacity var(--dur-transition) var(--ease),
-                            transform var(--dur-transition) var(--ease)}
+                            transform var(--dur-transition) var(--ease),
+                            visibility var(--dur-transition) var(--ease)}
 .cta-outline,.cta-dupe,.cta-link{padding-block:.5rem;font-size:.72rem}
 .cta-outline,.cta-dupe{padding-inline:1.1rem}
 
@@ -176,18 +189,19 @@ ul,ol{list-style:none}
 .bar[data-state="hero"] .mark-text{opacity:0;transform:translateX(-6px);
   width:0;overflow:hidden;pointer-events:none}
 .bar[data-state="hero"] .cta-dupe,
-.bar[data-state="hero"] .cta-link{opacity:0;transform:translateY(-6px);
+.bar[data-state="hero"] .cta-link{opacity:0;visibility:hidden;transform:translateY(-6px);
   position:absolute;right:0;pointer-events:none}
 
 /* State 2: handoff. Both CTAs on screen at once. */
-.bar[data-state="handoff"] .cta-link{opacity:0;position:absolute;right:0;pointer-events:none}
-.bar[data-state="handoff"] .cta-dupe{opacity:1;transform:none}
+.bar[data-state="handoff"] .cta-link{opacity:0;visibility:hidden;
+  position:absolute;right:0;pointer-events:none}
+.bar[data-state="handoff"] .cta-dupe{opacity:1;visibility:visible;transform:none}
 
 /* State 3: solid. */
 .bar[data-state="solid"] .cta-outline,
-.bar[data-state="solid"] .cta-dupe{opacity:0;transform:translateY(-6px);
+.bar[data-state="solid"] .cta-dupe{opacity:0;visibility:hidden;transform:translateY(-6px);
   position:absolute;right:0;pointer-events:none}
-.bar[data-state="solid"] .cta-link{opacity:1;transform:none}
+.bar[data-state="solid"] .cta-link{opacity:1;visibility:visible;transform:none}
 
 /* The wordmark spells itself out as the bar solidifies. */
 .mark-text{transition:opacity var(--dur-transition) var(--ease),
@@ -326,8 +340,12 @@ ul,ol{list-style:none}
    type, the margins carry everything else. Photography itself is unavailable
    (Ch6.3 row 2, no generation tool and none supplied), so the gutters carry mono
    marginalia rather than a faked image. */
+/* No opacity here. It used to carry `opacity:.7`, which dropped this to 3.08:1
+   on stock and 4.12:1 on key. aria-hidden does not exempt it: a sighted reader
+   still reads it, so it is real text and owes real contrast. The subtlety comes
+   from the size, the tracking and the vertical set instead. */
 .gutter-note{position:absolute;top:0;font-family:var(--mono);font-size:.62rem;
-  letter-spacing:.28em;text-transform:uppercase;color:var(--fg-soft);opacity:.7;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--fg-soft);
   writing-mode:vertical-rl;pointer-events:none}
 .gutter-l{left:calc(var(--gutter) * -.55)}
 .gutter-r{right:calc(var(--gutter) * -.55);transform:rotate(180deg)}
@@ -371,9 +389,13 @@ ul,ol{list-style:none}
 /* Status: one hue bound to one meaning, everywhere it appears (Ch6.2). */
 .state{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
   white-space:nowrap;padding:.2rem .5rem}
-.state-live{background:var(--green);color:var(--stock)}
-.state-open{background:var(--cyan);color:var(--stock)}
-.state-null{background:var(--magenta);color:var(--stock)}
+.state-live{background:var(--green);color:var(--stock)}   /* 5.41:1 */
+/* Dark text on this one, not stock. Process cyan is a LIGHT ink: stock on it is
+   2.96:1 and fails. Cyan cannot be darkened to fix it, because it is also the
+   Research chapter accent on near-black and needs to stay light there (5.19:1).
+   So the pill flips its text instead. */
+.state-open{background:var(--cyan);color:var(--key)}      /* 5.19:1 */
+.state-null{background:var(--magenta);color:var(--stock)} /* 5.25:1 */
 
 .plate-link{font-family:var(--mono);font-size:.72rem;border-bottom:1px solid var(--accent);
   padding-bottom:2px;white-space:nowrap;transition:color var(--dur-feedback) var(--ease)}
