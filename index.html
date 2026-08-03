@@ -4,264 +4,190 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Joshua Anojulu | Matchday Portfolio</title>
-<meta name="description" content="Joshua Anojulu builds full-stack software and machine-learning research projects. Score a penalty to unlock an interactive matchday portfolio.">
+<meta name="description" content="Joshua Anojulu builds full-stack software and runs machine-learning experiments on real scientific data. A matchday team sheet of shipped work and research.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<!-- Set before first paint so the reveal system fails OPEN: without this class
+     the .reveal rules never apply and all content renders visible. -->
+<script>document.documentElement.className += ' js';</script>
 </head>
 <body>
-<header class="bar">
+<a class="skip" href="#match-report">Skip to match report</a>
+
+<!-- Ambient: floodlight bloom. One system, 3 members, gated by useAmbientGate equivalent in site.js. -->
+<div class="floodlights ambient" id="floodlights" aria-hidden="true">
+  <span class="floodlight fl-1"></span>
+  <span class="floodlight fl-2"></span>
+  <span class="floodlight fl-3"></span>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="bar" id="bar">
   <div class="bar-in">
     <a class="mark" href="#top" aria-label="Joshua Anojulu, home">
       <span class="crest" aria-hidden="true"></span>
-      <span>joshua anojulu</span>
+      <span class="mark-text">joshua anojulu</span>
     </a>
+    <!-- Diegetic chrome: the nav sits ON the halfway line, with the centre spot as the marker. -->
     <nav class="nav-links" aria-label="Primary">
       <a href="#match-report">Match report</a>
       <a href="#toolkit">Project skills</a>
       <a href="#contact">Contact</a>
       <a href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">GitHub</a>
     </nav>
+    <a class="btn btn-primary bar-cta" href="#match-report">Match report</a>
   </div>
+  <span class="bar-line" aria-hidden="true"><i class="centre-spot"></i></span>
 </header>
 
 <main id="top">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow reveal">Matchday portfolio // CS student @ TAMS -> UNT</p>
-        <h1 class="reveal">Joshua Anojulu</h1>
-        <p class="lead reveal">Score once to unlock the scouting report.</p>
-        <p class="sub reveal">I build full-stack software and run machine-learning experiments on real scientific data. This version turns the site into a playable match: <b>shipped apps up front, research under pressure, and the skills behind each project on the sideline.</b></p>
-        <div class="hero-actions reveal">
-          <a class="btn btn-secondary" href="#match-report">View report</a>
-          <a class="btn" href="https://scholarships4u.dev/" target="_blank" rel="noopener">Open Scholarships4U</a>
-        </div>
-      </div>
 
-      <div class="penalty-card is-aiming reveal" id="penalty-card" aria-labelledby="penalty-title">
-        <div class="scoreboard" aria-hidden="true">
-          <span>JOSHUA XI</span>
-          <strong id="scoreline">0 - 0</strong>
-          <span>STATIC SITE</span>
+  <!-- ==================== CH1. THE TEAM SHEET (deep pitch, night) ==================== -->
+  <section class="hero" aria-labelledby="hero-name">
+    <div class="pitch-marks" aria-hidden="true">
+      <span class="mark-box"></span>
+      <span class="mark-arc"></span>
+      <span class="mark-spot"></span>
+    </div>
+
+    <div class="wrap hero-in">
+      <p class="eyebrow reveal">Matchday portfolio // CS student @ TAMS -&gt; UNT</p>
+
+      <!-- Dieste move: the name split across the composition, chalk on grass. -->
+      <h1 class="hero-name" id="hero-name">
+        <span class="n1 reveal">Joshua</span>
+        <span class="n2 reveal">Anojulu</span>
+      </h1>
+
+      <div class="hero-foot">
+        <p class="sub reveal">I build software that ships and run experiments that check whether the result holds.</p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary" href="#match-report">Match report</a>
+          <a class="btn btn-ghost" href="https://ensurecollege.com/" target="_blank" rel="noopener">EnsureCollege, live</a>
         </div>
-        <div class="penalty-stage" id="penalty-stage">
-          <h2 class="sr-only" id="penalty-title">Penalty kick portfolio unlock</h2>
-          <div class="goal-area" id="goal-area" role="application" aria-label="Penalty goal target. Click or drag inside the goal to aim.">
-            <span class="goal-label">Pick a corner</span>
-            <span class="net-ripple" aria-hidden="true"></span>
+        <!-- Ch2.6: the honest line sits next to the action, not in a footnote. -->
+        <p class="hero-note reveal">Seven entries below. Three shipped and public, four research, and the research repositories are private.</p>
+      </div>
+    </div>
+
+    <a class="scroll-cue" href="#match-report">
+      <span>Kick off</span>
+      <span class="cue-arrow" aria-hidden="true"></span>
+    </a>
+  </section>
+
+  <!-- ==================== CH2. MATCH REPORT (chalk, the content layer) ==================== -->
+  <section class="block chalk" id="match-report" aria-labelledby="h-match-report">
+    <div class="wrap">
+      <header class="sec-head">
+        <h2 id="h-match-report">Match report</h2>
+        <p class="sec-lede">The squad, by shirt number. Shipped work starts the line, research holds the back four.</p>
+      </header>
+
+      <!-- Layout family A: the team sheet. A numbered ledger, not a card grid. -->
+      <ol class="teamsheet" id="teamsheet"></ol>
+
+      <!-- Layout family B: a real data table. This is the density-7 content layer. -->
+      <div class="stats" id="stats">
+        <header class="stats-head">
+          <h3 id="h-stats">Calibration under magnitude shift</h3>
+          <p class="stats-lede">
+            Expected calibration error on SDSS DR17, where lower is better. Each recalibrator was
+            fitted on bright sources and then applied to the selected bin, so these three columns
+            are a transfer test. Green marks the best transfer in a row and red the worst. At the
+            faint end the capable models tell the clearest story: random forest and MLP both hold
+            under temperature scaling and break badly under Platt.
+          </p>
+        </header>
+
+        <div class="filters" role="group" aria-labelledby="filters-label">
+          <span class="filters-label" id="filters-label">Magnitude bin</span>
+          <div class="filter-row" id="filter-row"></div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="stats-table">
+            <caption class="sr-only">Expected calibration error by model and recalibration method for the selected magnitude bin</caption>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Raw ECE</th>
+                <th scope="col">Platt, bright fit</th>
+                <th scope="col">Isotonic, bright fit</th>
+                <th scope="col">Temperature, bright fit</th>
+              </tr>
+            </thead>
+            <tbody id="stats-body"></tbody>
+          </table>
+        </div>
+        <p class="stats-note">
+          Measured values from the study's own results, not estimates. IEEE URTC, in submission.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CH3. PROJECT SKILLS (pitch green) ==================== -->
+  <section class="block pitch" id="toolkit" aria-labelledby="h-toolkit">
+    <div class="wrap">
+      <header class="sec-head">
+        <h2 id="h-toolkit">Project skills</h2>
+        <p class="sec-lede">Pick an entry from the match report and this panel follows it, so each set of skills stays attached to the work that actually used them.</p>
+      </header>
+
+      <!-- Layout family C: two asymmetric columns, a live panel beside a static list. -->
+      <div class="toolkit-grid">
+        <div class="toolkit-panel">
+          <p class="toolkit-kicker" id="toolkit-kicker">01 // Striker</p>
+          <h3 id="toolkit-title">EnsureCollege</h3>
+          <ul class="skill-list" id="skill-list"></ul>
+        </div>
+
+        <!-- Ch4.4: signposted play. A real button, labelled, not a mystery div. -->
+        <div class="penalty" id="penalty">
+          <p class="penalty-label">Take a penalty. The keeper picks a corner too.</p>
+          <div class="goal" id="goal">
+            <span class="net" aria-hidden="true"></span>
             <span class="keeper" id="keeper" aria-hidden="true">
               <span class="keeper-head"></span>
               <span class="keeper-body"></span>
-              <span class="keeper-glove keeper-glove-left"></span>
-              <span class="keeper-glove keeper-glove-right"></span>
-              <span class="keeper-leg keeper-leg-left"></span>
-              <span class="keeper-leg keeper-leg-right"></span>
+              <span class="keeper-glove kg-l"></span>
+              <span class="keeper-glove kg-r"></span>
             </span>
-            <span class="save-burst" id="save-burst" aria-hidden="true"></span>
-            <span class="target" id="target" aria-hidden="true"></span>
+            <span class="ball" id="ball" aria-hidden="true"></span>
           </div>
-          <span class="shot-line" id="shot-line" aria-hidden="true"></span>
-          <span class="ball" id="ball" aria-hidden="true"></span>
-        </div>
-        <div class="lane-buttons" aria-label="Quick aim lanes">
-          <button type="button" data-lane="left">Left corner</button>
-          <button type="button" data-lane="top">Top shelf</button>
-          <button type="button" data-lane="right" class="is-active">Right corner</button>
-        </div>
-        <p class="penalty-note" id="penalty-note">Aim away from the keeper, then take the shot. Scoring unlocks the report; the skip button keeps the portfolio usable.</p>
-        <div class="match-controls">
-          <button type="button" class="btn btn-primary" id="shoot-btn">Take the shot</button>
-          <button type="button" class="btn" id="unlock-btn">Skip to report</button>
+          <div class="penalty-controls">
+            <button type="button" class="lane" data-lane="left">Left</button>
+            <button type="button" class="lane" data-lane="middle">Middle</button>
+            <button type="button" class="lane" data-lane="right">Right</button>
+          </div>
+          <p class="penalty-out" id="penalty-out" role="status" aria-live="polite">Scored 0 of 0.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="block match-report" id="match-report">
-    <div class="wrap">
-      <div class="locked-panel" id="locked-panel">
-        <b>Match report locked.</b> Score the penalty above or use "Skip to report" to open the project details immediately.
-      </div>
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">01 // Scoreboard</p>
-          <h2>Same stats, new matchday frame.</h2>
-        </div>
-        <p>The numbers are unchanged from the previous site; the interaction just gives them a sharper entrance.</p>
-      </div>
-
-      <div class="needs-unlock">
-        <div class="stat-grid reveal" aria-label="Portfolio statistics">
-          <div class="stat">
-            <strong>100K</strong>
-            <span>SDSS objects in the stellar-classifier study.</span>
-          </div>
-          <div class="stat">
-            <strong>499,995</strong>
-            <span>SDSS objects in the calibration robustness paper.</span>
-          </div>
-          <div class="stat">
-            <strong>0.003-0.007</strong>
-            <span>Expected calibration error range for capable models.</span>
-          </div>
-          <div class="stat">
-            <strong>20+</strong>
-            <span>CDC flu seasons behind the forecasting research work.</span>
-          </div>
-        </div>
-
-        <div class="sec-head reveal">
-          <div>
-            <p class="eyebrow">02 // Formation</p>
-            <h2>Project XI</h2>
-          </div>
-          <p>Click a player card to change the scouting note. Scholarships4U leads the line, while the new satellite project adds a remote-sensing research run to the formation.</p>
-        </div>
-
-        <div class="formation-grid reveal">
-          <div class="formation-pitch" aria-label="Interactive project formation">
-            <span class="center-circle" aria-hidden="true"></span>
-            <button type="button" class="player is-active" data-project="scholarships">
-              <span class="num">09</span>
-              <b>Scholarships4U</b>
-              <span>Striker / shipped app</span>
-            </button>
-            <button type="button" class="player" data-project="satellite">
-              <span class="num">07</span>
-              <b>Satellite Classifier</b>
-              <span>Midfield / geospatial ML</span>
-            </button>
-            <button type="button" class="player" data-project="stellar">
-              <span class="num">08</span>
-              <b>Stellar Classifier</b>
-              <span>Midfield / ML experiments</span>
-            </button>
-            <button type="button" class="player" data-project="calibration">
-              <span class="num">04</span>
-              <b>Calibration Robustness</b>
-              <span>Defense / reliability</span>
-            </button>
-            <button type="button" class="player" data-project="research">
-              <span class="num">11</span>
-              <b>Research In Progress</b>
-              <span>Winger / next runs</span>
-            </button>
-          </div>
-
-          <article class="detail-panel" id="project-detail" aria-live="polite">
-            <p class="detail-kicker" id="detail-kicker">09 // Striker / live product</p>
-            <h3 id="detail-title">Scholarships4U</h3>
-            <p id="detail-copy">A curated scholarship and elite summer-program planner for U.S. students. The GitHub version now goes beyond matching: students can build one profile, compare <b>204 scholarships</b> and <b>52 elite summer programs</b>, see transparent scoring reasons, save opportunities, track application status, export deadlines, and request server-side AI help for essays, draft review, and resume auto-fill.</p>
-            <div class="tags" id="detail-tags">
-              <span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag">Pydantic</span><span class="tag">SQLAlchemy</span><span class="tag">Anthropic API</span><span class="tag">Render</span>
-            </div>
-            <div class="links" id="detail-links">
-              <a href="https://scholarships4u.dev/" target="_blank" rel="noopener">Live app</a>
-              <a href="https://github.com/Joshua-Anojulu/scholarship-matcher" target="_blank" rel="noopener">Source</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="toolkit">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">03 // Project skills</p>
-          <h2>The sideline toolkit</h2>
-        </div>
-        <p>This panel updates with the selected player card, so each project shows the actual stack, methods, and skills behind it.</p>
-      </div>
-
-      <div class="toolkit-grid">
-        <div class="staff-board reveal">
-          <h3 id="toolkit-title">Scholarships4U toolkit</h3>
-          <div class="staff-list" id="toolkit-list" aria-label="Selected project skills">
-            <button type="button" class="staff-btn is-active" data-tool-index="0">
-              <b>FastAPI backend</b>
-              <span>Typed API routes for matching, accounts, AI, and saved data.</span>
-            </button>
-            <button type="button" class="staff-btn" data-tool-index="1">
-              <b>Curated data modeling</b>
-              <span>Pydantic schemas for scholarships, programs, and verification states.</span>
-            </button>
-            <button type="button" class="staff-btn" data-tool-index="2">
-              <b>Account systems</b>
-              <span>Saved profiles, bookmarks, tracker statuses, and session cookies.</span>
-            </button>
-            <button type="button" class="staff-btn" data-tool-index="3">
-              <b>LLM features</b>
-              <span>Essay advice, draft review, and resume auto-fill with consent gates.</span>
-            </button>
-            <button type="button" class="staff-btn" data-tool-index="4">
-              <b>Deployment</b>
-              <span>Render, Postgres, migrations, password reset, and production env vars.</span>
-            </button>
-            <button type="button" class="staff-btn" data-tool-index="5">
-              <b>Vanilla frontend</b>
-              <span>Responsive HTML, CSS, and JavaScript without a build step.</span>
-            </button>
-          </div>
-          <p class="playbook-note" id="playbook-note"><b>FastAPI backend:</b> routes the profile flow, matching response, account actions, and server-side AI requests behind one app.</p>
-        </div>
-
-        <div class="timeline reveal">
-          <h3>Match timeline</h3>
-          <div class="event">
-            <span class="minute">0'</span>
-            <p><b>Kickoff</b> Penalty interaction opens the site with a small game instead of a static hero.</p>
-          </div>
-          <div class="event">
-            <span class="minute">18'</span>
-            <p><b>First goal</b> Scholarships4U leads with verified data, saved trackers, profile storage, and AI guidance.</p>
-          </div>
-          <div class="event">
-            <span class="minute">36'</span>
-            <p><b>Remote-sensing run</b> Satellite Land-Cover Classifier brings EuroSAT, Sentinel-2, Global Forest Watch validation, and domain-shift fixes into the lineup.</p>
-          </div>
-          <div class="event">
-            <span class="minute">54'</span>
-            <p><b>Build-up play</b> Stellar Classifier keeps the galaxy / star / quasar credibility intact inside a soccer system.</p>
-          </div>
-          <div class="event">
-            <span class="minute">67'</span>
-            <p><b>Defensive stand</b> Calibration work becomes the reliability check: where models hold and where recalibration breaks.</p>
-          </div>
-          <div class="event">
-            <span class="minute">90+'</span>
-            <p><b>Final whistle</b> Contact stays simple so the interaction never gets in the way of reaching you.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block contact" id="contact">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">04 // Contact</p>
-          <h2>Send the next pass.</h2>
-        </div>
-      </div>
-      <p class="intro reveal">I like building things that ship, and finding where models quietly break.</p>
-      <div class="contact-links reveal">
-        <a class="clink" href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">github.com/Joshua-Anojulu</a>
-        <a class="clink" href="mailto:joshanojulu@gmail.com">joshanojulu@gmail.com</a>
-        <a class="clink" href="https://scholarships4u.dev/" target="_blank" rel="noopener">scholarships4u.dev</a>
-      </div>
+  <!-- ==================== CH4. CONTACT (deep pitch, night) ==================== -->
+  <section class="block deep" id="contact" aria-labelledby="h-contact">
+    <div class="wrap contact-in">
+      <h2 id="h-contact">Contact</h2>
+      <p class="contact-lede">I like building things that ship, and finding where models quietly break.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:joshanojulu@gmail.com">joshanojulu@gmail.com</a></li>
+        <li><a href="https://github.com/Joshua-Anojulu" target="_blank" rel="noopener">github.com/Joshua-Anojulu</a></li>
+        <li><a href="https://ensurecollege.com/" target="_blank" rel="noopener">ensurecollege.com</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#match-report">Match report</a>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
+  <div class="wrap foot-in">
     <span>Joshua Anojulu</span>
-    <span>matchday portfolio // full-stack + ML research</span>
+    <span class="foot-meta">Matchday portfolio &middot; built by hand, no framework</span>
   </div>
 </footer>
 

@@ -1,431 +1,408 @@
-var projectData = {
-    scholarships: {
-      kicker: '09 // Striker / live product',
-      title: 'Scholarships4U',
-      copy: 'A curated scholarship and elite summer-program planner for U.S. students. The GitHub version now goes beyond matching: students can build one profile, compare <b>204 scholarships</b> and <b>52 elite summer programs</b>, see transparent scoring reasons, save opportunities, track application status, export deadlines, and request server-side AI help for essays, draft review, and resume auto-fill.',
-      tags: ['FastAPI','Python','Pydantic','SQLAlchemy','Anthropic API','Render'],
-      links: [
-        ['Live app','https://scholarships4u.dev/'],
-        ['Source','https://github.com/Joshua-Anojulu/scholarship-matcher']
-      ],
-      toolkitTitle: 'Scholarships4U toolkit',
-      toolkit: [
-        {
-          label: 'FastAPI backend',
-          summary: 'Typed API routes for matching, accounts, AI, and saved data.',
-          note: '<b>FastAPI backend:</b> routes the profile flow, matching response, account actions, and server-side AI requests behind one app.'
-        },
-        {
-          label: 'Curated data modeling',
-          summary: 'Pydantic schemas for scholarships, programs, and verification states.',
-          note: '<b>Curated data modeling:</b> keeps real scholarships, summer programs, special requirements, deadlines, and verification flags explicit instead of hand-wavy.'
-        },
-        {
-          label: 'Account systems',
-          summary: 'Saved profiles, bookmarks, tracker statuses, and session cookies.',
-          note: '<b>Account systems:</b> optional user accounts save the profile, bookmarks, tracker notes, and application statuses without blocking guest use.'
-        },
-        {
-          label: 'LLM features',
-          summary: 'Essay advice, draft review, and resume auto-fill with consent gates.',
-          note: '<b>LLM features:</b> Anthropic-powered essay guidance, draft feedback, and resume extraction stay server-side and ask before sending sensitive student content.'
-        },
-        {
-          label: 'Deployment',
-          summary: 'Render, Postgres, migrations, password reset, and production env vars.',
-          note: '<b>Deployment:</b> Render, Postgres, Alembic migrations, Resend password reset, and env-var handling make the demo usable outside localhost.'
-        },
-        {
-          label: 'Vanilla frontend',
-          summary: 'Responsive HTML, CSS, and JavaScript without a build step.',
-          note: '<b>Vanilla frontend:</b> the app keeps the interface lightweight while still supporting sorting, filters, saved items, account modals, and theme behavior.'
-        }
+/* ===========================================================================
+   Joshua Anojulu, matchday portfolio.
+   Vanilla, no build step, no framework. Loaded at the end of <body>.
+
+   Every value below is real. No invented statistics (house-style ban 3):
+   the calibration matrix is measured output from the study's own
+   results/metrics_by_magnitude_agg.csv, and the satellite and influenza
+   figures come from those projects' own reported results.
+   =========================================================================== */
+(function () {
+  'use strict';
+
+  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* =========================================================================
+     DATA: the squad. Shirt number is diegetic information, not an eyebrow.
+     ====================================================================== */
+  var SQUAD = [
+    {
+      num: '01', name: 'EnsureCollege', role: 'Striker / shipped',
+      body: 'A live college-planning app that matches students to national scholarships and selective summer programs, with transparent scoring, source-linked requirements, saved plans and deadline tracking.',
+      tags: ['FastAPI', 'Python', 'Postgres', 'Alembic', 'Vercel', 'Neon'],
+      status: { label: 'Live', kind: 'live' },
+      link: { label: 'ensurecollege.com', href: 'https://ensurecollege.com/' },
+      restricted: 'Source: private',
+      skillTitle: 'EnsureCollege', skillKicker: '01 // Striker',
+      skills: [
+        ['API', 'FastAPI backend', 'Typed routes for matching, accounts, saved plans and server-side AI.'],
+        ['DATA', 'Curated data model', 'Real scholarships and programs with explicit requirements, deadlines and verification state.'],
+        ['AUTH', 'Accounts and sessions', 'Profiles, bookmarks and application status, without blocking guest use.'],
+        ['OPS', 'Deploy and migrations', 'Vercel and Neon Postgres, Alembic migrations applied deliberately rather than on boot.']
       ]
     },
-    satellite: {
-      kicker: '07 // Midfield / geospatial ML',
-      title: 'Satellite Land-Cover Classifier',
-      copy: 'A remote-sensing pipeline that fine-tunes <b>ResNet50</b> on EuroSAT Sentinel-2 land-cover imagery, reaches <b>98.26% test accuracy</b> on 2,700 held-out images, then applies the model to 2016 to 2024 Sentinel-2 scenes to detect forest-to-non-forest change. The deforestation run is validated against <b>Global Forest Watch</b> across two Amazon frontiers, with a key domain-shift fix: per-channel moment matching stops rainforest from being misread as water.',
-      tags: ['PyTorch','ResNet50','EuroSAT','Sentinel-2','rasterio','Global Forest Watch'],
-      links: [
-        ['Source','https://github.com/Joshua-Anojulu/satellite-deforestation-classifier']
-      ],
-      toolkitTitle: 'Satellite classifier toolkit',
-      toolkit: [
-        {
-          label: 'PyTorch transfer learning',
-          summary: 'ResNet50 fine-tuning with seeded splits and best-checkpoint saving.',
-          note: '<b>PyTorch transfer learning:</b> adapts ImageNet ResNet50 to EuroSAT land-cover classification with reproducible splits, two-phase training, and saved best validation checkpoints.'
-        },
-        {
-          label: 'Remote-sensing data',
-          summary: 'EuroSAT training data plus two-date Sentinel-2 scenes.',
-          note: '<b>Remote-sensing data:</b> connects benchmark EuroSAT patches to real Sentinel-2 scenes so the project moves beyond a classroom classifier.'
-        },
-        {
-          label: 'Domain-shift correction',
-          summary: 'Moment matching for Sentinel-2 scenes before classification.',
-          note: '<b>Domain-shift correction:</b> fixes the radiometric mismatch that made a high-accuracy model label rainforest as water, which is the project&apos;s most important methodological lesson.'
-        },
-        {
-          label: 'Geospatial pipeline',
-          summary: 'openEO/rasterio downloads, georeferenced patches, and change maps.',
-          note: '<b>Geospatial pipeline:</b> downloads Sentinel-2 composites, tiles georeferenced patches, classifies land cover, and exports forest-loss maps and event lists.'
-        },
-        {
-          label: 'GFW validation',
-          summary: 'Hansen Global Forest Change scoring for precision, recall, and F1.',
-          note: '<b>GFW validation:</b> compares detected loss against Global Forest Watch instead of judging the change maps by appearance alone.'
-        },
-        {
-          label: 'Research expansion',
-          summary: 'Multi-site, NDVI, and 13-band multispectral work in progress.',
-          note: '<b>Research expansion:</b> the local branch is growing into multi-biome testing, NDVI baseline comparison, and 13-band multispectral model experiments.'
-        }
+    {
+      num: '02', name: 'localflow', role: 'Midfield / shipped',
+      body: 'Local-first, system-wide dictation for Windows 11. Hold Left Ctrl, transcribe with faster-whisper large-v3-turbo on your own GPU, paste into whatever app has focus. No cloud, no quota, and no audio leaves the machine.',
+      tags: ['Python', 'faster-whisper', 'CUDA', 'Qt', 'Win32'],
+      status: { label: 'Shipped', kind: 'live' },
+      link: { label: 'github.com/Joshua-Anojulu/localflow', href: 'https://github.com/Joshua-Anojulu/localflow' },
+      skillTitle: 'localflow', skillKicker: '02 // Midfield',
+      skills: [
+        ['ASR', 'Local transcription', 'faster-whisper large-v3-turbo running on the local GPU, no network call in the hot path.'],
+        ['HOOK', 'Global keyboard hook', 'A push-to-talk key that survives focus changes across arbitrary applications.'],
+        ['UX', 'Paste into focus', 'Text lands in the focused control, so it works in apps with no integration.'],
+        ['PRIV', 'Nothing leaves', 'Audio is captured, transcribed and discarded locally by design.']
       ]
     },
-    stellar: {
-      kicker: '08 // Midfield / ML experiments',
-      title: 'Stellar Classifier',
-      copy: 'A reproducible study of how far you can trust a photometric classifier of galaxies, stars, and quasars on <b>100,000 SDSS objects</b>. Five self-contained experiments isolate where accuracy comes from and where it breaks down: redshift leakage, injected noise, useful bands, and brightness-regime generalization.',
-      tags: ['scikit-learn','Python','SDSS','pandas','model evaluation'],
-      links: [
-        ['Source','https://github.com/Joshua-Anojulu/Stellar-Classifier']
-      ],
-      toolkitTitle: 'Stellar Classifier toolkit',
-      toolkit: [
-        {
-          label: 'Python analysis',
-          summary: 'Notebook-to-repo workflow with repeatable experiment sections.',
-          note: '<b>Python analysis:</b> keeps the study runnable and modular instead of leaving the work as a one-off notebook.'
-        },
-        {
-          label: 'pandas + SDSS',
-          summary: 'Tabular cleaning and feature handling for sky-survey data.',
-          note: '<b>pandas + SDSS:</b> supports the data preparation needed to compare galaxies, stars, and quasars across photometric features.'
-        },
-        {
-          label: 'scikit-learn',
-          summary: 'Classifier training, evaluation, and controlled comparisons.',
-          note: '<b>scikit-learn:</b> powers the model training and makes it easier to isolate which experiments actually change performance.'
-        },
-        {
-          label: 'Leakage checks',
-          summary: 'Tests whether redshift shortcuts inflate classifier results.',
-          note: '<b>Leakage checks:</b> separate real photometric signal from features that make the benchmark look better than it should.'
-        },
-        {
-          label: 'Noise experiments',
-          summary: 'Injected-noise tests for robustness under degraded inputs.',
-          note: '<b>Noise experiments:</b> show how the classifier behaves when the data gets messier instead of only reporting clean-set accuracy.'
-        },
-        {
-          label: 'Generalization tests',
-          summary: 'Brightness-regime train/test splits for distribution shift.',
-          note: '<b>Generalization tests:</b> ask whether a model trained on one brightness regime still behaves when evaluated on another.'
-        }
+    {
+      num: '03', name: 'plan-hardening', role: 'Midfield / shipped',
+      body: 'An adversarial plan-review harness. One model drafts an implementation plan, a second attacks it in a read-only sandbox and returns a verdict, and the loop repeats until the plan survives or hits a round cap. Read-only is enforced by mechanism, not by asking politely.',
+      tags: ['Shell', 'Node', 'adapters', 'sandboxing'],
+      status: { label: 'Shipped', kind: 'live' },
+      link: { label: 'github.com/Joshua-Anojulu/plan-hardening', href: 'https://github.com/Joshua-Anojulu/plan-hardening' },
+      skillTitle: 'plan-hardening', skillKicker: '03 // Midfield',
+      skills: [
+        ['LOOP', 'Bounded review loop', 'Caps on both successful rounds and total launches, so the loop always terminates.'],
+        ['SAFE', 'Enforced read-only', 'Each adapter must pass an acceptance test with a working positive control before it counts as verified.'],
+        ['PROV', 'Provenance binding', 'A verdict is bound to a hash of the plan body it actually reviewed, or it is not a claim.'],
+        ['MULTI', 'Reviewer adapters', 'Repo-grounded and plan-only reviewers, each with its own gate and failure taxonomy.']
       ]
     },
-    calibration: {
-      kicker: '04 // Defense / reliability under shift',
-      title: 'Calibration robustness under magnitude shift',
-      copy: 'Sole-author paper measuring whether photometric star, galaxy, and quasar classifiers stay calibrated as sources get fainter across <b>499,995 SDSS objects</b>. Capable models stay well calibrated across the magnitude range, with expected calibration error around <b>0.003 to 0.007</b>; naive Platt scaling on bright sources roughly quintuples faint-end error while temperature scaling transfers best.',
-      tags: ['probability calibration','ECE','distribution shift','SDSS','IEEE URTC'],
-      links: [
-        ['Draft available on request', null]
-      ],
-      toolkitTitle: 'Calibration paper toolkit',
-      toolkit: [
-        {
-          label: 'Probability calibration',
-          summary: 'Reliability analysis beyond raw classification accuracy.',
-          note: '<b>Probability calibration:</b> asks whether predicted probabilities mean what they claim, not just whether the top label is correct.'
-        },
-        {
-          label: 'Expected calibration error',
-          summary: 'ECE measurement across source brightness regimes.',
-          note: '<b>Expected calibration error:</b> gives the paper a concrete way to compare reliability across magnitude ranges.'
-        },
-        {
-          label: 'Magnitude shift',
-          summary: 'Distribution-shift framing for fainter astronomical sources.',
-          note: '<b>Magnitude shift:</b> turns the study into a stress test: what happens when sources get fainter and the data regime changes?'
-        },
-        {
-          label: 'Recalibration methods',
-          summary: 'Platt scaling versus temperature scaling transfer tests.',
-          note: '<b>Recalibration methods:</b> compare how calibration fixes transfer, including the bright-source Platt scaling failure case.'
-        },
-        {
-          label: 'Large-scale SDSS audit',
-          summary: '499,995-object analysis across galaxy, star, and quasar classes.',
-          note: '<b>Large-scale SDSS audit:</b> gives the calibration claims enough volume to be more than a tiny benchmark result.'
-        },
-        {
-          label: 'Research writing',
-          summary: 'Sole-author paper framing, results, and IEEE URTC target.',
-          note: '<b>Research writing:</b> turns the experiments into a clear argument about where model confidence holds and where it breaks.'
-        }
+    {
+      num: '04', name: 'Calibration robustness', role: 'Defence / research',
+      body: 'Do photometric star, galaxy and quasar classifiers give probabilities you can actually trust, and does that hold as sources get fainter? Measured on 499,995 SDSS DR17 sources. The full result is in the table below.',
+      tags: ['scikit-learn', 'SDSS DR17', 'calibration', 'bootstrap'],
+      status: { label: 'In submission', kind: 'open' },
+      restricted: 'Source: restricted',
+      skillTitle: 'Calibration robustness', skillKicker: '04 // Defence',
+      skills: [
+        ['ECE', 'Calibration metrics', 'Expected and class-wise calibration error with bootstrap intervals, not a single point estimate.'],
+        ['SHIFT', 'Magnitude split', 'Train bright, evaluate faint, so the reported failure is a transfer failure rather than noise.'],
+        ['RECAL', 'Three methods compared', 'Platt, isotonic and temperature scaling, each fitted on bright sources and tested on faint.'],
+        ['REPRO', 'Seeded pipeline', 'Fixed splits and a locked requirements file so the numbers regenerate.']
       ]
     },
-    research: {
-      kicker: '11 // Winger / in-progress research',
-      title: 'Bioinformatics and flu forecasting',
-      copy: 'Current research work includes a UNT computational pathogen-detection project using protein language model embeddings, plus a UTD influenza forecasting project that studies season timing and severity from <b>20+ seasons</b> of CDC surveillance data with a calibration-focused angle.',
-      tags: ['protein embeddings','pathogen detection','CDC data','forecasting','calibration'],
-      links: [
-        ['GitHub profile','https://github.com/Joshua-Anojulu']
-      ],
-      toolkitTitle: 'Research-in-progress toolkit',
-      toolkit: [
-        {
-          label: 'Protein language models',
-          summary: 'Embedding-based workflows for pathogen-detection research.',
-          note: '<b>Protein language models:</b> the bioinformatics work uses learned protein representations as the starting point for pathogen-detection workflows.'
-        },
-        {
-          label: 'Literature review',
-          summary: 'Getting oriented on datasets, methods, and lab workflows.',
-          note: '<b>Literature review:</b> keeps the early-stage bioinformatics work grounded before making modeling claims.'
-        },
-        {
-          label: 'CDC surveillance data',
-          summary: '20+ influenza seasons for timing and severity modeling.',
-          note: '<b>CDC surveillance data:</b> gives the flu project its historical signal for season timing and severity prediction.'
-        },
-        {
-          label: 'Forecasting models',
-          summary: 'Machine-learning approach to seasonal flu outcomes.',
-          note: '<b>Forecasting models:</b> frame flu season timing and severity as predictive targets rather than descriptive summaries only.'
-        },
-        {
-          label: 'Calibration angle',
-          summary: 'Checking whether predictions are trustworthy, not just close.',
-          note: '<b>Calibration angle:</b> carries the same reliability instinct from the astronomy work into public-health forecasting.'
-        },
-        {
-          label: 'Research collaboration',
-          summary: 'Lab onboarding, project constraints, and reproducible handoffs.',
-          note: '<b>Research collaboration:</b> means learning existing workflows and making contributions that fit the project instead of freelancing a disconnected analysis.'
-        }
+    {
+      num: '05', name: 'Domain shift in remote sensing', role: 'Defence / research',
+      body: 'A ResNet50 fine-tuned on EuroSAT reaches 98% benchmark accuracy, then collapses out of biome: F1 of 0.001 in the Congo Basin, on a composite the diagnostics show to be clean. A label-free AdaBN pass recovers it to 0.397. Benchmark accuracy does not transfer for free.',
+      tags: ['PyTorch', 'ResNet50', 'EuroSAT', 'Sentinel-2', 'AdaBN'],
+      status: { label: 'Result held', kind: 'live' },
+      restricted: 'Source: restricted',
+      skillTitle: 'Domain shift in remote sensing', skillKicker: '05 // Defence',
+      skills: [
+        ['CV', 'Transfer learning', 'ImageNet ResNet50 adapted to Sentinel-2 land cover with seeded splits and checkpointing.'],
+        ['GEO', 'Geospatial pipeline', 'Two-date composites tiled into georeferenced patches, then scored into change maps.'],
+        ['ADAPT', 'Label-free adaptation', 'AdaBN recomputes batch statistics on the target biome without a single new label.'],
+        ['VALID', 'External validation', 'Detected loss compared against Global Forest Watch rather than judged by eye.']
+      ]
+    },
+    {
+      num: '06', name: 'Anti-virulence screen', role: 'Defence / research',
+      body: 'A structure-based docking screen against a bacterial virulence target. The result is null, and the SpeB positive control failed. A screen that cannot recover its own positive control cannot rank actives, so the work is being reframed as a benchmark of the pipeline itself.',
+      tags: ['docking', 'AutoDock', 'RDKit', 'controls'],
+      status: { label: 'Null result', kind: 'null' },
+      restricted: 'Source: restricted',
+      skillTitle: 'Anti-virulence screen', skillKicker: '06 // Defence',
+      skills: [
+        ['DOCK', 'Structure-based screen', 'Ligand preparation, receptor setup and scoring across a compound library.'],
+        ['CTRL', 'Positive controls', 'The control is the finding here: it failed, and that invalidates the ranking.'],
+        ['HONEST', 'Reported as null', 'Published as a negative result rather than reframed into a win.'],
+        ['NEXT', 'Benchmark reframe', 'The pipeline becomes the object of study instead of the compounds.']
+      ]
+    },
+    {
+      num: '07', name: 'Influenza timing', role: 'Substitute / preliminary',
+      body: 'Forecasting the timing and severity of US influenza season peaks from CDC surveillance data, standing at a fixed decision week inside an ongoing season. 19 seasons modelled. These results are preliminary and descriptive, and nothing here is a final claim.',
+      tags: ['pandas', 'CDC ILINet', 'time series', 'scikit-learn'],
+      status: { label: 'Preliminary', kind: 'null' },
+      restricted: 'Source: restricted',
+      skillTitle: 'Influenza timing', skillKicker: '07 // Substitute',
+      skills: [
+        ['DATA', 'CDC surveillance', 'Weighted ILI by MMWR week, assembled across seasons with explicit inclusion rules.'],
+        ['TASK', 'Within-season framing', 'Forecast from a fixed decision week using only data available by then.'],
+        ['TIERS', 'Severity tiers', 'CDC-anchored thresholds rather than tiers invented to fit the data.'],
+        ['LIMIT', 'Small sample, stated', 'Nineteen seasons is a small n, and the write-up says so rather than burying it.']
       ]
     }
+  ];
+
+  /* =========================================================================
+     DATA: measured calibration matrix. Expected calibration error, lower is
+     better. "bright fit" means the recalibrator was fitted on bright sources
+     and then applied to this magnitude bin, which is the transfer test.
+     ====================================================================== */
+  var BINS = ['[14,17)', '[17,18)', '[18,19)', '[19,20)', '[20,22)'];
+  var CALIB = {
+    'LogReg':       [[0.17217,0.14274,0.11987,0.12215],[0.13074,0.15292,0.13491,0.08214],
+                     [0.16458,0.12927,0.06462,0.15090],[0.09525,0.09733,0.06223,0.08807],
+                     [0.03117,0.04809,0.08936,0.07583]],
+    'RandomForest': [[0.00644,0.00799,0.00236,0.00281],[0.00775,0.00668,0.00275,0.00283],
+                     [0.01151,0.01156,0.00429,0.00406],[0.00937,0.03176,0.00891,0.00619],
+                     [0.00362,0.06336,0.02366,0.01747]],
+    'HistGB':       [[0.00265,0.00875,0.00834,0.00264],[0.00352,0.00906,0.00856,0.00248],
+                     [0.00626,0.00662,0.00571,0.00500],[0.00530,0.00528,0.00606,0.00452],
+                     [0.00453,0.00702,0.00945,0.00863]],
+    'MLP':          [[0.00324,0.00806,0.00286,0.00269],[0.00293,0.00625,0.00250,0.00255],
+                     [0.00412,0.01162,0.00422,0.00388],[0.00525,0.03133,0.00623,0.00516],
+                     [0.00603,0.06192,0.00967,0.00652]]
   };
 
-  (function(){
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var report = document.getElementById('match-report');
-    var penalty = document.getElementById('penalty-card');
-    var stage = document.getElementById('penalty-stage');
-    var goal = document.getElementById('goal-area');
-    var target = document.getElementById('target');
-    var keeper = document.getElementById('keeper');
-    var ball = document.getElementById('ball');
-    var saveBurst = document.getElementById('save-burst');
-    var note = document.getElementById('penalty-note');
-    var shoot = document.getElementById('shoot-btn');
-    var unlock = document.getElementById('unlock-btn');
-    var scoreline = document.getElementById('scoreline');
-    var laneButtons = document.querySelectorAll('[data-lane]');
-    var aim = {x:76,y:34};
-    var keeperX = 50;
-    var attempts = 0;
-    var isShooting = false;
-    var unlocked = false;
-    var resetTimer = 0;
+  /* ========================== small helpers ============================== */
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fmt(v) { return v.toFixed(5); }
 
-    function clamp(value,min,max){
-      return Math.max(min,Math.min(max,value));
-    }
+  /* ====================== render: the team sheet ========================= */
+  var sheet = document.getElementById('teamsheet');
+  var selected = 0;
 
-    function clearShotClasses(){
-      window.clearTimeout(resetTimer);
-      stage.classList.remove('is-goal','is-save');
-      penalty.classList.remove('is-goal','is-save');
-      keeper.classList.remove('is-diving-left','is-diving-right','is-jumping','is-beaten');
-      ball.classList.remove('is-shooting','is-deflected');
-    }
+  function renderSquad() {
+    if (!sheet) return;
+    SQUAD.forEach(function (p, i) {
+      var li = el('li', 'ts-row reveal');
+      li.appendChild(el('span', 'ts-num', p.num));
 
-    function keeperMoveForShot(x){
-      if(x < keeperX - 6) return 'is-diving-left';
-      if(x > keeperX + 6) return 'is-diving-right';
-      return 'is-jumping';
-    }
+      var head = el('div', 'ts-head');
+      var nameBtn = el('button', 'ts-name', p.name);
+      nameBtn.type = 'button';
+      nameBtn.setAttribute('aria-describedby', 'h-toolkit');
+      nameBtn.addEventListener('click', function () { select(i, true); });
+      head.appendChild(nameBtn);
+      head.appendChild(el('span', 'ts-role', p.role));
+      li.appendChild(head);
 
-    function setAim(x,y){
-      aim.x = Math.max(8,Math.min(92,x));
-      aim.y = Math.max(12,Math.min(82,y));
-      target.style.setProperty('--aim-x',aim.x + '%');
-      target.style.setProperty('--aim-y',aim.y + '%');
-      laneButtons.forEach(function(btn){btn.classList.remove('is-active');});
-    }
+      li.appendChild(el('p', 'ts-body', p.body));
 
-    function setLane(lane){
-      var map = {
-        left:[21,35],
-        top:[50,19],
-        right:[79,35]
-      };
-      setAim(map[lane][0],map[lane][1]);
-      laneButtons.forEach(function(btn){btn.classList.toggle('is-active',btn.getAttribute('data-lane') === lane);});
-    }
+      var meta = el('div', 'ts-meta');
+      p.tags.forEach(function (t) { meta.appendChild(el('span', 'ts-tag', t)); });
+      li.appendChild(meta);
 
-    function moveKeeper(){
-      if(reduce || unlocked || isShooting) return;
-      keeperX = [28,41,55,69][Math.floor(Math.random()*4)];
-      keeper.style.setProperty('--keeper-x',keeperX + '%');
-    }
-
-    function unlockReport(message,scoredGoal){
-      if(unlocked) return;
-      unlocked = true;
-      if(scoredGoal){
-        stage.classList.add('is-goal');
-        penalty.classList.add('is-goal');
-        keeper.classList.add('is-beaten');
-        scoreline.textContent = 'GOAL';
-        window.setTimeout(function(){scoreline.textContent = '1 - 0';}, reduce ? 120 : 680);
-      }else{
-        scoreline.textContent = '1 - 0';
+      var side = el('div', 'ts-side');
+      side.appendChild(el('span', 'lamp lamp-' + p.status.kind, p.status.label));
+      if (p.link) {
+        var a = el('a', 'ts-link', p.link.label);
+        a.href = p.link.href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        side.appendChild(a);
       }
-      report.classList.add('is-unlocked');
-      note.innerHTML = message || '<b>Goal.</b> Match report unlocked.';
-      penalty.classList.remove('is-aiming');
-      unlock.textContent = 'Report open';
-      unlock.disabled = true;
-      setTimeout(function(){report.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});}, scoredGoal ? 920 : 260);
-    }
+      if (p.restricted) side.appendChild(el('span', 'ts-restricted', p.restricted));
+      li.appendChild(side);
 
-    function takeShot(){
-      if(isShooting || unlocked) return;
-      attempts += 1;
-      isShooting = true;
-      shoot.disabled = true;
-      note.textContent = 'Shot away...';
-      clearShotClasses();
-      var shotX = aim.x;
-      var shotY = 10 + aim.y * 0.46;
-      var topCorner = aim.y < 25;
-      var outsideKeeper = Math.abs(aim.x - keeperX) > 17;
-      var forcedGoal = attempts >= 3;
-      var scored = topCorner || outsideKeeper || forcedGoal;
-      var diveClass = keeperMoveForShot(shotX);
-
-      keeper.classList.add(diveClass);
-      if(scored) keeper.classList.add('is-beaten');
-      ball.style.setProperty('--ball-x',shotX + '%');
-      ball.style.setProperty('--ball-y',shotY + '%');
-      ball.classList.add('is-shooting');
-
-      window.setTimeout(function(){
-        if(scored){
-          unlockReport(forcedGoal && !outsideKeeper && !topCorner ? '<b>Goal.</b> Third attempt sneaks through and opens the report.' : '<b>Goal.</b> Net ripple. Match report unlocked.', true);
-        }else{
-          var deflectDir = shotX < keeperX ? -1 : 1;
-          var deflectX = clamp(shotX + deflectDir * 24,10,90);
-          var deflectY = clamp(shotY + 17,26,78);
-          saveBurst.style.setProperty('--burst-x',shotX + '%');
-          saveBurst.style.setProperty('--burst-y',shotY + '%');
-          ball.style.setProperty('--deflect-x',deflectX + '%');
-          ball.style.setProperty('--deflect-y',deflectY + '%');
-          stage.classList.add('is-save');
-          penalty.classList.add('is-save');
-          ball.classList.add('is-deflected');
-          note.innerHTML = '<b>Saved.</b> Gloves got there first. Try a top corner or pull it wider.';
-          resetTimer = window.setTimeout(function(){
-            clearShotClasses();
-            shoot.disabled = false;
-            isShooting = false;
-            moveKeeper();
-          }, reduce ? 180 : 850);
-        }
-      }, reduce ? 80 : 720);
-    }
-
-    goal.addEventListener('pointerdown',function(event){
-      var rect = goal.getBoundingClientRect();
-      var x = ((event.clientX - rect.left) / rect.width) * 100;
-      var y = ((event.clientY - rect.top) / rect.height) * 100;
-      setAim(x,y);
+      sheet.appendChild(li);
     });
-    laneButtons.forEach(function(btn){
-      btn.addEventListener('click',function(){setLane(btn.getAttribute('data-lane'));});
-    });
-    shoot.addEventListener('click',takeShot);
-    unlock.addEventListener('click',function(){clearShotClasses(); unlockReport('<b>Report opened.</b> You skipped the penalty intro.', false);});
-    setLane('right');
-    moveKeeper();
-    window.setInterval(moveKeeper,2200);
-  })();
+  }
 
-  (function(){
-    var detail = {
-      kicker: document.getElementById('detail-kicker'),
-      title: document.getElementById('detail-title'),
-      copy: document.getElementById('detail-copy'),
-      tags: document.getElementById('detail-tags'),
-      links: document.getElementById('detail-links')
-    };
-    var toolkit = {
-      title: document.getElementById('toolkit-title'),
-      list: document.getElementById('toolkit-list'),
-      note: document.getElementById('playbook-note')
-    };
-    var players = document.querySelectorAll('.player');
-    function renderToolkit(data, activeIndex){
-      var activeTool = data.toolkit[activeIndex] || data.toolkit[0];
-      toolkit.title.textContent = data.toolkitTitle;
-      toolkit.list.innerHTML = data.toolkit.map(function(tool,index){
-        var activeClass = index === activeIndex ? ' is-active' : '';
-        return '<button type="button" class="staff-btn' + activeClass + '" data-tool-index="' + index + '"><b>' + tool.label + '</b><span>' + tool.summary + '</span></button>';
-      }).join('');
-      toolkit.note.innerHTML = activeTool.note;
-    }
-    function renderProject(key){
-      var data = projectData[key];
-      detail.kicker.textContent = data.kicker;
-      detail.title.textContent = data.title;
-      detail.copy.innerHTML = data.copy;
-      detail.tags.innerHTML = data.tags.map(function(tag){return '<span class="tag">' + tag + '</span>';}).join('');
-      detail.links.innerHTML = data.links.map(function(link){
-        if(!link[1]) return '<a class="muted">' + link[0] + '</a>';
-        return '<a href="' + link[1] + '" target="_blank" rel="noopener">' + link[0] + '</a>';
-      }).join('');
-      renderToolkit(data,0);
-      players.forEach(function(player){player.classList.toggle('is-active',player.getAttribute('data-project') === key);});
-    }
-    players.forEach(function(player){
-      player.addEventListener('click',function(){renderProject(player.getAttribute('data-project'));});
-    });
-    toolkit.list.addEventListener('click',function(event){
-      var button = event.target.closest('.staff-btn');
-      if(!button) return;
-      var activePlayer = document.querySelector('.player.is-active');
-      var activeKey = activePlayer ? activePlayer.getAttribute('data-project') : 'scholarships';
-      var activeIndex = Number(button.getAttribute('data-tool-index')) || 0;
-      renderToolkit(projectData[activeKey],activeIndex);
-    });
-    renderProject('scholarships');
-  })();
+  /* ================ render: the skills panel, follows selection ========== */
+  var kicker = document.getElementById('toolkit-kicker');
+  var title = document.getElementById('toolkit-title');
+  var list = document.getElementById('skill-list');
 
-  (function(){
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var els = document.querySelectorAll('.reveal');
-    if(reduce || !('IntersectionObserver' in window)){
-      els.forEach(function(el){el.classList.add('in');});
+  function select(i, moveFocus) {
+    selected = i;
+    var p = SQUAD[i];
+    if (kicker) kicker.textContent = p.skillKicker;
+    if (title) title.textContent = p.skillTitle;
+    if (!list) return;
+    list.textContent = '';
+    p.skills.forEach(function (s) {
+      var li = el('li');
+      li.appendChild(el('b', null, s[0]));
+      li.appendChild(el('span', 'skill-name', s[1]));
+      li.appendChild(el('span', 'skill-note', s[2]));
+      list.appendChild(li);
+    });
+    if (moveFocus) {
+      var target = document.getElementById('toolkit');
+      if (target) {
+        target.scrollIntoView({ behavior: reduceMQ.matches ? 'auto' : 'smooth', block: 'start' });
+        if (title) { title.setAttribute('tabindex', '-1'); title.focus({ preventScroll: true }); }
+      }
+    }
+  }
+
+  /* ====================== render: the stats table ======================== */
+  var filterRow = document.getElementById('filter-row');
+  var statsBody = document.getElementById('stats-body');
+  var activeBin = 4; // open on [20,22), where the transfer failure is largest
+
+  function renderTable() {
+    if (!statsBody) return;
+    statsBody.textContent = '';
+    Object.keys(CALIB).forEach(function (model) {
+      var row = CALIB[model][activeBin];
+      var tr = el('tr');
+      var th = el('th', 'cell-model', model);
+      th.scope = 'row';
+      tr.appendChild(th);
+
+      var raw = row[0];
+      tr.appendChild(el('td', null, fmt(raw)));
+
+      // Compare the three recalibration methods against EACH OTHER, per row.
+      // Green marks the best transfer in this row, red the worst.
+      //
+      // The earlier version compared each method to raw ECE, which read as
+      // green on LogReg temperature (0.07583) even though that is 2.4x worse
+      // than its own raw 0.03117, while leaving RandomForest temperature
+      // (0.01747) unmarked, which is the value that actually held. Same real
+      // numbers, but the emphasis contradicted the caption above the table.
+      var methods = [row[1], row[2], row[3]];
+      var best = Math.min.apply(null, methods);
+      var worst = Math.max.apply(null, methods);
+      methods.forEach(function (v) {
+        var cls = v === best ? 'cell-good' : (v === worst ? 'cell-bad' : null);
+        tr.appendChild(el('td', cls, fmt(v)));
+      });
+      statsBody.appendChild(tr);
+    });
+  }
+
+  function renderFilters() {
+    if (!filterRow) return;
+    BINS.forEach(function (b, i) {
+      var btn = el('button', 'filter', b);
+      btn.type = 'button';
+      btn.setAttribute('aria-pressed', String(i === activeBin));
+      btn.addEventListener('click', function () {
+        activeBin = i;
+        Array.prototype.forEach.call(filterRow.children, function (c, j) {
+          c.setAttribute('aria-pressed', String(j === activeBin));
+        });
+        renderTable();
+      });
+      filterRow.appendChild(btn);
+    });
+  }
+
+  /* ============================ reveals ================================== */
+  function initReveals() {
+    var items = document.querySelectorAll('.reveal');
+    if (reduceMQ.matches || !('IntersectionObserver' in window)) {
+      // End state, immediately. Never an empty stage (Ch7.1).
+      Array.prototype.forEach.call(items, function (n) { n.classList.add('is-in'); });
       return;
     }
-    var heroEls = document.querySelectorAll('.hero .reveal');
-    heroEls.forEach(function(el,i){setTimeout(function(){el.classList.add('in');},80*i);});
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
+
+    // Synchronous first pass. Anything already on screen is revealed without
+    // waiting for an observer callback, so above-the-fold content never
+    // depends on IO delivering. Chrome defers IO callbacks entirely while a
+    // tab is in the background, which would otherwise paint a blank hero for
+    // anyone who opens the page in a background tab and switches to it later.
+    function sweep() {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      Array.prototype.forEach.call(items, function (n) {
+        if (n.classList.contains('is-in')) return;
+        var r = n.getBoundingClientRect();
+        if (r.top < vh * 0.94 && r.bottom > 0) n.classList.add('is-in');
       });
-    },{threshold:0.12});
-    els.forEach(function(el){
-      if(!el.closest('.hero')) io.observe(el);
+    }
+    sweep();
+    // A tab that was hidden at load gets a correct first paint on reveal.
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') sweep();
     });
-  })();
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    Array.prototype.forEach.call(items, function (n) { io.observe(n); });
+  }
+
+  /* ======================= the ambient gate ==============================
+     Pauses when off-screen AND when the tab is hidden. The CSS default is
+     `running`, so if this never runs the page still animates rather than
+     silently freezing with no error.
+     ==================================================================== */
+  function initAmbientGate() {
+    var layer = document.getElementById('floodlights');
+    if (!layer) return;
+    if (reduceMQ.matches) { layer.dataset.ambient = 'paused'; return; }
+    var onScreen = true;
+    function sync() {
+      layer.dataset.ambient =
+        (onScreen && document.visibilityState === 'visible') ? 'running' : 'paused';
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting; sync();
+      });
+      io.observe(layer);
+    }
+    document.addEventListener('visibilitychange', sync);
+    sync();
+  }
+
+  /* ==================== nav: mark the current chapter ==================== */
+  function initNavState() {
+    var links = document.querySelectorAll('.nav-links a[href^="#"]');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    Array.prototype.forEach.call(links, function (a) {
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Array.prototype.forEach.call(links, function (a) { a.removeAttribute('aria-current'); });
+        var a = map[e.target.id];
+        if (a) a.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+  }
+
+  /* ========================= the penalty =================================
+     Signposted play (Ch4.4): real buttons, a written label, a rewarded click.
+     Not a gate. Nothing on the page is hidden behind it.
+     ==================================================================== */
+  function initPenalty() {
+    var goal = document.getElementById('goal');
+    var keeper = document.getElementById('keeper');
+    var ball = document.getElementById('ball');
+    var out = document.getElementById('penalty-out');
+    var lanes = document.querySelectorAll('.lane');
+    if (!goal || !keeper || !ball || !out || !lanes.length) return;
+
+    var taken = 0, scored = 0, busy = false;
+    var OFFSET = { left: '-120%', middle: '0%', right: '120%' };
+
+    function shoot(lane) {
+      if (busy) return;
+      busy = true;                                    // duplicate-fire protection
+      var keys = ['left', 'middle', 'right'];
+      var dive = keys[Math.floor(Math.random() * 3)];
+      var saved = dive === lane;
+
+      keeper.style.setProperty('--keeper-x', OFFSET[dive]);
+      ball.style.setProperty('--bx', OFFSET[lane]);
+      ball.style.setProperty('--by', '-260%');
+
+      taken += 1;
+      if (!saved) scored += 1;
+
+      window.setTimeout(function () {
+        out.textContent = (saved ? 'Saved. ' : 'Scored. ') + 'Scored ' + scored + ' of ' + taken + '.';
+        window.setTimeout(function () {
+          ball.style.setProperty('--bx', '0%');
+          ball.style.setProperty('--by', '0%');
+          keeper.style.setProperty('--keeper-x', '0%');
+          busy = false;
+        }, reduceMQ.matches ? 0 : 420);
+      }, reduceMQ.matches ? 0 : 380);
+    }
+
+    Array.prototype.forEach.call(lanes, function (b) {
+      b.addEventListener('click', function () { shoot(b.dataset.lane); });
+    });
+  }
+
+  /* ============================== boot =================================== */
+  renderSquad();
+  renderFilters();
+  renderTable();
+  select(0, false);
+  initReveals();
+  initAmbientGate();
+  initNavState();
+  initPenalty();
+})();
