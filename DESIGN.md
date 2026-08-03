@@ -163,6 +163,27 @@ the gutters would complete the technique.
 - **The font stylesheet loads non-blocking** (`media="print"` plus an `onload` flip, with a
   `<noscript>` copy). It was 804ms of an LCP that measured 3.3s on mobile.
 
+## Performance: where it stands and what NOT to do about it
+
+Measured on the live URL, mobile preset, three runs: **performance 85-86, accessibility 100,
+best practices 100, SEO 100. CLS 0, TBT 0ms, 187 KiB total.** FCP, LCP and Speed Index all sit at
+**3.3s**, above the 2.5s LCP target.
+
+That 3.3s is dominated by Lighthouse's simulated mobile network (562ms request latency, 4x CPU)
+plus the one render-blocking stylesheet. Server response is 40ms and every real request completes
+inside 280ms, so there is no fat to cut.
+
+**Two things were tried and one of them was wrong.** Loading the font stylesheet non-blocking was
+correct and kept. Moving the hero off the JS reveal onto a CSS entrance did **not** improve FCP or
+LCP, because first paint was never JS-bound; it only added a stagger, and Speed Index went
+3.3s to 4.9s until the delays were compressed. The `.rise` class was kept anyway because it is
+genuinely more robust, not because it was faster.
+
+**Do not inline critical CSS to chase the remaining LCP.** It would mean a hand-maintained copy of
+the above-fold rules living in `index.html` and silently drifting from `styles.css`, and it breaks
+the no-build-step rule that the rest of this file depends on. The honest read is that this page is
+fast in absolute terms and the score is a throttling artifact.
+
 ## Verifying this page, and the two traps in doing it
 
 Both cost real time. Neither is a defect in the page.
