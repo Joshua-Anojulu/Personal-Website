@@ -134,6 +134,20 @@ entry is explicit that a third use is what turns the system back into ornament.
 The earlier "Research" ambiguity is **resolved**: the `#data` section that also carried that word
 was removed, so the divider is now the only place it appears.
 
+## Internships are deliberately NOT on the proof sheet
+
+Decided 2026-08-03. Every plate has the same shape: a thing, a measured outcome, and either a link
+or an explicit "Source restricted". The internships cannot hold that shape. One had not started
+yet, and the other is an architecture document for a proprietary ERP, so there is nothing to link
+and nothing to quantify publicly. As plates they would be the only entries with no link, no result
+and no number, which weakens the standard the other eight set.
+
+The fact is not missing from the page: the Contact block states the August to December 2026
+internship next to the availability line, which is where it is actually decision-relevant.
+
+Revisit only when a role produces something showable or measurable. Do not add it as a plate to
+fill space.
+
 ## The page currently has NO dark chapter
 
 The `#data` section was the only `.key` chapter, and it was removed on 2026-08-03 along with the
