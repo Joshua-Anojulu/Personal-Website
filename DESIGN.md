@@ -12,14 +12,14 @@ regenerate_when: the design read changes, or the source authority is edited
 **Family:** print-tech paper
 **World:** a printer's proofing table at press check
 **Dials:** WORLD 8 / MOTION 8 / VARIANCE 7 / DENSITY 4 stage, 7 content
-**Primary action:** "Work" - this exact label in the nav, the hero, the sticky bar and the section heading
-**Palette:** process inks. Stock `#eceae4`, key `#14140f`, process cyan `#0b8fd4`, process magenta `#bd005e`, process yellow `#f2b705` (colour bar only), held-reading green `#186b45`
+**Primary action:** "Projects" - this exact label in the nav, the hero, the sticky bar, the scroll cue and the section heading
+**Palette:** process inks. Stock `#eceae4`, key `#14140f`, process cyan `#0b8fd4`, process magenta `#bd005e`, process yellow `#f2b705` (declared, currently unused), held-reading green `#186b45`
 
 > Magenta and green are darker than the first pull for a **measured** reason, not an aesthetic
 > one. At `#d6006e` magenta scored 4.27:1 on stock and at `#1c7a4f` green scored 4.42:1 under
 > stock text, so every small use failed WCAG AA. Lighthouse caught it. The `.state-open` pill also
 > flipped to dark text, because process cyan is a light ink (stock on it is 2.96:1) and cyan
-> cannot be darkened without breaking its other job as the Research chapter accent on near-black.
+> cannot be darkened without breaking its other job as the accent on a near-black chapter.
 > **Re-check with a contrast calculator before changing any of these; do not nudge them by eye.**
 **Type:** display Archivo (variable, wght 400-900, wdth 62-125), body Inter, mono IBM Plex Mono
 
@@ -61,16 +61,14 @@ Supplied by Josh, matched for feel and never for layout or content:
 | Block origin | A single `+` anchoring the section number. The second and final use of the glyph. |
 | Section surface | The title restated as a pale oversized ghost headline bleeding past the column |
 | Outer gutters | Vertical mono marginalia. The centre column is type, the margins carry everything else. |
-| Research metrics | A densitometer readout, tabular figures |
 | Primary button | Overprint: ink knocked out of stock, with a magenta offset that collapses on press |
 
 ## Layout families used (Ch5.7, no family repeated)
 
 1. Hero: full-bleed type composition, name split across the frame
-2. Work: numbered plates in a ledger, in **two groups**. Not a card grid, and there are **zero**
-   equal-card rows
-3. Research: a real data table with filter controls
-4. Contact: a two-column colophon
+2. Projects: numbered plates in a ledger, in **two groups**. Not a card grid, and there are
+   **zero** equal-card rows
+3. Contact: a two-column colophon
 
 ## Hard bans - these always fail, no override
 
@@ -86,9 +84,10 @@ Supplied by Josh, matched for feel and never for layout or content:
 change makes those fields prominent enough to read as the subject, that is a ban-1 violation even
 though nothing else changed.
 
-**On ban 3:** every number on the page is measured. The calibration matrix in `js/site.js` is real
-output from the study's `results/metrics_by_magnitude_agg.csv`; the satellite and influenza figures
-come from those projects' reported results. Add a number only if it is sourced.
+**On ban 3:** every number on the page is measured, and they now all live in the plate copy in
+`index.html`. The SDSS source count, the satellite F1 figures and the influenza season count come
+from those projects' own reported results; the `ccspike` percentages come from its README. Add a
+number only if it is sourced.
 
 ## The crop-mark system, and why it repeats
 
@@ -116,21 +115,35 @@ photography. The gutters carry mono marginalia instead, which honours the princi
 column is type, the margins carry everything else) without faking the asset. Real photography in
 the gutters would complete the technique.
 
-## The two Work groups
+## The two Projects groups
 
-**Shipped** (plates 01 to 04) and **Research** (05 to 08). The plate numbers run **straight
-through both**, because a proof sheet numbers its plates continuously no matter how the run is
-divided. Do not restart the numbering at a group heading.
+The first four (01 to 04) carry **no group heading at all**. They sit directly under "Projects"
+and need no second label; only the point where the research begins needs marking, so **Research**
+(05 to 08) is the only divider. The plate numbers run **straight through both**, because a proof
+sheet numbers its plates continuously no matter how the run is divided. Do not restart at the
+divider, and do not add a heading over the first four.
+
+Because the first group is unheaded, the Research divider is a **paragraph whose id labels its own
+list** (`aria-labelledby`), not a heading. A heading there would sit above the plate names, push
+them to `h4`, and leave the unheaded first group skipping a level.
 
 The group marker is **type and rule only, with no `+` glyph**. Both permitted uses of that glyph
 are already spent (paired for a chapter boundary, single for a section origin), and the library
 entry is explicit that a third use is what turns the system back into ornament.
 
-**Known ambiguity, not yet resolved:** the second group is headed "Research" and so is the `#data`
-section that the nav points at. The Ch2.2 gate still passes, since the nav label still matches the
-`h2` exactly, but a reader meets the word twice. The alternatives are renaming the group (say
-"Studies") or renaming the `#data` heading, and the second is a nav label, which does not change
-without Josh saying so.
+The earlier "Research" ambiguity is **resolved**: the `#data` section that also carried that word
+was removed, so the divider is now the only place it appears.
+
+## The page currently has NO dark chapter
+
+The `#data` section was the only `.key` chapter, and it was removed on 2026-08-03 along with the
+calibration readout. The page now runs one tone from top to bottom, which costs the light-to-dark
+chapter flip that this family uses as a structural device.
+
+`.key` is deliberately **kept in the CSS and unused**. Adding `key` beside `block` on any section
+switches its accent, rules and soft foreground together, and its contrast values are already
+measured (cyan accent 5.19:1, soft text 7.16:1). Contact is the obvious candidate. Josh has not
+asked for this, so it has not been done.
 
 ## Overrides taken, with reasons
 
@@ -145,8 +158,9 @@ without Josh saying so.
 
 - The Pages path. This is a **project** page served at `/Personal-Website/`, so **every asset path
   must stay relative**. A root-absolute `/css/...` works locally and 404s in production.
-- Anchor ids: `#top`, `#work`, `#data`, `#contact`.
-- Nav labels: Work, Research, Contact, GitHub. Section headings match them exactly (Ch2.2).
+- Anchor ids: `#top`, `#work`, `#contact`. **`#work` keeps its id** even though the heading now
+  reads "Projects", so nothing that already links here breaks.
+- Nav labels: Projects, Contact, GitHub. Section headings match them exactly (Ch2.2).
 
 ## Implementation rules a future session must not break
 
@@ -156,19 +170,11 @@ without Josh saying so.
   **visible**. Never move that rule out of the `.js` scope.
 - **The ambient gate fails open too.** CSS default is `running`; the JS sets `paused`. A wiring
   failure costs battery rather than silently freezing a MOTION 8 page with no error.
-- **The data table compares the three recalibration methods against each other, per row.**
-  Comparing them to raw ECE instead marks LogReg temperature as good at 0.07583 despite being 2.4x
-  worse than its own raw value, which contradicts the caption. That was a real bug, found by
-  reading the rendered table.
-- **The content fails open too, and this is the newest of the three.** The seven plates and the
-  default row of the data table are **static markup in `index.html`**. They used to be injected
-  from a `PLATES` array and a `renderTable()` call in `js/site.js`, which meant a 404 on that one
-  file rendered the Work and Research sections empty. A 404 there is not hypothetical: it is
+- **The content fails open too, and this is the newest of the three.** All eight plates are
+  **static markup in `index.html`**. They used to be injected from a `PLATES` array in
+  `js/site.js`, which meant a 404 on that one file rendered the section empty. A 404 there is not hypothetical: it is
   exactly what a root-absolute path does on this project page. `js/site.js` now only *enhances*
   (filters, reveals, ambient gate, nav states). **Do not move page content back into JS.**
-- **`activeBin` in `js/site.js` must match the static `<tbody>`,** which is written out for
-  `[20,22)`. If one changes, change both. The `#bin-current` readout is static for the same
-  reason and JS keeps it in sync.
 - **Ambient budget:** 1 system, 3 members desktop, 2 on mobile. Cap is 3 systems / 30 elements.
   Note the ink is only ever *visible* over the hero: sections are opaque and sit above it, which is
   what keeps Ch2.4 satisfied (no texture behind anything the user reads).

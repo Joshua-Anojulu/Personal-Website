@@ -290,6 +290,12 @@ ul,ol{list-style:none}
   scroll-margin-top:var(--bar-h);overflow-x:clip}
 .stock{--fg-soft:var(--key-soft);--rule:rgba(20,20,15,.16);--rule-strong:rgba(20,20,15,.42);
   --accent:var(--magenta);background:var(--stock);color:var(--key)}
+/* NOTHING USES .key RIGHT NOW. It was the dark Research chapter, removed with
+   the calibration readout on 2026-08-03, so the page currently runs one tone
+   end to end and has no light-to-dark chapter flip. Kept because it is the
+   whole mechanism for putting one back: add `key` beside `block` on a section
+   and its accent, rules and soft foreground all switch with it. Its contrast
+   values are already measured (cyan accent 5.19:1, soft text 7.16:1). */
 .key{--fg-soft:rgba(236,234,228,.66);--rule:rgba(236,234,228,.2);
   --rule-strong:rgba(236,234,228,.44);--accent:var(--cyan);
   background:var(--key);color:var(--stock)}
@@ -427,38 +433,6 @@ ul,ol{list-style:none}
   padding:.22rem .5rem;white-space:nowrap}
 
 /* ===========================================================================
-   THE COLOUR BAR. Layout family B: a densitometer readout, real table.
-   =========================================================================== */
-.readout-lede{color:var(--fg-soft);max-width:70ch;margin-bottom:2rem}
-.filters{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-bottom:1.75rem}
-.filters-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--fg-soft)}
-/* Static in the markup, so the table states its own bin even with no JS. */
-.bin-current{font-family:var(--mono);font-size:.74rem;font-variant-numeric:tabular-nums;
-  color:var(--accent);margin-left:-.5rem}
-.filter-row{display:flex;flex-wrap:wrap;gap:.4rem}
-.filter{font-family:var(--mono);font-size:.74rem;font-variant-numeric:tabular-nums;
-  padding:.42rem .8rem;border:1px solid var(--rule-strong);cursor:pointer;
-  transition:background-color var(--dur-feedback) var(--ease),
-             color var(--dur-feedback) var(--ease),transform var(--dur-feedback) var(--ease)}
-.filter:hover{background:rgba(236,234,228,.08)}
-.filter:active{transform:translateY(2px)}
-.filter[aria-pressed="true"]{background:var(--stock);color:var(--key);border-color:var(--stock)}
-
-.table-scroll{overflow-x:auto}
-.data-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;
-  font-family:var(--mono);font-size:.84rem;min-width:660px}
-.data-table th,.data-table td{text-align:right;padding:.75rem .9rem;
-  border-bottom:1px solid var(--rule)}
-.data-table th:first-child,.data-table td:first-child{text-align:left}
-.data-table thead th{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--fg-soft);border-bottom:1px solid var(--rule-strong);font-weight:500}
-.cell-model{font-family:var(--body);font-weight:500}
-.cell-bad{color:#ff5fa8;font-weight:600}
-.cell-good{color:#4fd08a;font-weight:600}
-.readout-note{margin-top:1.2rem;font-family:var(--mono);font-size:.7rem;color:var(--fg-soft)}
-
-/* ===========================================================================
    THE IMPRINT. Layout family C: a two-column colophon.
    =========================================================================== */
 .imprint{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
@@ -541,7 +515,7 @@ footer{position:relative;z-index:2;background:var(--stock);border-top:1px solid 
 
 /* Touch targets: measured on the built page, then grown. Coarse pointers only. */
 @media (pointer:coarse){
-  .nav-links a,.mark,.plate-link,.contact-links a,.filter{min-height:44px;
+  .nav-links a,.mark,.plate-link,.contact-links a{min-height:44px;
     display:inline-flex;align-items:center}
 }
 
@@ -554,7 +528,7 @@ footer{position:relative;z-index:2;background:var(--stock);border-top:1px solid 
   .rise{animation:none}   /* base opacity is 1, so this IS the assembled state */
   .ambient,.ambient *{animation:none !important}
   .cue-rule{animation:none;transform:none}
-  .btn,.filter,.plate{transition:none}
+  .btn,.plate{transition:none}
 }
 @media (prefers-reduced-transparency:reduce){
   .bar{background:var(--stock);backdrop-filter:none}
@@ -562,7 +536,7 @@ footer{position:relative;z-index:2;background:var(--stock);border-top:1px solid 
 }
 @media (forced-colors:active){
   .press,.grain,.sheet-marks{display:none}
-  .plate,.data-table th,.data-table td,.contact-links{border-color:CanvasText}
-  .btn-primary,.btn-ghost,.filter{border:1px solid CanvasText}
+  .plate,.contact-links{border-color:CanvasText}
+  .btn-primary,.btn-ghost{border:1px solid CanvasText}
   .state{border:1px solid CanvasText}
 }
