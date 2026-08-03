@@ -11,59 +11,10 @@
 
   var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* ===================== the proof sheet: seven plates ==================== */
-  var PLATES = [
-    {
-      num: '01', name: 'EnsureCollege', kind: 'Shipped, live',
-      body: 'A college-planning app that matches students to national scholarships and selective summer programs, with transparent scoring, source-linked requirements, saved plans and deadline tracking.',
-      tags: ['FastAPI', 'Python', 'Postgres', 'Alembic', 'Vercel', 'Neon'],
-      state: { label: 'Live', kind: 'live' },
-      link: { label: 'ensurecollege.com', href: 'https://ensurecollege.com/' },
-      restricted: 'Source private'
-    },
-    {
-      num: '02', name: 'localflow', kind: 'Shipped, open source',
-      body: 'Local-first, system-wide dictation for Windows 11. Hold Left Ctrl, transcribe with faster-whisper large-v3-turbo on your own GPU, paste into whatever app has focus. No cloud, no quota, and no audio leaves the machine.',
-      tags: ['Python', 'faster-whisper', 'CUDA', 'Qt', 'Win32'],
-      state: { label: 'Shipped', kind: 'live' },
-      link: { label: 'github.com/Joshua-Anojulu/localflow', href: 'https://github.com/Joshua-Anojulu/localflow' }
-    },
-    {
-      num: '03', name: 'plan-hardening', kind: 'Shipped, open source',
-      body: 'An adversarial plan-review harness. One model drafts an implementation plan, a second attacks it in a read-only sandbox and returns a verdict, and the loop repeats until the plan survives or hits a round cap. Read-only is enforced by mechanism, not by asking politely.',
-      tags: ['Shell', 'Node', 'sandboxing', 'adapters'],
-      state: { label: 'Shipped', kind: 'live' },
-      link: { label: 'github.com/Joshua-Anojulu/plan-hardening', href: 'https://github.com/Joshua-Anojulu/plan-hardening' }
-    },
-    {
-      num: '04', name: 'Calibration under magnitude shift', kind: 'Research',
-      body: 'Do photometric star, galaxy and quasar classifiers give probabilities you can actually trust, and does that hold as sources get fainter? Measured on 499,995 SDSS DR17 sources. The full result is in the next section.',
-      tags: ['scikit-learn', 'SDSS DR17', 'calibration', 'bootstrap'],
-      state: { label: 'URTC 2026', kind: 'open' },
-      restricted: 'Source restricted'
-    },
-    {
-      num: '05', name: 'Domain shift in remote sensing', kind: 'Research',
-      body: 'A ResNet50 fine-tuned on EuroSAT reaches 98% benchmark accuracy, then collapses out of biome: F1 of 0.001 in the Congo Basin, on a composite the diagnostics show to be clean. A label-free AdaBN pass recovers it to 0.397. Benchmark accuracy does not transfer for free.',
-      tags: ['PyTorch', 'ResNet50', 'EuroSAT', 'Sentinel-2', 'AdaBN'],
-      state: { label: 'Result held', kind: 'live' },
-      restricted: 'Source restricted'
-    },
-    {
-      num: '06', name: 'Anti-virulence screen', kind: 'Research, null result',
-      body: 'A structure-based docking screen against a bacterial virulence target. The result is null, and the SpeB positive control failed. A screen that cannot recover its own positive control cannot rank actives, so the work is being reframed as a benchmark of the pipeline itself.',
-      tags: ['docking', 'AutoDock', 'RDKit', 'controls'],
-      state: { label: 'Null', kind: 'null' },
-      restricted: 'Source restricted'
-    },
-    {
-      num: '07', name: 'Influenza peak timing', kind: 'Research, preliminary',
-      body: 'Forecasting the timing and severity of US influenza season peaks from CDC surveillance data, standing at a fixed decision week inside an ongoing season. 19 seasons modelled. These results are preliminary and descriptive, and nothing here is a final claim.',
-      tags: ['pandas', 'CDC ILINet', 'time series', 'scikit-learn'],
-      state: { label: 'Preliminary', kind: 'null' },
-      restricted: 'Source restricted'
-    }
-  ];
+  /* The seven plates are STATIC MARKUP in index.html, not injected from here.
+     They used to live in a PLATES array at this spot, which meant a 404 on this
+     file emptied the Work section. Everything else on the page fails open, so
+     the content does too. Edit the plates in index.html. */
 
   /* ============= measured calibration matrix, lower is better ============= */
   var BINS = ['[14,17)', '[17,18)', '[18,19)', '[19,20)', '[20,22)'];
@@ -90,46 +41,17 @@
   }
   function fmt(v) { return v.toFixed(5); }
 
-  /* =========================== render: plates ============================ */
-  function renderPlates() {
-    var host = document.getElementById('plates');
-    if (!host) return;
-    PLATES.forEach(function (p) {
-      var li = el('li', 'plate reveal');
-      li.appendChild(el('span', 'plate-num', p.num));
-
-      var head = el('div', 'plate-head');
-      head.appendChild(el('h3', 'plate-name', p.name));
-      head.appendChild(el('span', 'plate-kind', p.kind));
-      li.appendChild(head);
-
-      li.appendChild(el('p', 'plate-body', p.body));
-
-      var meta = el('div', 'plate-meta');
-      p.tags.forEach(function (t) { meta.appendChild(el('span', 'plate-tag', t)); });
-      li.appendChild(meta);
-
-      var side = el('div', 'plate-side');
-      side.appendChild(el('span', 'state state-' + p.state.kind, p.state.label));
-      if (p.link) {
-        var a = el('a', 'plate-link', p.link.label);
-        a.href = p.link.href; a.target = '_blank'; a.rel = 'noopener';
-        side.appendChild(a);
-      }
-      if (p.restricted) side.appendChild(el('span', 'plate-restricted', p.restricted));
-      li.appendChild(side);
-
-      host.appendChild(li);
-    });
-  }
-
-  /* ======================== render: the readout ========================== */
-  var activeBin = 4; // open on [20,22), where the transfer failure is largest
+  /* ======================== render: the readout ==========================
+     activeBin MUST match the static tbody in index.html, which is written out
+     for [20,22), the bin where the transfer failure is largest. */
+  var activeBin = 4;
 
   function renderTable() {
     var body = document.getElementById('data-body');
     if (!body) return;
     body.textContent = '';
+    var current = document.getElementById('bin-current');
+    if (current) current.textContent = BINS[activeBin];
     Object.keys(CALIB).forEach(function (model) {
       var row = CALIB[model][activeBin];
       var tr = el('tr');
@@ -275,7 +197,6 @@
     });
   }
 
-  renderPlates();
   renderFilters();
   renderTable();
   initReveals();

@@ -136,7 +136,18 @@ the gutters would complete the technique.
   Comparing them to raw ECE instead marks LogReg temperature as good at 0.07583 despite being 2.4x
   worse than its own raw value, which contradicts the caption. That was a real bug, found by
   reading the rendered table.
+- **The content fails open too, and this is the newest of the three.** The seven plates and the
+  default row of the data table are **static markup in `index.html`**. They used to be injected
+  from a `PLATES` array and a `renderTable()` call in `js/site.js`, which meant a 404 on that one
+  file rendered the Work and Research sections empty. A 404 there is not hypothetical: it is
+  exactly what a root-absolute path does on this project page. `js/site.js` now only *enhances*
+  (filters, reveals, ambient gate, nav states). **Do not move page content back into JS.**
+- **`activeBin` in `js/site.js` must match the static `<tbody>`,** which is written out for
+  `[20,22)`. If one changes, change both. The `#bin-current` readout is static for the same
+  reason and JS keeps it in sync.
 - **Ambient budget:** 1 system, 3 members desktop, 2 on mobile. Cap is 3 systems / 30 elements.
+  Note the ink is only ever *visible* over the hero: sections are opaque and sit above it, which is
+  what keeps Ch2.4 satisfied (no texture behind anything the user reads).
 - **No build step.** Vanilla HTML, CSS and JS, three files, no bundler and no CDN script tag.
 
 ## History

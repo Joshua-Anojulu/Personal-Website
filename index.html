@@ -104,7 +104,124 @@
       </header>
 
       <span class="gutter-note gutter-l" aria-hidden="true">Proof sheet</span>
-      <ol class="plates" id="plates"></ol>
+
+      <!-- The plates are STATIC. They used to be injected from a PLATES array in
+           site.js, which meant a 404 on that file rendered this section empty.
+           Everything else on this page fails open; the content itself must too. -->
+      <ol class="plates">
+        <li class="plate reveal">
+          <span class="plate-num">01</span>
+          <div class="plate-head">
+            <h3 class="plate-name">EnsureCollege</h3>
+            <span class="plate-kind">Shipped, live</span>
+          </div>
+          <p class="plate-body">A college-planning app that matches students to national scholarships and selective summer programs, with transparent scoring, source-linked requirements, saved plans and deadline tracking.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">FastAPI</span><span class="plate-tag">Python</span><span class="plate-tag">Postgres</span><span class="plate-tag">Alembic</span><span class="plate-tag">Vercel</span><span class="plate-tag">Neon</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-live">Live</span>
+            <a class="plate-link" href="https://ensurecollege.com/" target="_blank" rel="noopener">ensurecollege.com</a>
+            <span class="plate-restricted">Source private</span>
+          </div>
+        </li>
+
+        <li class="plate reveal">
+          <span class="plate-num">02</span>
+          <div class="plate-head">
+            <h3 class="plate-name">localflow</h3>
+            <span class="plate-kind">Shipped, open source</span>
+          </div>
+          <p class="plate-body">Local-first, system-wide dictation for Windows 11. Hold Left Ctrl, transcribe with faster-whisper large-v3-turbo on your own GPU, paste into whatever app has focus. No cloud, no quota, and no audio leaves the machine.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">Python</span><span class="plate-tag">faster-whisper</span><span class="plate-tag">CUDA</span><span class="plate-tag">Qt</span><span class="plate-tag">Win32</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-live">Shipped</span>
+            <a class="plate-link" href="https://github.com/Joshua-Anojulu/localflow" target="_blank" rel="noopener">github.com/Joshua-Anojulu/localflow</a>
+          </div>
+        </li>
+
+        <li class="plate reveal">
+          <span class="plate-num">03</span>
+          <div class="plate-head">
+            <h3 class="plate-name">plan-hardening</h3>
+            <span class="plate-kind">Shipped, open source</span>
+          </div>
+          <p class="plate-body">An adversarial plan-review harness. One model drafts an implementation plan, a second attacks it in a read-only sandbox and returns a verdict, and the loop repeats until the plan survives or hits a round cap. Read-only is enforced by mechanism, not by asking politely.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">Shell</span><span class="plate-tag">Node</span><span class="plate-tag">sandboxing</span><span class="plate-tag">adapters</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-live">Shipped</span>
+            <a class="plate-link" href="https://github.com/Joshua-Anojulu/plan-hardening" target="_blank" rel="noopener">github.com/Joshua-Anojulu/plan-hardening</a>
+          </div>
+        </li>
+
+        <li class="plate reveal">
+          <span class="plate-num">04</span>
+          <div class="plate-head">
+            <h3 class="plate-name">Calibration under magnitude shift</h3>
+            <span class="plate-kind">Research</span>
+          </div>
+          <p class="plate-body">Do photometric star, galaxy and quasar classifiers give probabilities you can actually trust, and does that hold as sources get fainter? Measured on 499,995 SDSS DR17 sources. The full result is in the next section.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">scikit-learn</span><span class="plate-tag">SDSS DR17</span><span class="plate-tag">calibration</span><span class="plate-tag">bootstrap</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-open">URTC 2026</span>
+            <span class="plate-restricted">Source restricted</span>
+          </div>
+        </li>
+
+        <li class="plate reveal">
+          <span class="plate-num">05</span>
+          <div class="plate-head">
+            <h3 class="plate-name">Domain shift in remote sensing</h3>
+            <span class="plate-kind">Research</span>
+          </div>
+          <p class="plate-body">A ResNet50 fine-tuned on EuroSAT reaches 98% benchmark accuracy, then collapses out of biome: F1 of 0.001 in the Congo Basin, on a composite the diagnostics show to be clean. A label-free AdaBN pass recovers it to 0.397. Benchmark accuracy does not transfer for free.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">PyTorch</span><span class="plate-tag">ResNet50</span><span class="plate-tag">EuroSAT</span><span class="plate-tag">Sentinel-2</span><span class="plate-tag">AdaBN</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-live">Result held</span>
+            <span class="plate-restricted">Source restricted</span>
+          </div>
+        </li>
+
+        <li class="plate reveal">
+          <span class="plate-num">06</span>
+          <div class="plate-head">
+            <h3 class="plate-name">Anti-virulence screen</h3>
+            <span class="plate-kind">Research, null result</span>
+          </div>
+          <p class="plate-body">A structure-based docking screen against a bacterial virulence target. The result is null, and the SpeB positive control failed. A screen that cannot recover its own positive control cannot rank actives, so the work is being reframed as a benchmark of the pipeline itself.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">docking</span><span class="plate-tag">AutoDock</span><span class="plate-tag">RDKit</span><span class="plate-tag">controls</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-null">Null</span>
+            <span class="plate-restricted">Source restricted</span>
+          </div>
+        </li>
+
+        <li class="plate reveal">
+          <span class="plate-num">07</span>
+          <div class="plate-head">
+            <h3 class="plate-name">Influenza peak timing</h3>
+            <span class="plate-kind">Research, preliminary</span>
+          </div>
+          <p class="plate-body">Forecasting the timing and severity of US influenza season peaks from CDC surveillance data, standing at a fixed decision week inside an ongoing season. 19 seasons modelled. These results are preliminary and descriptive, and nothing here is a final claim.</p>
+          <div class="plate-meta">
+            <span class="plate-tag">pandas</span><span class="plate-tag">CDC ILINet</span><span class="plate-tag">time series</span><span class="plate-tag">scikit-learn</span>
+          </div>
+          <div class="plate-side">
+            <span class="state state-null">Preliminary</span>
+            <span class="plate-restricted">Source restricted</span>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -133,8 +250,12 @@
           forest and MLP both hold under temperature scaling and break badly under Platt.
         </p>
 
+        <!-- The filter buttons are injected by JS, because a control that cannot
+             work should not be on the page. The bin readout beside the label is
+             static, so with no JS the table below still says which bin it shows. -->
         <div class="filters" role="group" aria-labelledby="filters-label">
           <span class="filters-label" id="filters-label">Magnitude bin</span>
+          <span class="bin-current" id="bin-current">[20,22)</span>
           <div class="filter-row" id="filter-row"></div>
         </div>
 
@@ -150,7 +271,29 @@
                 <th scope="col">Temperature, bright fit</th>
               </tr>
             </thead>
-            <tbody id="data-body"></tbody>
+            <!-- Static default bin [20,22), the one where the transfer failure is
+                 largest. JS replaces these rows when a filter is pressed. Green
+                 marks the best of the three RECALIBRATION methods in a row and
+                 magenta the worst; raw ECE is a reference column and is never
+                 marked. Same rule as renderTable() in site.js. -->
+            <tbody id="data-body">
+              <tr>
+                <th scope="row" class="cell-model">LogReg</th>
+                <td>0.03117</td><td class="cell-good">0.04809</td><td class="cell-bad">0.08936</td><td>0.07583</td>
+              </tr>
+              <tr>
+                <th scope="row" class="cell-model">RandomForest</th>
+                <td>0.00362</td><td class="cell-bad">0.06336</td><td>0.02366</td><td class="cell-good">0.01747</td>
+              </tr>
+              <tr>
+                <th scope="row" class="cell-model">HistGB</th>
+                <td>0.00453</td><td class="cell-good">0.00702</td><td class="cell-bad">0.00945</td><td>0.00863</td>
+              </tr>
+              <tr>
+                <th scope="row" class="cell-model">MLP</th>
+                <td>0.00603</td><td class="cell-bad">0.06192</td><td>0.00967</td><td class="cell-good">0.00652</td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <p class="readout-note">Measured values from the study's own results, not estimates. Written up for IEEE URTC 2026.</p>

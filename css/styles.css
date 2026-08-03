@@ -258,6 +258,9 @@ ul,ol{list-style:none}
 /* ===========================================================================
    CHAPTERS. One flat theme each. Boundary device differs at every join.
    =========================================================================== */
+/* #top is <main>, which is not a .block, so it needs the offset declared here.
+   Every href="#x" on this page has a matching id with scroll-margin-top. */
+#top{scroll-margin-top:var(--bar-h)}
 .block{position:relative;z-index:2;padding-block:var(--section-y);scroll-margin-top:var(--bar-h)}
 .stock{--fg-soft:var(--key-soft);--rule:rgba(20,20,15,.16);--rule-strong:rgba(20,20,15,.42);
   --accent:var(--magenta);background:var(--stock);color:var(--key)}
@@ -375,6 +378,9 @@ ul,ol{list-style:none}
 .filters{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-bottom:1.75rem}
 .filters-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--fg-soft)}
+/* Static in the markup, so the table states its own bin even with no JS. */
+.bin-current{font-family:var(--mono);font-size:.74rem;font-variant-numeric:tabular-nums;
+  color:var(--accent);margin-left:-.5rem}
 .filter-row{display:flex;flex-wrap:wrap;gap:.4rem}
 .filter{font-family:var(--mono);font-size:.74rem;font-variant-numeric:tabular-nums;
   padding:.42rem .8rem;border:1px solid var(--rule-strong);cursor:pointer;
@@ -435,7 +441,11 @@ footer{position:relative;z-index:2;background:var(--stock);border-top:1px solid 
 /* =========================== RESPONSIVE =================================== */
 @media (max-width:900px){
   .imprint{grid-template-columns:1fr}
-  .bar-cta{display:none}   /* nav's first item is the same anchor and label */
+  /* Was `.bar-cta`, a class that no longer exists anywhere, so this rule was
+     dead and the bar crowded at tablet width. The nav's first item is the same
+     anchor and the same label, so the CTA stays reachable at every scroll
+     position without it. */
+  .bar-actions{display:none}
 }
 @media (max-width:640px){
   :root{--bar-h:56px}
