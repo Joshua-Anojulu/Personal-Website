@@ -1,14 +1,29 @@
 ---
 review_provenance:
-  status: in-progress
+  status: aborted
   rounds: []
   historical_cross_model_review: false
   final_body_cross_model_approved: false
   degraded_rounds: []
 ---
 
+> **SUPERSEDED 2026-08-02. Do not build from this file.**
+>
+> This plan proposed replacing the matchday world with an observatory instrument
+> rack. The direction changed: the matchday world is being **kept** and redesigned
+> in place under the Ch8 redesign protocol, because it already commits to a world
+> and that instinct was correct.
+>
+> The live design contract is **`DESIGN.md`**. Read that instead.
+>
+> Act 2 of the grill chain never ran against this plan, so `status` is `aborted`
+> rather than `deadlocked` and nothing here carries a reviewer verdict. It is kept
+> only for the reasoning it records: why several projects were excluded from the
+> site (results maturity, and one withheld for confidentiality), which survives the
+> change of direction and still applies.
+
 # Plan: Rebuild Personal-Website as an observatory instrument rack
-_Locked via grill — by Claude + Joshua Anojulu_
+_Locked via grill — by Claude + Joshua Anojulu. SUPERSEDED, see above._
 
 ## Goal
 
