@@ -490,11 +490,16 @@ footer{position:relative;z-index:2;background:var(--stock);border-top:1px solid 
    the content is simply visible. Nothing can leave it stuck hidden. */
 .rise{animation:rise var(--dur-transition) var(--ease) both}
 @keyframes rise{from{opacity:0;transform:translateY(var(--reveal-y))}}
-.rise-1{animation-delay:60ms}
-.rise-2{animation-delay:130ms}
-.rise-3{animation-delay:200ms}
-.rise-4{animation-delay:270ms}
-.rise-5{animation-delay:330ms}
+/* Stagger is deliberately SHORT. The first version ran 60/130/200/270/330ms,
+   which put the last hero element 710ms from first paint once its own 380ms
+   fade is counted, and Lighthouse's Speed Index went 3.3s -> 4.9s. Speed Index
+   measures how fast the viewport becomes visually complete, so every ms of
+   entrance delay is charged directly against it. Keep the total under ~200ms. */
+.rise-1{animation-delay:35ms}
+.rise-2{animation-delay:70ms}
+.rise-3{animation-delay:105ms}
+.rise-4{animation-delay:140ms}
+.rise-5{animation-delay:175ms}
 
 /* =========================== RESPONSIVE =================================== */
 @media (max-width:900px){
