@@ -347,8 +347,15 @@ ul,ol{list-style:none}
 .gutter-note{position:absolute;top:0;font-family:var(--mono);font-size:.62rem;
   letter-spacing:.28em;text-transform:uppercase;color:var(--fg-soft);
   writing-mode:vertical-rl;pointer-events:none}
-.gutter-l{left:calc(var(--gutter) * -.55)}
-.gutter-r{right:calc(var(--gutter) * -.55);transform:rotate(180deg)}
+/* Inside the wrap's own padding, NOT at a negative offset outside it. The
+   negative version only cleared the viewport above ~1310px; below that it was
+   clipped, and a clipped note resolves its backdrop against the page stock
+   rather than its own chapter, which read as 1.06:1 light-on-light to
+   Lighthouse. Sitting in the padding gutter, it always has its chapter behind
+   it. Below 768px there is no gutter left to sit in, so it goes. */
+.gutter-l{left:0}
+.gutter-r{right:0;transform:rotate(180deg)}
+@media (max-width:768px){.gutter-note{display:none}}
 
 /* isolation:isolate gives the header its own stacking context, so the ghost sits
    behind this block's own text and cannot climb over anything else on the page. */
