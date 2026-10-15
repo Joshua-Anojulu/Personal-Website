@@ -1,69 +1,50 @@
 # Personal Website
 
-A personal site for Joshua Anojulu, built as a printer's proofing table at press
-check. Static HTML, CSS and JavaScript with no build step and no dependencies.
+The personal site of Joshua Anojulu: publications, research, the software I have built,
+and how to reach me. It is a single static page with no build step and no dependencies,
+served by GitHub Pages at
+[joshua-anojulu.github.io/Personal-Website](https://joshua-anojulu.github.io/Personal-Website/).
 
-Seven projects, numbered like plates on a proof sheet: three shipped and public,
-four research. The research repositories are private, so those entries carry the
-result instead of a link, and nothing on the page links somewhere a visitor
-cannot open. The research section publishes one result in full, the real
-per-magnitude calibration matrix from the SDSS study, filterable by magnitude
-bin. Every figure on the page is a measured value rather than an estimate.
+The page opens with one real result instead of a decoration: a chart from my SDSS
+calibration study showing how much purity four classifiers promised against how much they
+delivered for the faintest sources. Three models keep their promise; logistic regression
+promises 92% and delivers 77%. The numbers come straight from
+[`results/metrics_selection_agg.csv`](https://github.com/Joshua-Anojulu/sdss-photometric-calibration/blob/main/results/metrics_selection_agg.csv)
+in the study's repository.
 
 ## Design
 
-`DESIGN.md` is the design contract. It records the world, the four dials, the
-palette, the layout families, the references the build was steered by, and the
-things that must not change silently. Read it before touching the visual layer,
-including from Codex or Cursor, so a later session does not start from the model
-average.
+[`DESIGN.md`](DESIGN.md) is the design contract: palette, type, layout and the rules that
+keep the page honest. Read it before changing the visual layer.
 
-Three rules in there are load-bearing and easy to break by tidying:
+## Built with
 
-- The reveal system **fails open**. `.reveal { opacity: 0 }` is scoped to `.js`,
-  which an inline head script sets, and a synchronous sweep handles
-  above-the-fold. Without JavaScript, or with an IntersectionObserver that never
-  delivers, content stays visible instead of rendering blank.
-- The ambient gate **fails open** as well. The CSS default is `running` and the
-  JavaScript sets `paused`, so a wiring failure costs battery rather than
-  silently freezing the page.
-- The data table compares the three recalibration methods **against each other,
-  per row**. Comparing them against raw ECE reverses the finding the caption
-  states.
+- HTML, CSS and a small amount of JavaScript
+- [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) and
+  [Instrument Sans](https://fonts.google.com/specimen/Instrument+Sans) from Google Fonts
 
-## Built With
-
-- **HTML5**
-- **CSS3**, custom properties throughout so every aesthetic value is a knob
-- **Vanilla JavaScript**
-- **Google Fonts**, [Archivo](https://fonts.google.com/specimen/Archivo), [Inter](https://fonts.google.com/specimen/Inter), [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono)
-
-## Project Structure
+## Project structure
 
 ```text
 .
-|-- index.html
-|-- DESIGN.md
+|-- index.html      the whole page, including the chart as inline SVG
 |-- css/
-|   `-- styles.css
-`-- js/
-    `-- site.js
+|   `-- styles.css  tokens, layout and the chart's load sequence
+|-- js/
+|   `-- site.js     the chart's load sequence and point readouts (optional)
+`-- DESIGN.md       the design contract
 ```
 
-## Getting Started
+`PLAN.md` and `PLAN-REVIEW-LOG.md` record the previous design and are kept for history.
 
-No build tools and no dependencies. Serve the folder over HTTP rather than
-opening the file directly, so relative paths resolve the way they do in
-production.
+## Running it locally
+
+Serve the folder over HTTP so relative paths resolve the way they do on GitHub Pages:
 
 ```bash
 git clone https://github.com/Joshua-Anojulu/Personal-Website.git
 cd Personal-Website
-python -m http.server 8137
+python -m http.server 8000
 ```
 
-Then open `http://localhost:8137`.
-
-This is a **project** Pages site served from `/Personal-Website/`, so asset
-paths must stay relative. A root-absolute `/css/styles.css` works locally and
-returns 404 in production.
+Then open `http://localhost:8000`.
